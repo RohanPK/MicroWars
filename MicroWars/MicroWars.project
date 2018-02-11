@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CodeLite_Project Name="MicroWars" Version="10.0.0" InternalType="Console">
+  <Plugins>
+    <Plugin Name="qmake">
+      <![CDATA[00010001N0005Debug000000000000]]>
+    </Plugin>
+  </Plugins>
   <Description/>
   <Dependencies/>
+  <VirtualDirectory Name="src">
+    <File Name="main.cpp"/>
+    <File Name="Orb.h"/>
+    <File Name="Orb.cpp"/>
+    <File Name="rohan.h" ExcludeProjConfig=""/>
+    <File Name="ishan.h" ExcludeProjConfig="Debug"/>
+    <File Name="Unit.h"/>
+    <File Name="Unit.cpp"/>
+  </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>
       <Compiler Options="" C_Options="" Assembler="">
@@ -15,8 +29,17 @@
     <Configuration Name="Debug" CompilerType="GCC" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
       <Compiler Options="-g;-O0;-Wall" C_Options="-g;-O0;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
         <IncludePath Value="."/>
+        <IncludePath Value="/usr/include/SFML"/>
+        <Preprocessor Value="SFML_STATIC"/>
       </Compiler>
-      <Linker Options="" Required="yes"/>
+      <Linker Options="" Required="yes">
+        <LibraryPath Value="/usr/include"/>
+        <Library Value="sfml-graphics"/>
+        <Library Value="sfml-window"/>
+        <Library Value="sfml-audio"/>
+        <Library Value="sfml-network"/>
+        <Library Value="sfml-system"/>
+      </Linker>
       <ResourceCompiler Options="" Required="no"/>
       <General OutputFile="$(IntermediateDirectory)/$(ProjectName)" IntermediateDirectory="./Debug" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
       <BuildSystem Name="Default"/>
@@ -92,11 +115,4 @@
       </Completion>
     </Configuration>
   </Settings>
-  <VirtualDirectory Name="src">
-    <File Name="main.cpp"/>
-    <File Name="Orb.h"/>
-    <File Name="Orb.cpp"/>
-    <File Name="rohan.h"/>
-    <File Name="ishan.h" ExcludeProjConfig="Debug"/>
-  </VirtualDirectory>
 </CodeLite_Project>
