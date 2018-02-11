@@ -11,7 +11,6 @@ int play_rohan()
 	sf::Clock clock;
 	sf::Time elapsed1= clock.getElapsedTime();
 	
-	
 	char array_colour[7] = {'R','B','G','R','G','B','R'};
 	double orb_array[7][2] = {(100,100),(200,100),(300,100),(400,100),(500,100),(600,100),(700,600)};
 	CircleShape bot(30);

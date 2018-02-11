@@ -4,6 +4,6 @@
 int main()
 {
 	//play_rohan();
-	//play_ishan();
+	play_ishan();
 	return 0;
 }
