@@ -9,7 +9,7 @@ namespace microwars
 class Orb
 {
 public:
-	std::vector<unit::Unit> orb_units;
+	std::vector<microwars::Unit> orb_units;
 private:
 	float orb_pos_x, orb_pos_y;
 	char orb_colour;

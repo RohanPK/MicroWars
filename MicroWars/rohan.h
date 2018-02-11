@@ -5,7 +5,7 @@
 using namespace sf;
 
 
-int play()
+int play_rohan()
 
 {
 	sf::Clock clock;
@@ -29,11 +29,11 @@ int play()
 	window.display();
 	window.clear(Color::Black);
 
-	std::vector <orb::Orb> orb_vector;
+	std::vector <microwars::Orb> orb_vector;
 	
 	for(int i=0;i<7;i++)
 	{
-		orb_vector.push_back(orb::Orb(orb_array[i][0],orb_array[i][1],array_colour[i],i,100,10));
+		orb_vector.push_back(microwars::Orb(orb_array[i][0],orb_array[i][1],array_colour[i],i,100,10));
 	}
 	
 

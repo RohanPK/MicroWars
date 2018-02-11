@@ -22,7 +22,7 @@ void microwars::Orb::produce_unit()
 {	
 	for(int count=0; count<orb_power; count++)
 	{
-		unit::Unit var_unit(orb_pos_x, orb_pos_y, orb_colour, orb_ID, 0.1);
+		microwars::Unit var_unit(orb_pos_x, orb_pos_y, orb_colour, orb_ID, 0.1);
 		orb_units.push_back(var_unit);
 	}
 }
