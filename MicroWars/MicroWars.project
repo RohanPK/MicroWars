@@ -97,6 +97,6 @@
     <File Name="Orb.h"/>
     <File Name="Orb.cpp"/>
     <File Name="rohan.h"/>
-    <File Name="ishan.h"/>
+    <File Name="ishan.h" ExcludeProjConfig="Debug"/>
   </VirtualDirectory>
 </CodeLite_Project>
