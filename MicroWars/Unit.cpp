@@ -1,7 +1,7 @@
 #include "Unit.h"
 #include <math.h>
 
-#define EPSILON 0.1
+#define EPSILON 0.2
 
 int factor(float a, float b)
 {
@@ -54,20 +54,19 @@ int microwars::Unit::return_ID()
 
 int microwars::Unit::move(float final_x, float final_y)
 {
-	if(unit_speed_x == 0 && unit_speed_y == 0)
-	{
-		unit_speed_slope = (final_y - unit_pos_y)/(final_x - unit_pos_x);
-	}
 	if(fabs(final_x - unit_pos_x)<=EPSILON && fabs(final_y - unit_pos_y)<=EPSILON)
 	{
 		unit_speed_x = 0;
 		unit_speed_y = 0;
+		unit_pos_x = final_x;
+		unit_pos_y = final_y;
 		return 0;
 	}
 	else
 	{
-		unit_speed_x = ((unit_speed)*factor(final_x, unit_pos_x))/(1.0 + (unit_speed_slope*unit_speed_slope));
-		unit_speed_y = ((unit_speed_x)*unit_speed_slope);
+		unit_speed_slope = (final_y - unit_pos_y)/(final_x - unit_pos_x);
+		unit_speed_x = ((unit_speed)*factor(final_x, unit_pos_x))/sqrtf(1.0 + (unit_speed_slope*unit_speed_slope));
+		unit_speed_y = ((unit_speed_x)*(unit_speed_slope));
 		unit_pos_x += unit_speed_x;
 		unit_pos_y += unit_speed_y;
 		return 1;
