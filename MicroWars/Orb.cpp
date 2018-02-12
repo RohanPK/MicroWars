@@ -66,6 +66,7 @@ int microwars::Orb::change_health(char colour)
 			orb_health++;
 		}
 	}
+
 	else
 	{
 		if(orb_health > 0)
