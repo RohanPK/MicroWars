@@ -1,11 +1,7 @@
-Debug/main.cpp.o: main.cpp rohan.h Orb.h Unit.h Unit.h ishan.h
+Debug/main.cpp.o: main.cpp play.h Orb.h Unit.h
 
-rohan.h:
+play.h:
 
 Orb.h:
 
 Unit.h:
-
-Unit.h:
-
-ishan.h:
