@@ -11,8 +11,6 @@
     <File Name="main.cpp"/>
     <File Name="Orb.h"/>
     <File Name="Orb.cpp"/>
-    <File Name="rohan.h" ExcludeProjConfig="Debug"/>
-    <File Name="ishan.h" ExcludeProjConfig="Debug"/>
     <File Name="Unit.h"/>
     <File Name="Unit.cpp"/>
     <File Name="play.h"/>
