@@ -34,6 +34,7 @@ namespace microwars
 		int return_ID();
 		~Orb();
 	};
+
 }
 
 #endif // ORB_H
