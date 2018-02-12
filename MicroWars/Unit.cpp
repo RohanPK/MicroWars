@@ -75,5 +75,4 @@ int microwars::Unit::move(float final_x, float final_y)
 
 microwars::Unit::~Unit()
 {
-	
 }

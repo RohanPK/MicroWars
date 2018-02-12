@@ -5,32 +5,33 @@
 
 namespace microwars
 {
+	class Orb
+	{
+		public:
+		
+		std::vector<microwars::Unit> orb_units;
+		
+		private:
+		
+		float orb_pos_x, orb_pos_y;
+		char orb_colour;
+		int orb_ID;
+		char orb_residual_health_colour;
+		int orb_health;
+		int orb_power;
+		int orb_no_of_units;
 
-class Orb
-{
-public:
-	std::vector<microwars::Unit> orb_units;
-private:
-	float orb_pos_x, orb_pos_y;
-	char orb_colour;
-	int orb_ID;
-	char orb_residual_health_colour;
-	int orb_health;
-	int orb_power;
-	int orb_no_of_units;
-
-public:
-	Orb(float x, float y, char colour, int ID, int power, int no_of_units);
-	void produce_unit();
-	float return_current_pos(char option);
-	float return_orb_pos(char option);
-	char return_orb_colour();
-	int change_health(char colour);
-	int return_ID();
-	~Orb();
-	
-
-};
+		public:
+		
+		Orb(float x, float y, char colour, int ID, int power, int no_of_units);
+		void produce_unit();
+		float return_current_pos(char option);
+		float return_orb_pos(char option);
+		char return_orb_colour();
+		int change_health(char colour);
+		int return_ID();
+		~Orb();
+	};
 
 }
 

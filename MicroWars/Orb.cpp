@@ -1,20 +1,16 @@
 #include "Orb.h"
 #include <iostream>
-#define orb_radius 5 
 
 microwars::Orb::Orb(float var_x, float var_y, char var_colour, int var_ID, int var_power, int var_no_of_units)
 {
-
 	orb_pos_x = var_x;
 	orb_pos_y = var_y;
 	orb_colour=var_colour;
 	orb_ID = var_ID;
 	orb_power = var_power;
 	orb_residual_health_colour = 'X';
-	orb_health = 100*var_power;
 	orb_no_of_units = var_no_of_units;
-	produce_unit();
-	produce_unit();
+	orb_health = orb_no_of_units*orb_power;
 	produce_unit();
 }
 
@@ -70,6 +66,7 @@ int microwars::Orb::change_health(char colour)
 			orb_health++;
 		}
 	}
+
 	else
 	{
 		if(orb_health > 0)
@@ -88,4 +85,3 @@ int microwars::Orb::change_health(char colour)
 microwars::Orb::~Orb()
 {
 }
-

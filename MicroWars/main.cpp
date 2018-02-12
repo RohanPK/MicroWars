@@ -1,9 +1,7 @@
-#include "rohan.h"
-#include "ishan.h"
+#include "play.h"
 
 int main()
 {
-	//play_rohan();
-	//play_ishan();
+	play();
 	return 0;
 }
