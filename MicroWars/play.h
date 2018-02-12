@@ -13,9 +13,10 @@ using namespace microwars;
 #define ORB_RADIUS 30
 #define UNIT_RADIUS 4
 #define NULL_VECTOR Vector2f(0,0)
+#define PLAYER_COLOUR 'Y'
 
 vector <Orb> ORB_VECTOR;
-char ORB_COLOUR[ORB_COUNT] = {'B', 'R', 'G', 'Y'};
+char ORB_COLOUR[ORB_COUNT] = {'Y', 'B', 'Y', 'R'};
 float ORB_COORDINATES[ORB_COUNT][2] = {{10,200}, {178,654}, {250,124}, {560,633}};
 int ORB_INITIAL_UNITS[ORB_COUNT] = {10, 20, 30, 40};
 RenderWindow window(VideoMode(1080, 720), "Micro Wars");
@@ -38,11 +39,11 @@ void update()
 {
 	Vector2f starting_position;
 	Vector2f final_position;
-	Vector2f current_position;
+	Vector2f span;
 	
 	window.display();
 	
-	RectangleShape selection_box;
+	RectangleShape *selection_box = new RectangleShape;
 	CircleShape Orb_Shape(ORB_RADIUS);
 	
 	while (window.isOpen())
@@ -72,14 +73,18 @@ void update()
 					{
 						final_position.x = event.mouseButton.x;
 						final_position.y = event.mouseButton.y;
-						current_position.x = event.mouseButton.x - starting_position.x;
-						current_position.y = event.mouseButton.y - starting_position.y;
+						span.x = event.mouseButton.x - starting_position.x;
+						span.y = event.mouseButton.y - starting_position.y;
 						
-						selection_box.setFillColor(Color::Black);
-						selection_box.setOutlineColor(Color::Cyan);
-						selection_box.setOutlineThickness(1);
-						selection_box.setSize(current_position);
-						selection_box.setPosition(starting_position.x, starting_position.y);
+						if(selection_box != nullptr)
+						{
+							delete selection_box;
+						}
+						selection_box = new RectangleShape(span);
+						selection_box->setFillColor(Color::Black);
+						selection_box->setOutlineColor(Color::Cyan);
+						selection_box->setOutlineThickness(1);
+						selection_box->setPosition(starting_position.x, starting_position.y);
 					}
 					break;
 					
@@ -87,7 +92,10 @@ void update()
 					break;
 			}
         }
-		window.draw(selection_box);
+		if(selection_box != nullptr)
+		{
+			window.draw(*selection_box);
+		}
 		for(int i = 0; i<ORB_COUNT; i++)
 		{
 			Orb_Shape.setPosition(ORB_COORDINATES[i][0],ORB_COORDINATES[i][1]);
@@ -116,7 +124,7 @@ void update()
 		}
 		for(int i = 0; i<ORB_COUNT; i++)
 		{
-			if(ORB_VECTOR[i].return_orb_colour() == 'Y')
+			if(ORB_VECTOR[i].return_orb_colour() == PLAYER_COLOUR)
 			{
 				if (event.mouseButton.button == Mouse::Right)
 				{
@@ -139,17 +147,16 @@ void update()
 							}
 						}
 					}
-					selection_box.setSize(NULL_VECTOR);
-					final_position = NULL_VECTOR;
-					starting_position = NULL_VECTOR;
+					delete selection_box;
+					selection_box = nullptr;
 				}
 			}
 		}
 		for(int i = 0; i<ORB_COUNT; i++)
 		{
-			if(ORB_VECTOR[i].return_orb_colour() == 'Y')
+			if(ORB_VECTOR[i].return_orb_colour() == PLAYER_COLOUR)
 			{
-				for(int j=0; j<ORB_VECTOR[i].orb_units.size(); j++)
+				for(int j = 0; j<ORB_VECTOR[i].orb_units.size(); j++)
 				{
 					if(ORB_VECTOR[i].orb_units[j].return_selection_status())
 					{
