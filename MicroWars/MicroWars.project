@@ -114,4 +114,5 @@
       </Completion>
     </Configuration>
   </Settings>
+  <VirtualDirectory Name="assets"/>
 </CodeLite_Project>

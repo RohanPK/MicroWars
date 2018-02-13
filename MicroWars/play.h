@@ -4,6 +4,7 @@
 #include "Orb.h"
 #include "Unit.h"
 #include <algorithm>
+#include <SFML/Audio.hpp>
 
 using namespace sf;
 using namespace std;
@@ -16,10 +17,53 @@ using namespace microwars;
 #define PLAYER_COLOUR 'Y'
 
 vector <Orb> ORB_VECTOR;
-char ORB_COLOUR[ORB_COUNT] = {'Y', 'B', 'Y', 'R'};
+char ORB_COLOUR[ORB_COUNT] = {'Y', 'G', 'B', 'R'};
 float ORB_COORDINATES[ORB_COUNT][2] = {{10,200}, {178,654}, {250,124}, {560,633}};
 int ORB_INITIAL_UNITS[ORB_COUNT] = {10, 20, 30, 40};
 RenderWindow window(VideoMode(1080, 720), "Micro Wars");
+
+void main_menu()
+{
+	window.display();
+	
+	Font font_title,font_buttons;
+	font_title.loadFromFile("../assets/fonts/title.ttf");
+	Text menu_title("MicroWars",font_title,100);
+	Text menu_play;
+	Text menu_options;
+	Text menu_quit;
+	
+	menu_title.setColor(sf::Color::Red);
+	menu_title.setPosition(Vector2f(300,50));
+	
+	Music background;
+	background.openFromFile("../assets/sounds/temporary.ogg");
+	background.play();
+	while(window.isOpen())
+	{
+
+		window.display();
+		window.clear();
+		Event event;
+		while (window.pollEvent(event))
+		{
+			switch(event.type)
+			{
+				case Event::Closed:
+					window.close();
+					break;
+				default:
+					break;
+			}
+		}
+		if(event.MouseButtonPressed && event.mouseButton.button == Mouse::Button::Left)
+		{
+			break;
+		}
+		window.draw(menu_title);
+	}
+}
+
 
 void initialise()
 {
@@ -37,6 +81,24 @@ void initialise()
 
 void update()
 {
+	Texture texture_yellow,texture_red,texture_green,texture_blue;
+	texture_yellow.loadFromFile("../assets/images/yellow_orb.png");
+	texture_yellow.setSmooth(true);
+	const sf::Texture *p_yellow_Texture = &texture_yellow;
+
+	texture_red.loadFromFile("../assets/images/red_orb.png");
+	texture_red.setSmooth(true);
+	const sf::Texture *p_red_Texture = &texture_red;
+	
+	texture_green.loadFromFile("../assets/images/green_orb.png");
+	texture_green.setSmooth(true);
+	const sf::Texture *p_green_Texture = &texture_green;
+	
+	texture_blue.loadFromFile("../assets/images/blue_orb.png");
+	texture_blue.setSmooth(true);
+	const sf::Texture *p_blue_Texture = &texture_blue;
+
+
 	Vector2f starting_position;
 	Vector2f final_position;
 	Vector2f span;
@@ -45,6 +107,7 @@ void update()
 	
 	RectangleShape *selection_box = new RectangleShape;
 	CircleShape Orb_Shape(ORB_RADIUS);
+
 	
 	while (window.isOpen())
     {
@@ -102,23 +165,27 @@ void update()
 			
 			if(ORB_COLOUR[i] == 'R')
 			{
-				Orb_Shape.setFillColor(Color::Red);
+				Orb_Shape.setTexture(NULL);
+				Orb_Shape.setTexture(p_red_Texture,true);
 			}
 			if(ORB_COLOUR[i] == 'B')
 			{
-				Orb_Shape.setFillColor(Color::Blue);
+				Orb_Shape.setTexture(NULL);
+				Orb_Shape.setTexture(p_blue_Texture,true);
 			}
 			if(ORB_COLOUR[i]== 'G')
 			{
-				Orb_Shape.setFillColor(Color::Green);
+				Orb_Shape.setTexture(NULL);
+				Orb_Shape.setTexture(p_green_Texture,true);
 			}
 			if(ORB_COLOUR[i]== 'Y')
 			{
-				Orb_Shape.setFillColor(Color::Yellow);
+				Orb_Shape.setTexture(NULL);
+				Orb_Shape.setTexture(p_yellow_Texture,true);
 			}
 			if(ORB_COLOUR[i]== 'X')
 			{
-				Orb_Shape.setFillColor(Color::White);
+				Orb_Shape.setTexture(NULL);
 			}
 			window.draw(Orb_Shape);
 		}
@@ -167,9 +234,9 @@ void update()
 		}
 		for (int i = 0; i<ORB_COUNT; i++)
 		{
+			CircleShape Unit_Shape(UNIT_RADIUS);
 			for(int j = 0; j<ORB_VECTOR[i].orb_units.size(); j++)
 			{
-				CircleShape Unit_Shape(UNIT_RADIUS);
 				Unit_Shape.setPosition(ORB_VECTOR[i].orb_units[j].return_unit_pos('x'),ORB_VECTOR[i].orb_units[j].return_unit_pos('y'));
 				if(ORB_VECTOR[i].return_orb_colour() == 'R')
 				{
@@ -200,6 +267,7 @@ void update()
 
 void play()
 {
+	main_menu();
 	initialise();
 	update();
 }
