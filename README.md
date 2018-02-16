@@ -1,7 +1,7 @@
-## MicroWars
+# MicroWars
 A C++ implementation of the popular Indie game MicroWars
 
-# Features Implemented
+## Features Implemented
 1. Orb and Unit Classes
 2. Display Orbs and it's corresponding Units 
 3. Units Selection
