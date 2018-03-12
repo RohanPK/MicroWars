@@ -10,31 +10,46 @@ using namespace sf;
 using namespace std;
 using namespace microwars;
 
-#define ORB_COUNT 4
+#define ORB_COUNT 5
 #define ORB_RADIUS 30
 #define UNIT_RADIUS 4
 #define NULL_VECTOR Vector2f(0,0)
 #define PLAYER_COLOUR 'Y'
 
 vector <Orb> ORB_VECTOR;
-char ORB_COLOUR[ORB_COUNT] = {'Y', 'G', 'B', 'R'};
-float ORB_COORDINATES[ORB_COUNT][2] = {{10,200}, {178,654}, {250,124}, {560,633}};
-int ORB_INITIAL_UNITS[ORB_COUNT] = {10, 20, 30, 40};
+char ORB_COLOUR[ORB_COUNT] = {'Y', 'G', 'B', 'R','Y'};
+float ORB_COORDINATES[ORB_COUNT][2] = {{10,200}, {178,654}, {250,124}, {560,633},{600,240}};
+int ORB_INITIAL_UNITS[ORB_COUNT] = {10, 20, 30, 40, 50};
 RenderWindow window(VideoMode(1080, 720), "Micro Wars");
+
+bool start_play;
 
 void main_menu()
 {
+
 	window.display();
-	
+
 	Font font_title,font_buttons;
 	font_title.loadFromFile("../assets/fonts/title.ttf");
 	Text menu_title("MicroWars",font_title,100);
-	Text menu_play;
-	Text menu_options;
-	Text menu_quit;
+	Text menu_play("Play",font_title,50);
+	Text menu_options("Options",font_title,50);
+	Text menu_quit("Quit",font_title,50);
 	
 	menu_title.setColor(sf::Color::Red);
 	menu_title.setPosition(Vector2f(300,50));
+	
+	menu_play.setColor(sf::Color::Red);
+	menu_play.setPosition(Vector2f(450,200));
+	
+	menu_options.setColor(sf::Color::Red);
+	menu_options.setPosition(Vector2f(450,250));
+	
+	menu_quit.setColor(sf::Color::Red);
+	menu_quit.setPosition(Vector2f(450,300));
+	
+	RectangleShape menu_box;
+	
 	
 	Music background;
 	background.openFromFile("../assets/sounds/temporary.ogg");
@@ -52,15 +67,36 @@ void main_menu()
 				case Event::Closed:
 					window.close();
 					break;
+					
 				default:
 					break;
 			}
+
+		if( Mouse::getPosition(window).x >= 450 && Mouse::getPosition(window).x <= 550 && Mouse::getPosition(window).y >=200 && Mouse::getPosition(window).y <= 250 )
+		{
+			menu_play.setColor(Color::White);
+			
+			if( event.mouseButton.button == Mouse::Left )
+			{
+				start_play=true;
+			}
 		}
-		if(event.MouseButtonPressed && event.mouseButton.button == Mouse::Button::Left)
+		else
+		{
+			menu_play.setColor(Color::Red);
+		}
+		
+		}
+		if(start_play)
 		{
 			break;
 		}
+		
 		window.draw(menu_title);
+		window.draw(menu_play);
+		window.draw(menu_options);
+		window.draw(menu_quit);
+
 	}
 }
 
@@ -134,20 +170,27 @@ void update()
 				case Event::MouseButtonReleased:
 					if(event.mouseButton.button == Mouse::Left)
 					{
-						final_position.x = event.mouseButton.x;
-						final_position.y = event.mouseButton.y;
-						span.x = event.mouseButton.x - starting_position.x;
-						span.y = event.mouseButton.y - starting_position.y;
-						
-						if(selection_box != nullptr)
+						if(start_play)
 						{
-							delete selection_box;
+							start_play=false;
 						}
-						selection_box = new RectangleShape(span);
-						selection_box->setFillColor(Color::Black);
-						selection_box->setOutlineColor(Color::Cyan);
-						selection_box->setOutlineThickness(1);
-						selection_box->setPosition(starting_position.x, starting_position.y);
+						else
+						{
+							final_position.x = event.mouseButton.x;
+							final_position.y = event.mouseButton.y;
+							span.x = event.mouseButton.x - starting_position.x;
+							span.y = event.mouseButton.y - starting_position.y;
+							
+							if(selection_box != nullptr)
+							{
+								delete selection_box;
+							}
+							selection_box = new RectangleShape(span);
+							selection_box->setFillColor(Color::Black);
+							selection_box->setOutlineColor(Color::Cyan);
+							selection_box->setOutlineThickness(1);
+							selection_box->setPosition(starting_position.x, starting_position.y);
+						}
 					}
 					break;
 					
