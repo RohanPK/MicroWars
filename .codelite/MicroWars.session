@@ -5,8 +5,8 @@
   <TabInfoArray Name="TabInfoArray">
     <TabInfo>
       <wxString Value="/home/rohan/Documents/MicroWars/MicroWars/play.h" Name="FileName"/>
-      <int Value="35" Name="FirstVisibleLine"/>
-      <int Value="58" Name="CurrentLine"/>
+      <int Value="66" Name="FirstVisibleLine"/>
+      <int Value="94" Name="CurrentLine"/>
       <wxArrayString Name="Bookmarks"/>
       <IntVector Name="CollapsedFolds"/>
     </TabInfo>
