@@ -1,49 +1,92 @@
-#include <SFML/Graphics.hpp>
 #include <iostream>
 #include <vector>
+#include <algorithm>
+#include <time.h>
+#include <SFML/Audio.hpp>
+#include <SFML/Graphics.hpp>
 #include "Orb.h"
 #include "Unit.h"
-#include <algorithm>
-#include <SFML/Audio.hpp>
 
 using namespace sf;
 using namespace std;
 using namespace microwars;
 
-#define ORB_COUNT 4
+#define ORB_COUNT 5
 #define ORB_RADIUS 30
 #define UNIT_RADIUS 4
 #define NULL_VECTOR Vector2f(0,0)
 #define PLAYER_COLOUR 'Y'
 
 vector <Orb> ORB_VECTOR;
-char ORB_COLOUR[ORB_COUNT] = {'Y', 'G', 'B', 'R'};
-float ORB_COORDINATES[ORB_COUNT][2] = {{10,200}, {178,654}, {250,124}, {560,633}};
-int ORB_INITIAL_UNITS[ORB_COUNT] = {50, 20, 30, 40};
+
+char ORB_COLOUR[ORB_COUNT] = {'Y', 'G', 'B', 'R','Y'};
+float ORB_COORDINATES[ORB_COUNT][2] = {{10,200}, {178,654}, {250,124}, {560,633},{600,240}};
+int ORB_INITIAL_UNITS[ORB_COUNT] = {10, 20, 30, 40, 50};
+
 RenderWindow window(VideoMode(1080, 720), "Micro Wars");
+
+bool start_play;
 
 void main_menu()
 {
+
 	window.display();
-	
+
 	Font font_title,font_buttons;
 	font_title.loadFromFile("../assets/fonts/title.ttf");
 	Text menu_title("MicroWars",font_title,100);
-	Text menu_play;
-	Text menu_options;
-	Text menu_quit;
+	Text menu_play("Play",font_title,50);
+	Text menu_options("Options",font_title,50);
+	Text menu_quit("Quit",font_title,50);
 	
 	menu_title.setColor(sf::Color::Red);
-	menu_title.setPosition(Vector2f(300,50));
+	Vector2f position_menu(300,50);
+	menu_title.setPosition(position_menu);
+	menu_play.setColor(sf::Color::Red);
+	Vector2f position_play(450,200);
+	menu_play.setPosition(position_play);
+	menu_options.setColor(sf::Color::Red);
+	Vector2f position_options(450,250);
+	menu_options.setPosition(position_options);
+	menu_quit.setColor(sf::Color::Red);
+	Vector2f position_quit(450,300);
+	menu_quit.setPosition(position_quit);
 	
-	Music background;
-	background.openFromFile("../assets/sounds/temporary.ogg");
-	background.play();
+	RectangleShape menu_box;
+	
+	Sprite background;
+	Texture background_image;
+	background_image.loadFromFile("../assets/images/main_menu.png");
+	background.setTexture(background_image);
+	background.setScale(0.5625,0.6667);
+	
+	Unit unit_yellow(10,10,6,'Y',1000,0.2),unit_green(10,710,6,'G',1000,0.2),unit_red(1070,10,6,'R',1000,0.2),unit_blue(1070,710,6,'B',1000,0.2);
+	CircleShape unit_shape;
+	unit_shape.setRadius(6);
+
+	Clock timer;
+	Time wait_time = seconds(3);
+
+
+	Music background_music;
+	background_music.openFromFile("../assets/sounds/temporary.ogg");
+	background_music.play();
 	while(window.isOpen())
 	{
+		if( timer.getElapsedTime().asSeconds() > wait_time.asSeconds() )
+		{
+			timer.restart();
+			unit_yellow.set_unit_destination(rand()%1070,rand()%710);
+			unit_red.set_unit_destination(rand()%1070,rand()%710);
+			unit_blue.set_unit_destination(rand()%1070,rand()%710);
+			unit_green.set_unit_destination(rand()%1070,rand()%710);
+
+		}
 
 		window.display();
 		window.clear();
+		window.draw(background);
+		
 		Event event;
 		while (window.pollEvent(event))
 		{
@@ -52,15 +95,84 @@ void main_menu()
 				case Event::Closed:
 					window.close();
 					break;
+					
 				default:
 					break;
 			}
+
+		if( Mouse::getPosition(window).x >= position_play.x && Mouse::getPosition(window).x <= (position_play.x+100) && Mouse::getPosition(window).y >=position_play.y && Mouse::getPosition(window).y <= (position_play.y+50) )
+		{
+			menu_play.setColor(Color::White);
+			
+			if( event.mouseButton.button == Mouse::Left )
+			{
+				start_play=true;
+			}
 		}
-		if(event.MouseButtonPressed && event.mouseButton.button == Mouse::Button::Left)
+		else
+		{
+			menu_play.setColor(Color::Red);
+		}
+
+		if( Mouse::getPosition(window).x >= position_options.x && Mouse::getPosition(window).x <= (position_options.x+100) && Mouse::getPosition(window).y >=position_options.y && Mouse::getPosition(window).y <= (position_options.y+50) )
+		{
+			menu_options.setColor(Color::White);
+			
+			if( event.mouseButton.button == Mouse::Left )
+			{
+				start_play=true;
+			}
+		}
+		else
+		{
+			menu_options.setColor(Color::Red);
+		}
+
+		if( Mouse::getPosition(window).x >= position_quit.x && Mouse::getPosition(window).x <= (position_quit.x+100) && Mouse::getPosition(window).y >=position_quit.y && Mouse::getPosition(window).y <= (position_quit.y+50) )
+		{
+			menu_quit.setColor(Color::White);
+			
+			if( event.mouseButton.button == Mouse::Left )
+			{
+				window.close();
+			}
+		}
+		else
+		{
+			menu_quit.setColor(Color::Red);
+		}
+
+		}
+		if(start_play)
 		{
 			break;
 		}
+		
+		unit_yellow.move();
+		unit_shape.setPosition(unit_yellow.return_unit_pos('x'),unit_yellow.return_unit_pos('y'));
+		unit_shape.setFillColor(Color::Yellow);
+		window.draw(unit_shape);
+
+		unit_red.move();
+		unit_shape.setPosition(unit_red.return_unit_pos('x'),unit_red.return_unit_pos('y'));
+		unit_shape.setFillColor(Color::Red);
+		window.draw(unit_shape);
+
+		unit_green.move();
+		unit_shape.setPosition(unit_green.return_unit_pos('x'),unit_green.return_unit_pos('y'));
+		unit_shape.setFillColor(Color::Green);
+		window.draw(unit_shape);
+
+		unit_blue.move();
+		unit_shape.setPosition(unit_blue.return_unit_pos('x'),unit_blue.return_unit_pos('y'));
+		unit_shape.setFillColor(Color::Blue);
+		window.draw(unit_shape);
+
 		window.draw(menu_title);
+		window.draw(menu_play);
+		window.draw(menu_options);
+		window.draw(menu_quit);
+
 	}
 }
 
@@ -137,20 +249,27 @@ void update()
 				case Event::MouseButtonReleased:
 					if(event.mouseButton.button == Mouse::Left)
 					{
-						final_position.x = event.mouseButton.x;
-						final_position.y = event.mouseButton.y;
-						span.x = event.mouseButton.x - starting_position.x;
-						span.y = event.mouseButton.y - starting_position.y;
-						
-						if(selection_box != nullptr)
+						if(start_play)
 						{
-							delete selection_box;
+							start_play=false;
 						}
-						selection_box = new RectangleShape(span);
-						selection_box->setFillColor(Color::Black);
-						selection_box->setOutlineColor(Color::Cyan);
-						selection_box->setOutlineThickness(1);
-						selection_box->setPosition(starting_position.x, starting_position.y);
+						else
+						{
+							final_position.x = event.mouseButton.x;
+							final_position.y = event.mouseButton.y;
+							span.x = event.mouseButton.x - starting_position.x;
+							span.y = event.mouseButton.y - starting_position.y;
+							
+							if(selection_box != nullptr)
+							{
+								delete selection_box;
+							}
+							selection_box = new RectangleShape(span);
+							selection_box->setFillColor(Color::Black);
+							selection_box->setOutlineColor(Color::Cyan);
+							selection_box->setOutlineThickness(1);
+							selection_box->setPosition(starting_position.x, starting_position.y);
+						}
 					}
 					break;
 					
