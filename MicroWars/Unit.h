@@ -22,7 +22,7 @@ namespace microwars
 		Unit(float x, float y, float radius, char colour, int ID, float speed);
 		float return_unit_pos(char option);
 		void set_unit_destination(float final_x, float final_y);
-		void move();
+		int move();
 		bool return_selection_status();
 		char return_unit_colour();
 		int return_ID();

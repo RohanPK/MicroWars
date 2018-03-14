@@ -19,7 +19,7 @@ using namespace microwars;
 vector <Orb> ORB_VECTOR;
 char ORB_COLOUR[ORB_COUNT] = {'Y', 'G', 'B', 'R'};
 float ORB_COORDINATES[ORB_COUNT][2] = {{10,200}, {178,654}, {250,124}, {560,633}};
-int ORB_INITIAL_UNITS[ORB_COUNT] = {10, 20, 30, 40};
+int ORB_INITIAL_UNITS[ORB_COUNT] = {50, 20, 30, 40};
 RenderWindow window(VideoMode(1080, 720), "Micro Wars");
 
 void main_menu()
@@ -71,7 +71,7 @@ void initialise()
 	
 	for(int i = 0; i<ORB_COUNT; i++)
 	{
-		ORB_VECTOR.push_back(Orb(ORB_COORDINATES[i][0],ORB_COORDINATES[i][1],ORB_RADIUS,ORB_COLOUR[i],i,1,100));
+		ORB_VECTOR.push_back(Orb(ORB_COORDINATES[i][0],ORB_COORDINATES[i][1],ORB_RADIUS,ORB_COLOUR[i],i,1,100,100));
 		for(int j = 0; j<ORB_INITIAL_UNITS[i]; j++)
 		{
 			ORB_VECTOR[i].produce_unit();
@@ -81,7 +81,7 @@ void initialise()
 
 void update()
 {
-	Texture texture_yellow,texture_red,texture_green,texture_blue;
+	Texture texture_yellow,texture_red,texture_green,texture_blue,texture_grey;
 	texture_yellow.loadFromFile("../assets/images/yellow_orb.png");
 	texture_yellow.setSmooth(true);
 	const sf::Texture *p_yellow_Texture = &texture_yellow;
@@ -98,6 +98,9 @@ void update()
 	texture_blue.setSmooth(true);
 	const sf::Texture *p_blue_Texture = &texture_blue;
 
+	texture_grey.loadFromFile("../assets/images/grey_orb.png");
+	texture_grey.setSmooth(true);
+	const sf::Texture *p_grey_Texture = &texture_grey;
 
 	Vector2f starting_position;
 	Vector2f final_position;
@@ -163,29 +166,30 @@ void update()
 		{
 			Orb_Shape.setPosition(ORB_COORDINATES[i][0],ORB_COORDINATES[i][1]);
 			
-			if(ORB_COLOUR[i] == 'R')
+			if(ORB_VECTOR[i].return_orb_colour() == 'R')
 			{
 				Orb_Shape.setTexture(NULL);
 				Orb_Shape.setTexture(p_red_Texture,true);
 			}
-			if(ORB_COLOUR[i] == 'B')
+			if(ORB_VECTOR[i].return_orb_colour() == 'B')
 			{
 				Orb_Shape.setTexture(NULL);
 				Orb_Shape.setTexture(p_blue_Texture,true);
 			}
-			if(ORB_COLOUR[i]== 'G')
+			if(ORB_VECTOR[i].return_orb_colour() == 'G')
 			{
 				Orb_Shape.setTexture(NULL);
 				Orb_Shape.setTexture(p_green_Texture,true);
 			}
-			if(ORB_COLOUR[i]== 'Y')
+			if(ORB_VECTOR[i].return_orb_colour() == 'Y')
 			{
 				Orb_Shape.setTexture(NULL);
 				Orb_Shape.setTexture(p_yellow_Texture,true);
 			}
-			if(ORB_COLOUR[i]== 'X')
+			if(ORB_VECTOR[i].return_orb_colour() == 'X')
 			{
 				Orb_Shape.setTexture(NULL);
+				Orb_Shape.setTexture(p_grey_Texture,true);
 			}
 			window.draw(Orb_Shape);
 		}
@@ -227,7 +231,17 @@ void update()
 				{
 					if(ORB_VECTOR[i].orb_units[j].return_selection_status())
 					{
-						ORB_VECTOR[i].orb_units[j].move();
+						if(ORB_VECTOR[i].orb_units[j].move())
+						{
+							for(int k = 0; k<ORB_COUNT; k++)
+							{
+								if(ORB_VECTOR[k].check_unit_vicinity(ORB_VECTOR[i].orb_units[j].return_unit_pos('x'), ORB_VECTOR[i].orb_units[j].return_unit_pos('y')))
+								{
+									ORB_VECTOR[k].change_health(ORB_VECTOR[i].orb_units[j].return_unit_colour());
+									cout<<k<<"\t"<<ORB_VECTOR[k].return_health()<<"\t"<<ORB_VECTOR[k].return_orb_colour()<<"\n";
+								}
+							}
+						}
 					}
 				}
 			}

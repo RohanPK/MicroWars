@@ -25,12 +25,13 @@ namespace microwars
 
 		public:
 		
-		Orb(float x, float y, float radius, char colour, int ID, int power, int no_of_units);
+		Orb(float x, float y, float radius, char colour, int ID, int power, int no_of_units, int initial_health);
 		void produce_unit();
-		float return_current_pos(char option);
 		float return_orb_pos(char option);
 		char return_orb_colour();
-		int change_health(char colour);
+		int check_unit_vicinity(float x, float y);
+		void change_health(char colour);
+		int return_health();
 		int return_ID();
 		~Orb();
 	};

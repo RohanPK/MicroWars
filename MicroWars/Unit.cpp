@@ -57,7 +57,7 @@ void microwars::Unit::set_unit_destination(float final_x, float final_y)
 	unit_destination_y = final_y + randomising_y;
 }
 
-void microwars::Unit::move()
+int microwars::Unit::move()
 {
 	if(fabs(unit_destination_x - unit_pos_x)<=EPSILON && fabs(unit_destination_y - unit_pos_y)<=EPSILON)
 	{
@@ -66,6 +66,7 @@ void microwars::Unit::move()
 		unit_pos_x = unit_destination_x;
 		unit_pos_y = unit_destination_y;
 		unit_selected = false;
+		return 1;
 	}
 	else
 	{
@@ -74,6 +75,7 @@ void microwars::Unit::move()
 		unit_speed_y = ((unit_speed_x)*(unit_speed_slope));
 		unit_pos_x += unit_speed_x;
 		unit_pos_y += unit_speed_y;
+		return 0;
 	}
 }
 

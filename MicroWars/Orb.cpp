@@ -1,13 +1,14 @@
 #include "Orb.h"
-#include <iostream>
+#include <math.h>
 #include <stdlib.h>
 #include <time.h>
 
 #define UNIT_SPEED 0.2
 #define UNIT_RADIUS 4
 #define ORB_RADIUS 30
+#define EPSILON 45
 
-microwars::Orb::Orb(float x, float y, float radius, char colour, int ID, int power, int no_of_units)
+microwars::Orb::Orb(float x, float y, float radius, char colour, int ID, int power, int no_of_units, int initial_health)
 {
 	orb_pos_x = x;
 	orb_pos_y = y;
@@ -17,12 +18,12 @@ microwars::Orb::Orb(float x, float y, float radius, char colour, int ID, int pow
 	orb_power = power;
 	orb_residual_health_colour = 'X';
 	orb_no_of_units = no_of_units;
-	orb_health = orb_no_of_units*orb_power;
+	orb_health = initial_health;
 }
 
 void microwars::Orb::produce_unit()
 {	
-	for(int count = 0; count<orb_power; count++)
+	for(int count = 0; count<(orb_health / orb_no_of_units); count++)
 	{
 		float randomising_x = (rand()%5000 - 2500.0)/(250.0);
 		float randomising_y = (rand()%5000 - 2500.0)/(250.0);
@@ -53,9 +54,21 @@ int microwars::Orb::return_ID()
 	return orb_ID;
 }
 
-int microwars::Orb::change_health(char colour)
+int microwars::Orb::check_unit_vicinity(float x, float y)
 {
-	if(colour == orb_residual_health_colour)
+	if(fabs(orb_pos_x - x)<=EPSILON && fabs(orb_pos_y - y)<=EPSILON)
+	{
+		return 1;
+	}
+	else
+	{
+		return 0;
+	}
+}
+
+void microwars::Orb::change_health(char colour)
+{
+	if(colour == orb_residual_health_colour || colour == orb_colour)
 	{
 		if(orb_health < orb_no_of_units*orb_power)
 		{
@@ -66,6 +79,7 @@ int microwars::Orb::change_health(char colour)
 			orb_colour = colour;
 		}
 	}
+	
 	else if(orb_colour == 'X')
 	{
 		if(colour == orb_residual_health_colour || orb_residual_health_colour == 'X')
@@ -87,6 +101,10 @@ int microwars::Orb::change_health(char colour)
 			orb_residual_health_colour = 'X';
 		}
 	}
+}
+
+int microwars::Orb::return_health()
+{
 	return orb_health;
 }
 
