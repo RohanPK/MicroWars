@@ -65,7 +65,7 @@ void main_menu()
 	unit_shape.setRadius(6);
 
 	Clock timer;
-	Time wait_time = seconds(3);
+	Time wait_time = seconds(2);
 
 
 	Music background_music;
@@ -191,8 +191,10 @@ void initialise()
 	}
 }
 
-void update()
+/*void draw_game()
 {
+
+	window.setActive(false);
 	Texture texture_yellow,texture_red,texture_green,texture_blue,texture_grey;
 	texture_yellow.loadFromFile("../assets/images/yellow_orb.png");
 	texture_yellow.setSmooth(true);
@@ -213,17 +215,115 @@ void update()
 	texture_grey.loadFromFile("../assets/images/grey_orb.png");
 	texture_grey.setSmooth(true);
 	const sf::Texture *p_grey_Texture = &texture_grey;
+	
+	CircleShape Orb_Shape(ORB_RADIUS);
+	
+	window.display();
+	while(window.isOpen())
+	{
+		for(int i = 0; i<ORB_COUNT; i++)
+			{
+				Orb_Shape.setPosition(ORB_COORDINATES[i][0],ORB_COORDINATES[i][1]);
+				
+				if(ORB_VECTOR[i].return_orb_colour() == 'R')
+				{
+					Orb_Shape.setTexture(NULL);
+					Orb_Shape.setTexture(p_red_Texture,true);
+				}
+				if(ORB_VECTOR[i].return_orb_colour() == 'B')
+				{
+					Orb_Shape.setTexture(NULL);
+					Orb_Shape.setTexture(p_blue_Texture,true);
+				}
+				if(ORB_VECTOR[i].return_orb_colour() == 'G')
+				{
+					Orb_Shape.setTexture(NULL);
+					Orb_Shape.setTexture(p_green_Texture,true);
+				}
+				if(ORB_VECTOR[i].return_orb_colour() == 'Y')
+				{
+					Orb_Shape.setTexture(NULL);
+					Orb_Shape.setTexture(p_yellow_Texture,true);
+				}
+				if(ORB_VECTOR[i].return_orb_colour() == 'X')
+				{
+					Orb_Shape.setTexture(NULL);
+					Orb_Shape.setTexture(p_grey_Texture,true);
+				}
+				window.draw(Orb_Shape);
+			}
+		for (unsigned i = 0; i<ORB_COUNT; i++)
+		{
+			CircleShape Unit_Shape(UNIT_RADIUS);
+			for(unsigned j = 0; j<ORB_VECTOR[i].orb_units.size(); j++)
+			{
+				Unit_Shape.setPosition(ORB_VECTOR[i].orb_units[j].return_unit_pos('x'),ORB_VECTOR[i].orb_units[j].return_unit_pos('y'));
+				if(ORB_VECTOR[i].orb_units[j].return_unit_colour() == 'R')
+				{
+					Unit_Shape.setFillColor(Color::Red);
+				}
+				if(ORB_VECTOR[i].orb_units[j].return_unit_colour() == 'B')
+				{
+					Unit_Shape.setFillColor(Color::Blue);
+				}
+				if(ORB_VECTOR[i].orb_units[j].return_unit_colour() == 'G')
+				{
+					Unit_Shape.setFillColor(Color::Green);
+				}
+				if(ORB_VECTOR[i].orb_units[j].return_unit_colour() == 'Y')
+				{
+					Unit_Shape.setFillColor(Color::Yellow);
+					if(ORB_VECTOR[i].orb_units[j].return_selection_status())
+					{
+						Unit_Shape.setOutlineColor(Color::White);
+						Unit_Shape.setOutlineThickness(1);
+					}
+				}
+				window.draw(Unit_Shape);
+			}
+		}
+	}
+}
+*/
+void update_game_logic()
+{
+
+	window.setActive(false);
+	Texture texture_yellow,texture_red,texture_green,texture_blue,texture_grey;
+	texture_yellow.loadFromFile("../assets/images/yellow_orb.png");
+	texture_yellow.setSmooth(true);
+	const sf::Texture *p_yellow_Texture = &texture_yellow;
+
+	texture_red.loadFromFile("../assets/images/red_orb.png");
+	texture_red.setSmooth(true);
+	const sf::Texture *p_red_Texture = &texture_red;
+	
+	texture_green.loadFromFile("../assets/images/green_orb.png");
+	texture_green.setSmooth(true);
+	const sf::Texture *p_green_Texture = &texture_green;
+	
+	texture_blue.loadFromFile("../assets/images/blue_orb.png");
+	texture_blue.setSmooth(true);
+	const sf::Texture *p_blue_Texture = &texture_blue;
+
+	texture_grey.loadFromFile("../assets/images/grey_orb.png");
+	texture_grey.setSmooth(true);
+	const sf::Texture *p_grey_Texture = &texture_grey;
+	
+	CircleShape Orb_Shape(ORB_RADIUS);
+	
 
 	Vector2f starting_position;
 	Vector2f final_position;
 	Vector2f span;
 	
+	Clock timer;
+	Time wait_time = seconds(10);
+	
 	window.display();
 	
 	RectangleShape *selection_box = new RectangleShape;
-	CircleShape Orb_Shape(ORB_RADIUS);
 
-	
 	while (window.isOpen())
     {
 		window.display();
@@ -232,6 +332,7 @@ void update()
 		
         while (window.pollEvent(event))
         {
+
 			switch(event.type)
 			{
 				case Event::Closed:
@@ -265,7 +366,7 @@ void update()
 								delete selection_box;
 							}
 							selection_box = new RectangleShape(span);
-							selection_box->setFillColor(Color::Black);
+							selection_box->setFillColor(Color::Transparent);
 							selection_box->setOutlineColor(Color::Cyan);
 							selection_box->setOutlineThickness(1);
 							selection_box->setPosition(starting_position.x, starting_position.y);
@@ -281,57 +382,34 @@ void update()
 		{
 			window.draw(*selection_box);
 		}
+
 		for(int i = 0; i<ORB_COUNT; i++)
 		{
-			Orb_Shape.setPosition(ORB_COORDINATES[i][0],ORB_COORDINATES[i][1]);
-			
-			if(ORB_VECTOR[i].return_orb_colour() == 'R')
+			if( ORB_VECTOR[i].return_orb_colour() == PLAYER_COLOUR || ORB_VECTOR[i].return_orb_colour() == 'B' )
 			{
-				Orb_Shape.setTexture(NULL);
-				Orb_Shape.setTexture(p_red_Texture,true);
-			}
-			if(ORB_VECTOR[i].return_orb_colour() == 'B')
-			{
-				Orb_Shape.setTexture(NULL);
-				Orb_Shape.setTexture(p_blue_Texture,true);
-			}
-			if(ORB_VECTOR[i].return_orb_colour() == 'G')
-			{
-				Orb_Shape.setTexture(NULL);
-				Orb_Shape.setTexture(p_green_Texture,true);
-			}
-			if(ORB_VECTOR[i].return_orb_colour() == 'Y')
-			{
-				Orb_Shape.setTexture(NULL);
-				Orb_Shape.setTexture(p_yellow_Texture,true);
-			}
-			if(ORB_VECTOR[i].return_orb_colour() == 'X')
-			{
-				Orb_Shape.setTexture(NULL);
-				Orb_Shape.setTexture(p_grey_Texture,true);
-			}
-			window.draw(Orb_Shape);
-		}
-		for(int i = 0; i<ORB_COUNT; i++)
-		{
-			if(ORB_VECTOR[i].return_orb_colour() == PLAYER_COLOUR)
-			{
-				if (event.mouseButton.button == Mouse::Right)
+
+				if (event.mouseButton.button == Mouse::Right && Mouse::isButtonPressed(Mouse::Button::Right))
 				{
 					Vector2f destination_point;
 					destination_point.x	= event.mouseButton.x;
 					destination_point.y = event.mouseButton.y;
-					for(int j = 0; j<ORB_VECTOR[i].orb_units.size(); j++)
+					for(unsigned j = 0; j<ORB_VECTOR[i].orb_units.size(); j++)
 					{
-						if(ORB_VECTOR[i].orb_units[j].return_unit_pos('x') >=  min(final_position.x,starting_position.x))
+						if(ORB_VECTOR[i].orb_units[j].return_unit_colour() == 'Y' || ORB_VECTOR[i].orb_units[j].return_unit_colour() == 'B')
 						{
-							if(ORB_VECTOR[i].orb_units[j].return_unit_pos('x') <= max(final_position.x,starting_position.x)) 
+							if(ORB_VECTOR[i].orb_units[j].return_unit_pos('x') >=  min(final_position.x,starting_position.x))
 							{
-								if(ORB_VECTOR[i].orb_units[j].return_unit_pos('y') >= min(final_position.y,starting_position.y))
+								if(ORB_VECTOR[i].orb_units[j].return_unit_pos('x') <= max(final_position.x,starting_position.x)) 
 								{
-									if(ORB_VECTOR[i].orb_units[j].return_unit_pos('y') <= max(final_position.y,starting_position.y))
+									if(ORB_VECTOR[i].orb_units[j].return_unit_pos('y') >= min(final_position.y,starting_position.y))
 									{
-										ORB_VECTOR[i].orb_units[j].set_unit_destination(destination_point.x, destination_point.y);
+										if(ORB_VECTOR[i].orb_units[j].return_unit_pos('y') <= max(final_position.y,starting_position.y))
+										{
+											if( destination_point.x!=0 && destination_point.y!=0 )
+											{
+												ORB_VECTOR[i].orb_units[j].set_unit_destination(destination_point.x, destination_point.y);
+											}
+										}
 									}
 								}
 							}
@@ -342,11 +420,11 @@ void update()
 				}
 			}
 		}
-		for(int i = 0; i<ORB_COUNT; i++)
+		for(unsigned i = 0; i<ORB_COUNT; i++)
 		{
-			if(ORB_VECTOR[i].return_orb_colour() == PLAYER_COLOUR)
+			if(ORB_VECTOR[i].return_orb_colour() == PLAYER_COLOUR || ORB_VECTOR[i].return_orb_colour() == 'B')
 			{
-				for(int j = 0; j<ORB_VECTOR[i].orb_units.size(); j++)
+				for(unsigned j = 0; j<ORB_VECTOR[i].orb_units.size(); j++)
 				{
 					if(ORB_VECTOR[i].orb_units[j].return_selection_status())
 					{
@@ -357,7 +435,11 @@ void update()
 								if(ORB_VECTOR[k].check_unit_vicinity(ORB_VECTOR[i].orb_units[j].return_unit_pos('x'), ORB_VECTOR[i].orb_units[j].return_unit_pos('y')))
 								{
 									ORB_VECTOR[k].change_health(ORB_VECTOR[i].orb_units[j].return_unit_colour());
-									cout<<k<<"\t"<<ORB_VECTOR[k].return_health()<<"\t"<<ORB_VECTOR[k].return_orb_colour()<<"\n";
+									if(ORB_VECTOR[k].return_orb_colour() != ORB_VECTOR[i].orb_units[j].return_unit_colour() || (ORB_VECTOR[k].return_orb_colour() == ORB_VECTOR[i].orb_units[j].return_unit_colour() && ORB_VECTOR[k].return_health()<(100*ORB_VECTOR[k].return_power())))
+									{
+										ORB_VECTOR[i].orb_units[j].~Unit();
+										ORB_VECTOR[i].orb_units.erase(ORB_VECTOR[i].orb_units.begin()+j);
+									}
 								}
 							}
 						}
@@ -365,25 +447,62 @@ void update()
 				}
 			}
 		}
-		for (int i = 0; i<ORB_COUNT; i++)
+
+		if( timer.getElapsedTime().asSeconds()>= wait_time.asSeconds())
 		{
-			CircleShape Unit_Shape(UNIT_RADIUS);
-			for(int j = 0; j<ORB_VECTOR[i].orb_units.size(); j++)
+			timer.restart();
+			ORB_VECTOR[0].produce_unit();
+		}
+		for(int i = 0; i<ORB_COUNT; i++)
 			{
-				Unit_Shape.setPosition(ORB_VECTOR[i].orb_units[j].return_unit_pos('x'),ORB_VECTOR[i].orb_units[j].return_unit_pos('y'));
+				Orb_Shape.setPosition(ORB_COORDINATES[i][0],ORB_COORDINATES[i][1]);
+				
 				if(ORB_VECTOR[i].return_orb_colour() == 'R')
 				{
-					Unit_Shape.setFillColor(Color::Red);
+					Orb_Shape.setTexture(NULL);
+					Orb_Shape.setTexture(p_red_Texture,true);
 				}
 				if(ORB_VECTOR[i].return_orb_colour() == 'B')
 				{
-					Unit_Shape.setFillColor(Color::Blue);
+					Orb_Shape.setTexture(NULL);
+					Orb_Shape.setTexture(p_blue_Texture,true);
 				}
 				if(ORB_VECTOR[i].return_orb_colour() == 'G')
 				{
-					Unit_Shape.setFillColor(Color::Green);
+					Orb_Shape.setTexture(NULL);
+					Orb_Shape.setTexture(p_green_Texture,true);
 				}
 				if(ORB_VECTOR[i].return_orb_colour() == 'Y')
+				{
+					Orb_Shape.setTexture(NULL);
+					Orb_Shape.setTexture(p_yellow_Texture,true);
+				}
+				if(ORB_VECTOR[i].return_orb_colour() == 'X')
+				{
+					Orb_Shape.setTexture(NULL);
+					Orb_Shape.setTexture(p_grey_Texture,true);
+				}
+				window.draw(Orb_Shape);
+			}
+		for (unsigned i = 0; i<ORB_COUNT; i++)
+		{
+			CircleShape Unit_Shape(UNIT_RADIUS);
+			for(unsigned j = 0; j<ORB_VECTOR[i].orb_units.size(); j++)
+			{
+				Unit_Shape.setPosition(ORB_VECTOR[i].orb_units[j].return_unit_pos('x'),ORB_VECTOR[i].orb_units[j].return_unit_pos('y'));
+				if(ORB_VECTOR[i].orb_units[j].return_unit_colour() == 'R')
+				{
+					Unit_Shape.setFillColor(Color::Red);
+				}
+				if(ORB_VECTOR[i].orb_units[j].return_unit_colour() == 'B')
+				{
+					Unit_Shape.setFillColor(Color::Blue);
+				}
+				if(ORB_VECTOR[i].orb_units[j].return_unit_colour() == 'G')
+				{
+					Unit_Shape.setFillColor(Color::Green);
+				}
+				if(ORB_VECTOR[i].orb_units[j].return_unit_colour() == 'Y')
 				{
 					Unit_Shape.setFillColor(Color::Yellow);
 					if(ORB_VECTOR[i].orb_units[j].return_selection_status())
@@ -400,7 +519,11 @@ void update()
 
 void play()
 {
+	//Thread thread_draw(&draw_game);
+	//Thread thread_logic(&update_game_logic);
 	main_menu();
 	initialise();
-	update();
+	update_game_logic();
+	//thread_draw.launch();
+
 }

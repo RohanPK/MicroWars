@@ -33,6 +33,7 @@ namespace microwars
 		void change_health(char colour);
 		int return_health();
 		int return_ID();
+		int return_power();
 		~Orb();
 	};
 

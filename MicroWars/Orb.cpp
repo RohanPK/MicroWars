@@ -2,7 +2,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include <time.h>
-
+#include <iostream>
 #define UNIT_SPEED 0.2
 #define UNIT_RADIUS 4
 #define ORB_RADIUS 30
@@ -23,10 +23,10 @@ microwars::Orb::Orb(float x, float y, float radius, char colour, int ID, int pow
 
 void microwars::Orb::produce_unit()
 {	
-	for(int count = 0; count<(orb_health / orb_no_of_units); count++)
+	for(int count = 0; count<(orb_power); count++)
 	{
-		float randomising_x = (rand()%5000 - 2500.0)/(250.0);
-		float randomising_y = (rand()%5000 - 2500.0)/(250.0);
+		float randomising_x = ((rand()%5000) - 2500.0)/(250.0);
+		float randomising_y = ((rand()%5000) - 2500.0)/(250.0);
 		microwars::Unit new_unit(orb_pos_x + randomising_x, orb_pos_y + randomising_y, UNIT_RADIUS, orb_colour, count, UNIT_SPEED);
 		orb_units.push_back(new_unit);
 	}
@@ -70,7 +70,7 @@ void microwars::Orb::change_health(char colour)
 {
 	if(colour == orb_residual_health_colour || colour == orb_colour)
 	{
-		if(orb_health < orb_no_of_units*orb_power)
+		if(orb_health < 100*orb_power)
 		{
 			orb_health++;
 		}
@@ -101,12 +101,19 @@ void microwars::Orb::change_health(char colour)
 			orb_residual_health_colour = 'X';
 		}
 	}
+	std::cout<<"Blue Orb Health"<<orb_health<<'\n';
 }
 
 int microwars::Orb::return_health()
 {
 	return orb_health;
 }
+
+int microwars::Orb::return_power()
+{
+	return orb_power;
+}
+
 
 microwars::Orb::~Orb()
 {

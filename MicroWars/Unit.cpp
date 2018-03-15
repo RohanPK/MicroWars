@@ -1,5 +1,6 @@
 #include "Unit.h"
 #include <math.h>
+#include <iostream>
 #include <stdlib.h>
 #include <time.h>
 
@@ -51,8 +52,8 @@ float microwars::Unit::return_unit_pos(char option)
 void microwars::Unit::set_unit_destination(float final_x, float final_y)
 {
 	unit_selected = true;
-	float randomising_x = (rand()%5000 - 2500.0)/(125.0);
-	float randomising_y = (rand()%5000 - 2500.0)/(125.0);
+	float randomising_x = ((float)(rand()%50000) - 25000.0)/(2500.0);
+	float randomising_y = ((float)(rand()%50000) - 25000.0)/(2500.0);
 	unit_destination_x = final_x + randomising_x;
 	unit_destination_y = final_y + randomising_y;
 }
