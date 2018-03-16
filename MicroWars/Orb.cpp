@@ -6,7 +6,7 @@
 #define UNIT_SPEED 0.2
 #define UNIT_RADIUS 4
 #define ORB_RADIUS 30
-#define EPSILON 45
+#define EPSILON 40
 
 microwars::Orb::Orb(float x, float y, float radius, char colour, int ID, int power, int no_of_units, int initial_health)
 {
@@ -23,10 +23,10 @@ microwars::Orb::Orb(float x, float y, float radius, char colour, int ID, int pow
 
 void microwars::Orb::produce_unit()
 {	
-	for(int count = 0; count<(orb_power); count++)
+	for(int count = 0; count<(orb_health/orb_no_of_units); count++)
 	{
-		float randomising_x = ((rand()%5000) - 2500.0)/(250.0);
-		float randomising_y = ((rand()%5000) - 2500.0)/(250.0);
+		float randomising_x = ((rand()%5000) - 2500.0)/(100.0);
+		float randomising_y = ((rand()%5000) - 2500.0)/(100.0);
 		microwars::Unit new_unit(orb_pos_x + randomising_x, orb_pos_y + randomising_y, UNIT_RADIUS, orb_colour, count, UNIT_SPEED);
 		orb_units.push_back(new_unit);
 	}
@@ -80,6 +80,7 @@ void microwars::Orb::change_health(char colour)
 		}
 	}
 	
+	
 	else if(orb_colour == 'X')
 	{
 		if(colour == orb_residual_health_colour || orb_residual_health_colour == 'X')
@@ -101,7 +102,7 @@ void microwars::Orb::change_health(char colour)
 			orb_residual_health_colour = 'X';
 		}
 	}
-	std::cout<<"Blue Orb Health"<<orb_health<<'\n';
+	std::cout<<"Blue Health"<<orb_health<<"\n";
 }
 
 int microwars::Orb::return_health()

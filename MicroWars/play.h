@@ -20,8 +20,8 @@ using namespace microwars;
 vector <Orb> ORB_VECTOR;
 
 char ORB_COLOUR[ORB_COUNT] = {'Y', 'G', 'B', 'R','Y'};
-float ORB_COORDINATES[ORB_COUNT][2] = {{10,200}, {178,654}, {250,124}, {560,633},{600,240}};
-int ORB_INITIAL_UNITS[ORB_COUNT] = {10, 20, 30, 40, 50};
+float ORB_COORDINATES[ORB_COUNT][2] = {{50,200}, {178,654}, {250,124}, {560,633},{600,240}};
+int ORB_INITIAL_UNITS[ORB_COUNT] = {10, 20, 0, 0, 50};
 
 RenderWindow window(VideoMode(1080, 720), "Micro Wars");
 
@@ -65,7 +65,7 @@ void main_menu()
 	unit_shape.setRadius(6);
 
 	Clock timer;
-	Time wait_time = seconds(2);
+	Time wait_time = seconds(10);
 
 
 	Music background_music;
@@ -183,7 +183,7 @@ void initialise()
 	
 	for(int i = 0; i<ORB_COUNT; i++)
 	{
-		ORB_VECTOR.push_back(Orb(ORB_COORDINATES[i][0],ORB_COORDINATES[i][1],ORB_RADIUS,ORB_COLOUR[i],i,1,100,100));
+		ORB_VECTOR.push_back(Orb(ORB_COORDINATES[i][0],ORB_COORDINATES[i][1],ORB_RADIUS,ORB_COLOUR[i],i,2,100,100));
 		for(int j = 0; j<ORB_INITIAL_UNITS[i]; j++)
 		{
 			ORB_VECTOR[i].produce_unit();
@@ -311,14 +311,14 @@ void update_game_logic()
 	const sf::Texture *p_grey_Texture = &texture_grey;
 	
 	CircleShape Orb_Shape(ORB_RADIUS);
-	
+	Orb_Shape.setOrigin(Orb_Shape.getRadius(),Orb_Shape.getRadius());
 
 	Vector2f starting_position;
 	Vector2f final_position;
 	Vector2f span;
 	
 	Clock timer;
-	Time wait_time = seconds(10);
+	Time wait_time = seconds(1);
 	
 	window.display();
 	
@@ -408,6 +408,7 @@ void update_game_logic()
 											if( destination_point.x!=0 && destination_point.y!=0 )
 											{
 												ORB_VECTOR[i].orb_units[j].set_unit_destination(destination_point.x, destination_point.y);
+												cout<<destination_point.x<<' '<<destination_point.y<<'\n';
 											}
 										}
 									}
@@ -451,8 +452,12 @@ void update_game_logic()
 		if( timer.getElapsedTime().asSeconds()>= wait_time.asSeconds())
 		{
 			timer.restart();
-			ORB_VECTOR[0].produce_unit();
+			for (int i=0;i<ORB_COUNT;i++)
+			{
+				ORB_VECTOR[i].produce_unit();
+			}
 		}
+
 		for(int i = 0; i<ORB_COUNT; i++)
 			{
 				Orb_Shape.setPosition(ORB_COORDINATES[i][0],ORB_COORDINATES[i][1]);
