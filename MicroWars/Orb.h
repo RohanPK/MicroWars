@@ -21,7 +21,7 @@ namespace microwars
 		char orb_residual_health_colour;
 		int orb_health;
 		int orb_power;
-		int orb_no_of_units;
+		int orb_max_power;
 
 		public:
 		
@@ -34,6 +34,8 @@ namespace microwars
 		int return_health();
 		int return_ID();
 		int return_power();
+		int return_max_power();
+
 		~Orb();
 	};
 
