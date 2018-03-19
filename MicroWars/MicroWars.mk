@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Rohan
-Date                   :=17/03/18
+Date                   :=19/03/18
 CodeLitePath           :=/home/rohan/.codelite
 LinkerName             :=/usr/bin/g++
 SharedObjectLinkerName :=/usr/bin/g++ -shared -fPIC
@@ -60,7 +60,7 @@ AS       := /usr/bin/as
 ## User defined environment variables
 ##
 CodeLiteDir:=/usr/share/codelite
-Objects0=$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IntermediateDirectory)/Orb.cpp$(ObjectSuffix) $(IntermediateDirectory)/Unit.cpp$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IntermediateDirectory)/Unit.cpp$(ObjectSuffix) $(IntermediateDirectory)/Orb.cpp$(ObjectSuffix) 
 
 
 
@@ -99,14 +99,6 @@ $(IntermediateDirectory)/main.cpp$(DependSuffix): main.cpp
 $(IntermediateDirectory)/main.cpp$(PreprocessSuffix): main.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/main.cpp$(PreprocessSuffix) main.cpp
 
-$(IntermediateDirectory)/Orb.cpp$(ObjectSuffix): Orb.cpp $(IntermediateDirectory)/Orb.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/rohan/Documents/MicroWars/MicroWars/Orb.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Orb.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/Orb.cpp$(DependSuffix): Orb.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Orb.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/Orb.cpp$(DependSuffix) -MM Orb.cpp
-
-$(IntermediateDirectory)/Orb.cpp$(PreprocessSuffix): Orb.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Orb.cpp$(PreprocessSuffix) Orb.cpp
-
 $(IntermediateDirectory)/Unit.cpp$(ObjectSuffix): Unit.cpp $(IntermediateDirectory)/Unit.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/rohan/Documents/MicroWars/MicroWars/Unit.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Unit.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/Unit.cpp$(DependSuffix): Unit.cpp
@@ -114,6 +106,14 @@ $(IntermediateDirectory)/Unit.cpp$(DependSuffix): Unit.cpp
 
 $(IntermediateDirectory)/Unit.cpp$(PreprocessSuffix): Unit.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Unit.cpp$(PreprocessSuffix) Unit.cpp
+
+$(IntermediateDirectory)/Orb.cpp$(ObjectSuffix): Orb.cpp $(IntermediateDirectory)/Orb.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/rohan/Documents/MicroWars/MicroWars/Orb.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Orb.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/Orb.cpp$(DependSuffix): Orb.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Orb.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/Orb.cpp$(DependSuffix) -MM Orb.cpp
+
+$(IntermediateDirectory)/Orb.cpp$(PreprocessSuffix): Orb.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Orb.cpp$(PreprocessSuffix) Orb.cpp
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)
