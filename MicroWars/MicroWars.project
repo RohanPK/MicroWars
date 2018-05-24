@@ -8,6 +8,8 @@
   <Description/>
   <Dependencies/>
   <VirtualDirectory Name="src">
+    <File Name="window.h"/>
+    <File Name="main_menu.h"/>
     <File Name="main.cpp"/>
     <File Name="Orb.h"/>
     <File Name="Orb.cpp"/>
