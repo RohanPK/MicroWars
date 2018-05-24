@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <iostream>
+
 #define UNIT_SPEED 0.2
 #define UNIT_RADIUS 4
 #define ORB_RADIUS 30
@@ -95,7 +96,6 @@ void microwars::Orb::change_health(char colour)
 			orb_colour = colour;
 		}
 	}
-	
 	else if(orb_colour == 'X')
 	{
 		if(colour == orb_residual_health_colour || orb_residual_health_colour == 'X')
@@ -104,10 +104,9 @@ void microwars::Orb::change_health(char colour)
 			orb_health++;
 		}
 	}
-
 	else
 	{
-		if(orb_health > 1)
+		if(orb_health > 0)
 		{
 			orb_health--;
 		}
@@ -128,6 +127,7 @@ int microwars::Orb::return_power()
 {
 	return orb_power;
 }
+
 int microwars::Orb::return_max_power()
 {
 	return orb_max_power;

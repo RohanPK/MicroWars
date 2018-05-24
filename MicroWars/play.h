@@ -14,7 +14,7 @@ using namespace microwars;
 #define ORB_COUNT 5
 #define ORB_RADIUS 30
 #define UNIT_RADIUS 4
-#define NULL_VECTOR Vector2f(0,0)
+
 #define PLAYER_COLOUR 'Y'
 
 vector <Orb> ORB_VECTOR;
@@ -23,66 +23,53 @@ char ORB_COLOUR[ORB_COUNT] = {'Y', 'G', 'B', 'R','Y'};
 float ORB_COORDINATES[ORB_COUNT][2] = {{50,200}, {178,654}, {250,124}, {560,633},{600,240}};
 int ORB_INITIAL_UNITS[ORB_COUNT] = {100, 20, 0, 0,300};
 int ORB_MAX_POWER[ORB_COUNT] = {3,2,3,3,2};
+
 RenderWindow window(VideoMode(1080, 720), "Micro Wars");
 
 bool start_play;
 
 void main_menu()
 {
-
 	window.display();
 
 	Font font_title,font_buttons;
 	font_title.loadFromFile("../assets/fonts/title.ttf");
-	Text menu_title("MicroWars",font_title,100);
-	Text menu_play("Play",font_title,50);
-	Text menu_options("Options",font_title,50);
-	Text menu_quit("Quit",font_title,50);
 	
+	Text menu_title("MicroWars",font_title,100);
 	menu_title.setColor(sf::Color::Red);
 	Vector2f position_menu(300,50);
 	menu_title.setPosition(position_menu);
+	
+	Text menu_play("Play",font_title,50);
 	menu_play.setColor(sf::Color::Red);
 	Vector2f position_play(450,200);
 	menu_play.setPosition(position_play);
+	
+	Text menu_options("Options",font_title,50);
 	menu_options.setColor(sf::Color::Red);
 	Vector2f position_options(450,250);
 	menu_options.setPosition(position_options);
+	
+	Text menu_quit("Quit",font_title,50);
 	menu_quit.setColor(sf::Color::Red);
 	Vector2f position_quit(450,300);
 	menu_quit.setPosition(position_quit);
 	
 	RectangleShape menu_box;
 	
-	Sprite background;
 	Texture background_image;
 	background_image.loadFromFile("../assets/images/main_menu.png");
+	
+	Sprite background;
 	background.setTexture(background_image);
 	background.setScale(0.5625,0.6667);
-	
-	Unit unit_yellow(10,10,6,'Y',1000,0.2),unit_green(10,710,6,'G',1000,0.2),unit_red(1070,10,6,'R',1000,0.2),unit_blue(1070,710,6,'B',1000,0.2);
-	CircleShape unit_shape;
-	unit_shape.setRadius(6);
-
-	Clock timer;
-	Time wait_time = seconds(1);
-
 
 	Music background_music;
 	background_music.openFromFile("../assets/sounds/temporary.ogg");
 	background_music.play();
+	
 	while(window.isOpen())
 	{
-		if( timer.getElapsedTime().asSeconds() > wait_time.asSeconds() )
-		{
-			timer.restart();
-			unit_yellow.set_unit_destination(rand()%1070,rand()%710);
-			unit_red.set_unit_destination(rand()%1070,rand()%710);
-			unit_blue.set_unit_destination(rand()%1070,rand()%710);
-			unit_green.set_unit_destination(rand()%1070,rand()%710);
-
-		}
-
 		window.display();
 		window.clear();
 		window.draw(background);
@@ -100,79 +87,58 @@ void main_menu()
 					break;
 			}
 
-		if( Mouse::getPosition(window).x >= position_play.x && Mouse::getPosition(window).x <= (position_play.x+100) && Mouse::getPosition(window).y >=position_play.y && Mouse::getPosition(window).y <= (position_play.y+50) )
-		{
-			menu_play.setColor(Color::White);
-			
-			if( event.mouseButton.button == Mouse::Left )
+			if( Mouse::getPosition(window).x >= position_play.x && Mouse::getPosition(window).x <= (position_play.x+100) && Mouse::getPosition(window).y >=position_play.y && Mouse::getPosition(window).y <= (position_play.y+50) )
 			{
-				start_play=true;
+				menu_play.setColor(Color::White);
+				
+				if( event.mouseButton.button == Mouse::Left )
+				{
+					start_play=true;
+				}
+			}
+			else
+			{
+				menu_play.setColor(Color::Red);
+			}
+
+			if( Mouse::getPosition(window).x >= position_options.x && Mouse::getPosition(window).x <= (position_options.x+100) && Mouse::getPosition(window).y >=position_options.y && Mouse::getPosition(window).y <= (position_options.y+50) )
+			{
+				menu_options.setColor(Color::White);
+				
+				if( event.mouseButton.button == Mouse::Left )
+				{
+					start_play=true;
+				}
+			}
+			else
+			{
+				menu_options.setColor(Color::Red);
+			}
+
+			if( Mouse::getPosition(window).x >= position_quit.x && Mouse::getPosition(window).x <= (position_quit.x+100) && Mouse::getPosition(window).y >=position_quit.y && Mouse::getPosition(window).y <= (position_quit.y+50) )
+			{
+				menu_quit.setColor(Color::White);
+				
+				if( event.mouseButton.button == Mouse::Left )
+				{
+					window.close();
+				}
+			}
+			else
+			{
+				menu_quit.setColor(Color::Red);
 			}
 		}
-		else
-		{
-			menu_play.setColor(Color::Red);
-		}
-
-		if( Mouse::getPosition(window).x >= position_options.x && Mouse::getPosition(window).x <= (position_options.x+100) && Mouse::getPosition(window).y >=position_options.y && Mouse::getPosition(window).y <= (position_options.y+50) )
-		{
-			menu_options.setColor(Color::White);
-			
-			if( event.mouseButton.button == Mouse::Left )
-			{
-				start_play=true;
-			}
-		}
-		else
-		{
-			menu_options.setColor(Color::Red);
-		}
-
-		if( Mouse::getPosition(window).x >= position_quit.x && Mouse::getPosition(window).x <= (position_quit.x+100) && Mouse::getPosition(window).y >=position_quit.y && Mouse::getPosition(window).y <= (position_quit.y+50) )
-		{
-			menu_quit.setColor(Color::White);
-			
-			if( event.mouseButton.button == Mouse::Left )
-			{
-				window.close();
-			}
-		}
-		else
-		{
-			menu_quit.setColor(Color::Red);
-		}
-
-		}
+		
 		if(start_play)
 		{
 			break;
 		}
-		
-		unit_yellow.move();
-		unit_shape.setPosition(unit_yellow.return_unit_pos('x'),unit_yellow.return_unit_pos('y'));
-		unit_shape.setFillColor(Color::Yellow);
-		window.draw(unit_shape);
-
-		unit_red.move();
-		unit_shape.setPosition(unit_red.return_unit_pos('x'),unit_red.return_unit_pos('y'));
-		unit_shape.setFillColor(Color::Red);
-		window.draw(unit_shape);
-
-		unit_green.move();
-		unit_shape.setPosition(unit_green.return_unit_pos('x'),unit_green.return_unit_pos('y'));
-		unit_shape.setFillColor(Color::Green);
-		window.draw(unit_shape);
-
-		unit_blue.move();
-		unit_shape.setPosition(unit_blue.return_unit_pos('x'),unit_blue.return_unit_pos('y'));
-		unit_shape.setFillColor(Color::Blue);
-		window.draw(unit_shape);
 
 		window.draw(menu_title);
 		window.draw(menu_play);
 		window.draw(menu_options);
 		window.draw(menu_quit);
-
 	}
 }
 
@@ -193,12 +159,8 @@ void initialise()
 
 void draw_game()
 {
-
-	window.setActive(false);
-	window.setFramerateLimit(60);
-
-	Mouse::setPosition(Vector2i(560,633),window);
 	Texture texture_yellow,texture_red,texture_green,texture_blue,texture_grey;
+	
 	texture_yellow.loadFromFile("../assets/images/yellow_orb.png");
 	texture_yellow.setSmooth(true);
 	const sf::Texture *p_yellow_Texture = &texture_yellow;
@@ -220,14 +182,18 @@ void draw_game()
 	const sf::Texture *p_grey_Texture = &texture_grey;
 	
 	Sprite background;
+	
 	Texture background_image;
 	background_image.loadFromFile("../assets/images/play_background.png");
+	
 	background.setTexture(background_image);
 	background.setScale(0.84375,0.9);
 
 	CircleShape Orb_Shape(ORB_RADIUS);
+	
 	CircleShape Power_Circle_One(2*ORB_RADIUS);
 	Power_Circle_One.setOutlineThickness(1);
+	
 	CircleShape Power_Circle_Two(3*ORB_RADIUS);
 	Power_Circle_Two.setOutlineThickness(1);
 
@@ -241,12 +207,13 @@ void draw_game()
 	while(window.isOpen())
 	{
 		Orb_Shape.setOrigin(ORB_RADIUS/2,ORB_RADIUS/2);
-		Power_Circle_One.setOrigin(ORB_RADIUS,ORB_RADIUS);
+		Power_Circle_One.setOrigin(2*ORB_RADIUS/2,2*ORB_RADIUS/2);
 		Power_Circle_Two.setOrigin(3*ORB_RADIUS/2,3*ORB_RADIUS/2);
 
 		window.display();
 		window.clear();
 		window.draw(background);
+		
 		Event event;
 
 		while (window.pollEvent(event))
@@ -284,6 +251,7 @@ void draw_game()
 							{
 								delete selection_box;
 							}
+							
 							selection_box = new RectangleShape(span);
 							selection_box->setFillColor(Color::Transparent);
 							selection_box->setOutlineColor(Color::Cyan);
@@ -306,15 +274,16 @@ void draw_game()
 		{
 			if( ORB_VECTOR[i].return_orb_colour() == PLAYER_COLOUR)
 			{
-
 				if (event.mouseButton.button == Mouse::Right && Mouse::isButtonPressed(Mouse::Button::Right))
 				{
 					Vector2f destination_point;
+					
 					destination_point.x	= event.mouseButton.x;
 					destination_point.y = event.mouseButton.y;
-					for(unsigned j = 0; j<ORB_VECTOR[i].orb_units.size(); j++)
+					
+					for(int j = 0; j<ORB_VECTOR[i].orb_units.size(); j++)
 					{
-						if(ORB_VECTOR[i].orb_units[j].return_unit_colour() == 'Y' || ORB_VECTOR[i].orb_units[j].return_unit_colour() == 'B')
+						if(ORB_VECTOR[i].orb_units[j].return_unit_colour() == 'Y')
 						{
 							if(ORB_VECTOR[i].orb_units[j].return_unit_pos('x') >=  min(final_position.x,starting_position.x))
 							{
@@ -342,7 +311,7 @@ void draw_game()
 		for(int i = 0; i<ORB_COUNT; i++)
 			{
 				Orb_Shape.setPosition(ORB_COORDINATES[i][0]-ORB_RADIUS/2,ORB_COORDINATES[i][1]-ORB_RADIUS/2);
-				Power_Circle_One.setPosition(ORB_COORDINATES[i][0]-ORB_RADIUS,ORB_COORDINATES[i][1]-ORB_RADIUS);
+				Power_Circle_One.setPosition(ORB_COORDINATES[i][0]-2*ORB_RADIUS/2,ORB_COORDINATES[i][1]-2*ORB_RADIUS/2);
 				Power_Circle_One.setOutlineColor(Color::White);
 				Power_Circle_Two.setPosition(ORB_COORDINATES[i][0]-3*ORB_RADIUS/2,ORB_COORDINATES[i][1]-3*ORB_RADIUS/2);
 				Power_Circle_Two.setOutlineColor(Color::White);
@@ -361,6 +330,7 @@ void draw_game()
 					if(ORB_VECTOR[i].return_power()==3)
 						Power_Circle_Two.setOutlineColor(Color::Red);
 				}
+				
 				if(ORB_VECTOR[i].return_orb_colour() == 'B')
 				{
 					Orb_Shape.setTexture(NULL);
@@ -375,6 +345,7 @@ void draw_game()
 					if(ORB_VECTOR[i].return_power()==3)
 						Power_Circle_Two.setOutlineColor(Color::Blue);
 				}
+				
 				if(ORB_VECTOR[i].return_orb_colour() == 'G')
 				{
 					Orb_Shape.setTexture(NULL);
@@ -389,6 +360,7 @@ void draw_game()
 					if(ORB_VECTOR[i].return_power()==3)
 						Power_Circle_Two.setOutlineColor(Color::Green);
 				}
+				
 				if(ORB_VECTOR[i].return_orb_colour() == 'Y')
 				{
 					Orb_Shape.setTexture(NULL);
@@ -403,6 +375,7 @@ void draw_game()
 					if(ORB_VECTOR[i].return_power()==3)
 						Power_Circle_Two.setOutlineColor(Color::Yellow);
 				}
+				
 				if(ORB_VECTOR[i].return_orb_colour() == 'X')
 				{
 					Orb_Shape.setTexture(NULL);
@@ -417,6 +390,7 @@ void draw_game()
 					if(ORB_VECTOR[i].return_power()==3)
 						Power_Circle_One.setOutlineColor(Color::White);
 				}
+				
 				if( ORB_VECTOR[i].return_max_power()>2)
 					window.draw(Power_Circle_Two);
 				if( ORB_VECTOR[i].return_max_power()>1)
@@ -424,25 +398,29 @@ void draw_game()
 				window.draw(Orb_Shape);
 			}
 
-		for (unsigned i = 0; i<ORB_COUNT; i++)
+		for (int i = 0; i<ORB_COUNT; i++)
 		{
 			CircleShape Unit_Shape(UNIT_RADIUS);
 
-			for(unsigned j = 0; j<ORB_VECTOR[i].orb_units.size(); j++)
+			for(int j = 0; j<ORB_VECTOR[i].orb_units.size(); j++)
 			{
 				Unit_Shape.setPosition(ORB_VECTOR[i].orb_units[j].return_unit_pos('x'),ORB_VECTOR[i].orb_units[j].return_unit_pos('y'));
+				
 				if(ORB_VECTOR[i].orb_units[j].return_unit_colour() == 'R')
 				{
 					Unit_Shape.setFillColor(Color::Red);
 				}
+				
 				if(ORB_VECTOR[i].orb_units[j].return_unit_colour() == 'B')
 				{
 					Unit_Shape.setFillColor(Color::Blue);
 				}
+				
 				if(ORB_VECTOR[i].orb_units[j].return_unit_colour() == 'G')
 				{
 					Unit_Shape.setFillColor(Color::Green);
 				}
+				
 				if(ORB_VECTOR[i].orb_units[j].return_unit_colour() == 'Y')
 				{
 					Unit_Shape.setFillColor(Color::Yellow);
@@ -452,27 +430,25 @@ void draw_game()
 						Unit_Shape.setOutlineThickness(1);
 					}
 				}
+				
 				window.draw(Unit_Shape);
 			}
 		}
 	}
-
 }
 
 void update_game_logic()
 {
-
 	Clock timer;
 	Time wait_time = seconds(10000000);
 
 	while (true)
 	{
-
-		for(unsigned i = 0; i<ORB_COUNT; i++)
+		for(int i = 0; i<ORB_COUNT; i++)
 		{
-			if(ORB_VECTOR[i].return_orb_colour() == PLAYER_COLOUR || ORB_VECTOR[i].return_orb_colour() == 'B')
+			if(ORB_VECTOR[i].return_orb_colour() == PLAYER_COLOUR)
 			{
-				for(unsigned j = 0; j<ORB_VECTOR[i].orb_units.size(); j++)
+				for(int j = 0; j<ORB_VECTOR[i].orb_units.size(); j++)
 				{
 					if(ORB_VECTOR[i].orb_units[j].return_selection_status())
 					{
@@ -487,7 +463,6 @@ void update_game_logic()
 									{
 										ORB_VECTOR[i].orb_units[j].~Unit();
 										ORB_VECTOR[i].orb_units.erase(ORB_VECTOR[i].orb_units.begin()+j);
-										cout<<ORB_VECTOR[i].return_power()<<'\n';
 									}
 								}
 							}
@@ -505,7 +480,6 @@ void update_game_logic()
 				ORB_VECTOR[i].produce_unit();
 			}
 		}
-
 	}
 }
 
@@ -517,8 +491,10 @@ void play()
 
 	Thread thread_draw(&draw_game);
 	Thread thread_logic(&update_game_logic);
+	
 	main_menu();
 	initialise();
+	
 	thread_logic.launch();
 	thread_draw.launch();
 
