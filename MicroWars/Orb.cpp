@@ -23,7 +23,7 @@ microwars::Orb::Orb(float x, float y, float radius, char colour, int ID, int pow
 }
 
 void microwars::Orb::produce_unit()
-{	
+{
 	for(int count = 0; count< orb_power; count++)
 	{
 		float randomising_x = ((rand()%5000) - 2500.0)/(100.0);

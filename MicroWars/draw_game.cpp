@@ -41,8 +41,14 @@ void draw_game(GameEssentials &G)
 	Power_Circle_One.setOrigin(2*G.ORB_RADIUS/2,2*G.ORB_RADIUS/2);
 	Power_Circle_Two.setOrigin(3*G.ORB_RADIUS/2,3*G.ORB_RADIUS/2);
 
+	vector < RectangleShape > Health_Bar_Vector;
+	RectangleShape health_bar;
+	health_bar.setSize(Vector2f(100, 10));
+	health_bar.setOutlineColor(Color(255, 255, 255));
+	health_bar.setOutlineThickness(1);
+	
 	for(int i=0; i<5; i++)
-		{
+	{
 		vector <CircleShape> Orb_Shape_temp;
 		Orb_Shape.setTexture(NULL);
 		switch (i) 
@@ -53,10 +59,7 @@ void draw_game(GameEssentials &G)
 				Color blue_transparent(0,0,255,30);
 				Power_Circle_One.setFillColor(blue_transparent);
 				Power_Circle_Two.setFillColor(blue_transparent);
-				Orb_Shape_temp.push_back(Orb_Shape);
-				Orb_Shape_temp.push_back(Power_Circle_One);
-				Orb_Shape_temp.push_back(Power_Circle_Two);
-				Orb_Shape_Vector.push_back(Orb_Shape_temp);
+				health_bar.setFillColor(Color(0,0,255));
 				break;
 			}
 			case 1 :
@@ -65,10 +68,7 @@ void draw_game(GameEssentials &G)
 				Color green_transparent(0,255,0,30);
 				Power_Circle_One.setFillColor(green_transparent);
 				Power_Circle_Two.setFillColor(green_transparent);
-				Orb_Shape_temp.push_back(Orb_Shape);
-				Orb_Shape_temp.push_back(Power_Circle_One);
-				Orb_Shape_temp.push_back(Power_Circle_Two);
-				Orb_Shape_Vector.push_back(Orb_Shape_temp);
+				health_bar.setFillColor(Color(0,255,0));
 				break;
 			}
 			
@@ -78,10 +78,7 @@ void draw_game(GameEssentials &G)
 				Color red_transparent(255,0,0,30);
 				Power_Circle_One.setFillColor(red_transparent);
 				Power_Circle_Two.setFillColor(red_transparent);
-				Orb_Shape_temp.push_back(Orb_Shape);
-				Orb_Shape_temp.push_back(Power_Circle_One);
-				Orb_Shape_temp.push_back(Power_Circle_Two);
-				Orb_Shape_Vector.push_back(Orb_Shape_temp);
+				health_bar.setFillColor(Color(255,0,0));
 				break;
 			}
 			
@@ -91,10 +88,7 @@ void draw_game(GameEssentials &G)
 				Color yellow_transparent(255,255,0,30);
 				Power_Circle_One.setFillColor(yellow_transparent);
 				Power_Circle_Two.setFillColor(yellow_transparent);
-				Orb_Shape_temp.push_back(Orb_Shape);
-				Orb_Shape_temp.push_back(Power_Circle_One);
-				Orb_Shape_temp.push_back(Power_Circle_Two);
-				Orb_Shape_Vector.push_back(Orb_Shape_temp);
+				health_bar.setFillColor(Color(255,255,0));
 				break;
 			}
 			
@@ -104,10 +98,7 @@ void draw_game(GameEssentials &G)
 				Color grey_transparent(128,128,128,30);
 				Power_Circle_One.setFillColor(grey_transparent);
 				Power_Circle_Two.setFillColor(grey_transparent);
-				Orb_Shape_temp.push_back(Orb_Shape);
-				Orb_Shape_temp.push_back(Power_Circle_One);
-				Orb_Shape_temp.push_back(Power_Circle_Two);
-				Orb_Shape_Vector.push_back(Orb_Shape_temp);
+				health_bar.setFillColor(Color(128,128,128));
 				break;
 			}
 		}
@@ -116,7 +107,8 @@ void draw_game(GameEssentials &G)
 		Orb_Shape_temp.push_back(Power_Circle_One);
 		Orb_Shape_temp.push_back(Power_Circle_Two);
 		Orb_Shape_Vector.push_back(Orb_Shape_temp);
-		}
+		Health_Bar_Vector.push_back(health_bar);
+	}
 	Vector2f starting_position;
 	Vector2f final_position;
 	Vector2f span;
@@ -228,6 +220,8 @@ void draw_game(GameEssentials &G)
 		for(int i = 0; i<G.ORB_COUNT; i++)
 			{
 				int colour_index;
+				RectangleShape line(sf::Vector2f(2,10));
+
 				if(G.ORB_VECTOR[i].return_orb_colour() == 'R')
 				{
 					colour_index=2;
@@ -276,11 +270,31 @@ void draw_game(GameEssentials &G)
 				Orb_Shape_Vector[colour_index][0].setPosition(G.ORB_COORDINATES[i][0]-G.ORB_RADIUS/2,G.ORB_COORDINATES[i][1]-G.ORB_RADIUS/2);
 				Orb_Shape_Vector[colour_index][1].setPosition(G.ORB_COORDINATES[i][0]-2*G.ORB_RADIUS/2,G.ORB_COORDINATES[i][1]-2*G.ORB_RADIUS/2);
 				Orb_Shape_Vector[colour_index][2].setPosition(G.ORB_COORDINATES[i][0]-3*G.ORB_RADIUS/2,G.ORB_COORDINATES[i][1]-3*G.ORB_RADIUS/2);
+				
 				if( G.ORB_VECTOR[i].return_max_power()>2)
 					G.window->draw(Orb_Shape_Vector[colour_index][2]);
 				if( G.ORB_VECTOR[i].return_max_power()>1)
 					G.window->draw(Orb_Shape_Vector[colour_index][1]);
 				G.window->draw(Orb_Shape_Vector[colour_index][0]);
+
+				Health_Bar_Vector[colour_index].setPosition(G.ORB_COORDINATES[i][0]-50,G.ORB_COORDINATES[i][1]+30);
+				Health_Bar_Vector[colour_index].setSize(Vector2f(G.ORB_VECTOR[i].return_health(),10));
+				G.window->draw(Health_Bar_Vector[colour_index]);
+				if( G.ORB_VECTOR[i].return_health()>=25 )
+				{
+					line.setPosition(G.ORB_COORDINATES[i][0]-50+25,G.ORB_COORDINATES[i][1]+30);
+					G.window->draw(line);
+					if( G.ORB_VECTOR[i].return_health()>=50 )
+					{
+						line.setPosition(G.ORB_COORDINATES[i][0]-50+50,G.ORB_COORDINATES[i][1]+30);
+						G.window->draw(line);
+						if( G.ORB_VECTOR[i].return_health()>=75 )
+						{
+							line.setPosition(G.ORB_COORDINATES[i][0]-50+75,G.ORB_COORDINATES[i][1]+30);
+							G.window->draw(line);
+						}
+					}
+				}
 			}
 
 		for (int i = 0; i<G.ORB_COUNT; i++)
