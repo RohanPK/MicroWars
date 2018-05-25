@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Ishan Sang
-Date                   :=25/05/18
+Date                   :=26/05/18
 CodeLitePath           :=/home/ishan/.codelite
 LinkerName             :=/usr/bin/g++
 SharedObjectLinkerName :=/usr/bin/g++ -shared -fPIC
@@ -60,7 +60,7 @@ AS       := /usr/bin/as
 ## User defined environment variables
 ##
 CodeLiteDir:=/usr/share/codelite
-Objects0=$(IntermediateDirectory)/init_game.cpp$(ObjectSuffix) $(IntermediateDirectory)/main_menu.cpp$(ObjectSuffix) $(IntermediateDirectory)/window.cpp$(ObjectSuffix) $(IntermediateDirectory)/draw_game.cpp$(ObjectSuffix) $(IntermediateDirectory)/Unit.cpp$(ObjectSuffix) $(IntermediateDirectory)/update_game.cpp$(ObjectSuffix) $(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IntermediateDirectory)/Orb.cpp$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/Orb.cpp$(ObjectSuffix) $(IntermediateDirectory)/Unit.cpp$(ObjectSuffix) $(IntermediateDirectory)/draw_game.cpp$(ObjectSuffix) $(IntermediateDirectory)/init_game.cpp$(ObjectSuffix) $(IntermediateDirectory)/update_game.cpp$(ObjectSuffix) $(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IntermediateDirectory)/main_menu.cpp$(ObjectSuffix) $(IntermediateDirectory)/window.cpp$(ObjectSuffix) 
 
 
 
@@ -91,29 +91,21 @@ PreBuild:
 ##
 ## Objects
 ##
-$(IntermediateDirectory)/init_game.cpp$(ObjectSuffix): init_game.cpp $(IntermediateDirectory)/init_game.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/ishan/Documents/MicroWars/MicroWars/init_game.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/init_game.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/init_game.cpp$(DependSuffix): init_game.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/init_game.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/init_game.cpp$(DependSuffix) -MM init_game.cpp
+$(IntermediateDirectory)/Orb.cpp$(ObjectSuffix): Orb.cpp $(IntermediateDirectory)/Orb.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/ishan/Documents/MicroWars/MicroWars/Orb.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Orb.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/Orb.cpp$(DependSuffix): Orb.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Orb.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/Orb.cpp$(DependSuffix) -MM Orb.cpp
 
-$(IntermediateDirectory)/init_game.cpp$(PreprocessSuffix): init_game.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/init_game.cpp$(PreprocessSuffix) init_game.cpp
+$(IntermediateDirectory)/Orb.cpp$(PreprocessSuffix): Orb.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Orb.cpp$(PreprocessSuffix) Orb.cpp
 
-$(IntermediateDirectory)/main_menu.cpp$(ObjectSuffix): main_menu.cpp $(IntermediateDirectory)/main_menu.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/ishan/Documents/MicroWars/MicroWars/main_menu.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main_menu.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/main_menu.cpp$(DependSuffix): main_menu.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/main_menu.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/main_menu.cpp$(DependSuffix) -MM main_menu.cpp
+$(IntermediateDirectory)/Unit.cpp$(ObjectSuffix): Unit.cpp $(IntermediateDirectory)/Unit.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/ishan/Documents/MicroWars/MicroWars/Unit.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Unit.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/Unit.cpp$(DependSuffix): Unit.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Unit.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/Unit.cpp$(DependSuffix) -MM Unit.cpp
 
-$(IntermediateDirectory)/main_menu.cpp$(PreprocessSuffix): main_menu.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/main_menu.cpp$(PreprocessSuffix) main_menu.cpp
-
-$(IntermediateDirectory)/window.cpp$(ObjectSuffix): window.cpp $(IntermediateDirectory)/window.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/ishan/Documents/MicroWars/MicroWars/window.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/window.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/window.cpp$(DependSuffix): window.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/window.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/window.cpp$(DependSuffix) -MM window.cpp
-
-$(IntermediateDirectory)/window.cpp$(PreprocessSuffix): window.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/window.cpp$(PreprocessSuffix) window.cpp
+$(IntermediateDirectory)/Unit.cpp$(PreprocessSuffix): Unit.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Unit.cpp$(PreprocessSuffix) Unit.cpp
 
 $(IntermediateDirectory)/draw_game.cpp$(ObjectSuffix): draw_game.cpp $(IntermediateDirectory)/draw_game.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/ishan/Documents/MicroWars/MicroWars/draw_game.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/draw_game.cpp$(ObjectSuffix) $(IncludePath)
@@ -123,13 +115,13 @@ $(IntermediateDirectory)/draw_game.cpp$(DependSuffix): draw_game.cpp
 $(IntermediateDirectory)/draw_game.cpp$(PreprocessSuffix): draw_game.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/draw_game.cpp$(PreprocessSuffix) draw_game.cpp
 
-$(IntermediateDirectory)/Unit.cpp$(ObjectSuffix): Unit.cpp $(IntermediateDirectory)/Unit.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/ishan/Documents/MicroWars/MicroWars/Unit.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Unit.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/Unit.cpp$(DependSuffix): Unit.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Unit.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/Unit.cpp$(DependSuffix) -MM Unit.cpp
+$(IntermediateDirectory)/init_game.cpp$(ObjectSuffix): init_game.cpp $(IntermediateDirectory)/init_game.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/ishan/Documents/MicroWars/MicroWars/init_game.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/init_game.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/init_game.cpp$(DependSuffix): init_game.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/init_game.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/init_game.cpp$(DependSuffix) -MM init_game.cpp
 
-$(IntermediateDirectory)/Unit.cpp$(PreprocessSuffix): Unit.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Unit.cpp$(PreprocessSuffix) Unit.cpp
+$(IntermediateDirectory)/init_game.cpp$(PreprocessSuffix): init_game.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/init_game.cpp$(PreprocessSuffix) init_game.cpp
 
 $(IntermediateDirectory)/update_game.cpp$(ObjectSuffix): update_game.cpp $(IntermediateDirectory)/update_game.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/ishan/Documents/MicroWars/MicroWars/update_game.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/update_game.cpp$(ObjectSuffix) $(IncludePath)
@@ -147,13 +139,21 @@ $(IntermediateDirectory)/main.cpp$(DependSuffix): main.cpp
 $(IntermediateDirectory)/main.cpp$(PreprocessSuffix): main.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/main.cpp$(PreprocessSuffix) main.cpp
 
-$(IntermediateDirectory)/Orb.cpp$(ObjectSuffix): Orb.cpp $(IntermediateDirectory)/Orb.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/ishan/Documents/MicroWars/MicroWars/Orb.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Orb.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/Orb.cpp$(DependSuffix): Orb.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Orb.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/Orb.cpp$(DependSuffix) -MM Orb.cpp
+$(IntermediateDirectory)/main_menu.cpp$(ObjectSuffix): main_menu.cpp $(IntermediateDirectory)/main_menu.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/ishan/Documents/MicroWars/MicroWars/main_menu.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main_menu.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/main_menu.cpp$(DependSuffix): main_menu.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/main_menu.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/main_menu.cpp$(DependSuffix) -MM main_menu.cpp
 
-$(IntermediateDirectory)/Orb.cpp$(PreprocessSuffix): Orb.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Orb.cpp$(PreprocessSuffix) Orb.cpp
+$(IntermediateDirectory)/main_menu.cpp$(PreprocessSuffix): main_menu.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/main_menu.cpp$(PreprocessSuffix) main_menu.cpp
+
+$(IntermediateDirectory)/window.cpp$(ObjectSuffix): window.cpp $(IntermediateDirectory)/window.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/ishan/Documents/MicroWars/MicroWars/window.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/window.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/window.cpp$(DependSuffix): window.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/window.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/window.cpp$(DependSuffix) -MM window.cpp
+
+$(IntermediateDirectory)/window.cpp$(PreprocessSuffix): window.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/window.cpp$(PreprocessSuffix) window.cpp
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)

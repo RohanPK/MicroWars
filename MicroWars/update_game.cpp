@@ -1,6 +1,6 @@
 #include "play.h"
 
-void update_game(GameEssentials G)
+void update_game(GameEssentials &G)
 {
 	Clock timer;
 	Time wait_time = seconds(10000000);

@@ -1,6 +1,6 @@
 #include "play.h"
 
-void draw_game(GameEssentials G)
+void draw_game(GameEssentials &G)
 {
 	Texture texture_yellow,texture_red,texture_green,texture_blue,texture_grey;
 	

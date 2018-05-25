@@ -115,5 +115,5 @@ void main_menu(RenderWindow &window)
 		window.draw(menu_quit);
 	}
 	
-	init_game(window);
+	init_game(window, start_play);
 }
