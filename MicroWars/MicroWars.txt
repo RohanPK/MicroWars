@@ -1,1 +1,1 @@
-./Debug/main.cpp.o ./Debug/Orb.cpp.o ./Debug/Unit.cpp.o
+./Debug/Orb.cpp.o ./Debug/Unit.cpp.o ./Debug/draw_game.cpp.o ./Debug/init_game.cpp.o ./Debug/update_game.cpp.o ./Debug/main.cpp.o ./Debug/main_menu.cpp.o ./Debug/window.cpp.o

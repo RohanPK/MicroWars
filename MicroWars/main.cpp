@@ -2,6 +2,6 @@
 using namespace sf;
 int main()
 {
-	play();
+	init_window();
 	return 0;
 }

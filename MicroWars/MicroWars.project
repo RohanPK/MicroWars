@@ -8,8 +8,11 @@
   <Description/>
   <Dependencies/>
   <VirtualDirectory Name="src">
-    <File Name="window.h"/>
-    <File Name="main_menu.h"/>
+    <File Name="update_game.cpp"/>
+    <File Name="draw_game.cpp"/>
+    <File Name="init_game.cpp"/>
+    <File Name="main_menu.cpp"/>
+    <File Name="window.cpp"/>
     <File Name="main.cpp"/>
     <File Name="Orb.h"/>
     <File Name="Orb.cpp"/>
