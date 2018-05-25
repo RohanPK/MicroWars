@@ -102,12 +102,15 @@ void draw_game(GameEssentials &G)
 				break;
 			}
 		}
+<<<<<<< HEAD
 
 		Orb_Shape_temp.push_back(Orb_Shape);
 		Orb_Shape_temp.push_back(Power_Circle_One);
 		Orb_Shape_temp.push_back(Power_Circle_Two);
 		Orb_Shape_Vector.push_back(Orb_Shape_temp);
 		Health_Bar_Vector.push_back(health_bar);
+=======
+>>>>>>> fbad2034d4078c959a3936a57e3d075c37f40bba
 	}
 	Vector2f starting_position;
 	Vector2f final_position;

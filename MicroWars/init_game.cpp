@@ -15,7 +15,11 @@ void initialise(GameEssentials &G)
 
 void init_game(RenderWindow &window, bool &start_play)
 {		
+<<<<<<< HEAD
 	GameEssentials G={5,30,4,'Y',{'Y','G','B','R','Y'}, {{50,200}, {178,654}, {250,124}, {560,633},{600,240}}, {10, 20, 0, 0,30}, {3,2,3,3,2}};
+=======
+	GameEssentials G={5,30,4,'Y',{'Y','G','B','R','Y'}, {{50,200}, {178,654}, {250,124}, {560,633},{600,240}}, {100, 20, 60, 50,300}, {3,2,3,3,2}};
+>>>>>>> fbad2034d4078c959a3936a57e3d075c37f40bba
 	G.start_play = start_play;
 	G.window = &window;
 	
