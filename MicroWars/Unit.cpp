@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define EPSILON 0.2
+#define EPSILON 0.05
 
 int factor(float a, float b)
 {
@@ -76,6 +76,18 @@ int microwars::Unit::move()
 		unit_speed_y = ((unit_speed_x)*(unit_speed_slope));
 		unit_pos_x += unit_speed_x;
 		unit_pos_y += unit_speed_y;
+		return 0;
+	}
+}
+
+int microwars::Unit::check_unit_vicinity(float x, float y)
+{
+	if(fabs(unit_pos_x - x)<=EPSILON && fabs(unit_pos_y - y)<=EPSILON)
+	{
+		return 1;
+	}
+	else
+	{
 		return 0;
 	}
 }

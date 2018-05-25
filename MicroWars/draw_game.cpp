@@ -1,6 +1,6 @@
 #include "play.h"
 
-void draw_game(GameEssentials G)
+void draw_game(GameEssentials &G)
 {
 	Texture texture_yellow,texture_red,texture_green,texture_blue,texture_grey;
 	
@@ -19,27 +19,104 @@ void draw_game(GameEssentials G)
 	texture_blue.loadFromFile("../assets/images/blue_orb.png");
 	texture_blue.setSmooth(true);
 	const sf::Texture *p_blue_Texture = &texture_blue;
-
+	
 	texture_grey.loadFromFile("../assets/images/grey_orb.png");
 	texture_grey.setSmooth(true);
 	const sf::Texture *p_grey_Texture = &texture_grey;
-	
+
 	Sprite background;
 	
 	Texture background_image;
 	background_image.loadFromFile("../assets/images/play_background.png");
-	
 	background.setTexture(background_image);
 	background.setScale(0.84375,0.9);
 
+	vector < vector < CircleShape> > Orb_Shape_Vector;
 	CircleShape Orb_Shape(G.ORB_RADIUS);
-	
 	CircleShape Power_Circle_One(2*G.ORB_RADIUS);
 	Power_Circle_One.setOutlineThickness(1);
-	
 	CircleShape Power_Circle_Two(3*G.ORB_RADIUS);
 	Power_Circle_Two.setOutlineThickness(1);
+	Orb_Shape.setOrigin(G.ORB_RADIUS/2,G.ORB_RADIUS/2);
+	Power_Circle_One.setOrigin(2*G.ORB_RADIUS/2,2*G.ORB_RADIUS/2);
+	Power_Circle_Two.setOrigin(3*G.ORB_RADIUS/2,3*G.ORB_RADIUS/2);
 
+	for(int i=0; i<5; i++)
+		{
+		vector <CircleShape> Orb_Shape_temp;
+		Orb_Shape.setTexture(NULL);
+		switch (i) 
+		{
+			case 0 :
+			{
+				Orb_Shape.setTexture(p_blue_Texture,true);
+				Color blue_transparent(0,0,255,30);
+				Power_Circle_One.setFillColor(blue_transparent);
+				Power_Circle_Two.setFillColor(blue_transparent);
+				Orb_Shape_temp.push_back(Orb_Shape);
+				Orb_Shape_temp.push_back(Power_Circle_One);
+				Orb_Shape_temp.push_back(Power_Circle_Two);
+				Orb_Shape_Vector.push_back(Orb_Shape_temp);
+				break;
+			}
+			case 1 :
+			{
+				Orb_Shape.setTexture(p_green_Texture,true);
+				Color green_transparent(0,255,0,30);
+				Power_Circle_One.setFillColor(green_transparent);
+				Power_Circle_Two.setFillColor(green_transparent);
+				Orb_Shape_temp.push_back(Orb_Shape);
+				Orb_Shape_temp.push_back(Power_Circle_One);
+				Orb_Shape_temp.push_back(Power_Circle_Two);
+				Orb_Shape_Vector.push_back(Orb_Shape_temp);
+				break;
+			}
+			
+			case 2 :
+			{
+				Orb_Shape.setTexture(p_red_Texture,true);
+				Color red_transparent(255,0,0,30);
+				Power_Circle_One.setFillColor(red_transparent);
+				Power_Circle_Two.setFillColor(red_transparent);
+				Orb_Shape_temp.push_back(Orb_Shape);
+				Orb_Shape_temp.push_back(Power_Circle_One);
+				Orb_Shape_temp.push_back(Power_Circle_Two);
+				Orb_Shape_Vector.push_back(Orb_Shape_temp);
+				break;
+			}
+			
+			case 3 :
+			{	
+				Orb_Shape.setTexture(p_yellow_Texture,true);
+				Color yellow_transparent(255,255,0,30);
+				Power_Circle_One.setFillColor(yellow_transparent);
+				Power_Circle_Two.setFillColor(yellow_transparent);
+				Orb_Shape_temp.push_back(Orb_Shape);
+				Orb_Shape_temp.push_back(Power_Circle_One);
+				Orb_Shape_temp.push_back(Power_Circle_Two);
+				Orb_Shape_Vector.push_back(Orb_Shape_temp);
+				break;
+			}
+			
+			case 4:
+			{
+				Orb_Shape.setTexture(p_grey_Texture,true);
+				Color grey_transparent(128,128,128,30);
+				Power_Circle_One.setFillColor(grey_transparent);
+				Power_Circle_Two.setFillColor(grey_transparent);
+				Orb_Shape_temp.push_back(Orb_Shape);
+				Orb_Shape_temp.push_back(Power_Circle_One);
+				Orb_Shape_temp.push_back(Power_Circle_Two);
+				Orb_Shape_Vector.push_back(Orb_Shape_temp);
+				break;
+			}
+		}
+
+		Orb_Shape_temp.push_back(Orb_Shape);
+		Orb_Shape_temp.push_back(Power_Circle_One);
+		Orb_Shape_temp.push_back(Power_Circle_Two);
+		Orb_Shape_Vector.push_back(Orb_Shape_temp);
+		}
 	Vector2f starting_position;
 	Vector2f final_position;
 	Vector2f span;
@@ -49,9 +126,6 @@ void draw_game(GameEssentials G)
 	G.window->display();
 	while(G.window->isOpen())
 	{
-		Orb_Shape.setOrigin(G.ORB_RADIUS/2,G.ORB_RADIUS/2);
-		Power_Circle_One.setOrigin(2*G.ORB_RADIUS/2,2*G.ORB_RADIUS/2);
-		Power_Circle_Two.setOrigin(3*G.ORB_RADIUS/2,3*G.ORB_RADIUS/2);
 
 		G.window->display();
 		G.window->clear();
@@ -153,92 +227,60 @@ void draw_game(GameEssentials G)
 		}
 		for(int i = 0; i<G.ORB_COUNT; i++)
 			{
-				Orb_Shape.setPosition(G.ORB_COORDINATES[i][0]-G.ORB_RADIUS/2,G.ORB_COORDINATES[i][1]-G.ORB_RADIUS/2);
-				Power_Circle_One.setPosition(G.ORB_COORDINATES[i][0]-2*G.ORB_RADIUS/2,G.ORB_COORDINATES[i][1]-2*G.ORB_RADIUS/2);
-				Power_Circle_One.setOutlineColor(Color::White);
-				Power_Circle_Two.setPosition(G.ORB_COORDINATES[i][0]-3*G.ORB_RADIUS/2,G.ORB_COORDINATES[i][1]-3*G.ORB_RADIUS/2);
-				Power_Circle_Two.setOutlineColor(Color::White);
-
+				int colour_index;
 				if(G.ORB_VECTOR[i].return_orb_colour() == 'R')
 				{
-					Orb_Shape.setTexture(NULL);
-					Orb_Shape.setTexture(p_red_Texture,true);
-					
-					Color red_transparent(255,0,0,30);
-					Power_Circle_One.setFillColor(red_transparent);
-					Power_Circle_Two.setFillColor(red_transparent);
-
+					colour_index=2;
 					if(G.ORB_VECTOR[i].return_power()>=2)
-						Power_Circle_One.setOutlineColor(Color::Red);
+						Orb_Shape_Vector[colour_index][1].setOutlineColor(Color::Red);
 					if(G.ORB_VECTOR[i].return_power()==3)
-						Power_Circle_Two.setOutlineColor(Color::Red);
+						Orb_Shape_Vector[colour_index][2].setOutlineColor(Color::Red);
 				}
 				
 				if(G.ORB_VECTOR[i].return_orb_colour() == 'B')
 				{
-					Orb_Shape.setTexture(NULL);
-					Orb_Shape.setTexture(p_blue_Texture,true);
-					
-					Color blue_transparent(0,0,255,30);
-					Power_Circle_One.setFillColor(blue_transparent);
-					Power_Circle_Two.setFillColor(blue_transparent);
-
+					colour_index=0;
 					if(G.ORB_VECTOR[i].return_power()>=2)
-						Power_Circle_One.setOutlineColor(Color::Blue);
+						Orb_Shape_Vector[colour_index][1].setOutlineColor(Color::Blue);
 					if(G.ORB_VECTOR[i].return_power()==3)
-						Power_Circle_Two.setOutlineColor(Color::Blue);
+						Orb_Shape_Vector[colour_index][2].setOutlineColor(Color::Blue);
 				}
 				
 				if(G.ORB_VECTOR[i].return_orb_colour() == 'G')
 				{
-					Orb_Shape.setTexture(NULL);
-					Orb_Shape.setTexture(p_green_Texture,true);
-					
-					Color green_transparent(0,255,0,30);
-					Power_Circle_One.setFillColor(green_transparent);
-					Power_Circle_Two.setFillColor(green_transparent);
-
+					colour_index=1;
 					if(G.ORB_VECTOR[i].return_power()>=2)
-						Power_Circle_One.setOutlineColor(Color::Green);
+						Orb_Shape_Vector[colour_index][1].setOutlineColor(Color::Green);
 					if(G.ORB_VECTOR[i].return_power()==3)
-						Power_Circle_Two.setOutlineColor(Color::Green);
+						Orb_Shape_Vector[colour_index][2].setOutlineColor(Color::Green);
 				}
 				
 				if(G.ORB_VECTOR[i].return_orb_colour() == 'Y')
 				{
-					Orb_Shape.setTexture(NULL);
-					Orb_Shape.setTexture(p_yellow_Texture,true);
-					
-					Color yellow_transparent(255,255,0,30);
-					Power_Circle_One.setFillColor(yellow_transparent);
-					Power_Circle_Two.setFillColor(yellow_transparent);
-
+					colour_index=3;
 					if(G.ORB_VECTOR[i].return_power()>=2)
-						Power_Circle_One.setOutlineColor(Color::Yellow);
+						Orb_Shape_Vector[colour_index][1].setOutlineColor(Color::Yellow);
 					if(G.ORB_VECTOR[i].return_power()==3)
-						Power_Circle_Two.setOutlineColor(Color::Yellow);
+						Orb_Shape_Vector[colour_index][2].setOutlineColor(Color::Yellow);
 				}
 				
 				if(G.ORB_VECTOR[i].return_orb_colour() == 'X')
 				{
-					Orb_Shape.setTexture(NULL);
-					Orb_Shape.setTexture(p_grey_Texture,true);
-					
-					Color grey_transparent(128,128,128,30);
-					Power_Circle_One.setFillColor(grey_transparent);
-					Power_Circle_Two.setFillColor(grey_transparent);
-
+					colour_index=4;
 					if(G.ORB_VECTOR[i].return_power()>=2)
-						Power_Circle_One.setOutlineColor(Color::White);
+						Orb_Shape_Vector[colour_index][2].setOutlineColor(Color::White);
 					if(G.ORB_VECTOR[i].return_power()==3)
-						Power_Circle_One.setOutlineColor(Color::White);
+						Orb_Shape_Vector[colour_index][1].setOutlineColor(Color::White);
 				}
 				
+				Orb_Shape_Vector[colour_index][0].setPosition(G.ORB_COORDINATES[i][0]-G.ORB_RADIUS/2,G.ORB_COORDINATES[i][1]-G.ORB_RADIUS/2);
+				Orb_Shape_Vector[colour_index][1].setPosition(G.ORB_COORDINATES[i][0]-2*G.ORB_RADIUS/2,G.ORB_COORDINATES[i][1]-2*G.ORB_RADIUS/2);
+				Orb_Shape_Vector[colour_index][2].setPosition(G.ORB_COORDINATES[i][0]-3*G.ORB_RADIUS/2,G.ORB_COORDINATES[i][1]-3*G.ORB_RADIUS/2);
 				if( G.ORB_VECTOR[i].return_max_power()>2)
-					G.window->draw(Power_Circle_Two);
+					G.window->draw(Orb_Shape_Vector[colour_index][2]);
 				if( G.ORB_VECTOR[i].return_max_power()>1)
-					G.window->draw(Power_Circle_One);
-				G.window->draw(Orb_Shape);
+					G.window->draw(Orb_Shape_Vector[colour_index][1]);
+				G.window->draw(Orb_Shape_Vector[colour_index][0]);
 			}
 
 		for (int i = 0; i<G.ORB_COUNT; i++)

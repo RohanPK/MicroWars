@@ -1,6 +1,7 @@
+#include<functional>
 #include "play.h"
 
-void initialise(GameEssentials G)
+void initialise(GameEssentials &G)
 {
 	for(int i = 0; i<G.ORB_COUNT; i++)
 	{
@@ -12,14 +13,14 @@ void initialise(GameEssentials G)
 	}
 }
 
-void init_game(RenderWindow &window)
+void init_game(RenderWindow &window, bool &start_play)
 {		
 	GameEssentials G={5,30,4,'Y',{'Y','G','B','R','Y'}, {{50,200}, {178,654}, {250,124}, {560,633},{600,240}}, {100, 20, 0, 0,300}, {3,2,3,3,2}};
-	
+	G.start_play = start_play;
 	G.window = &window;
 	
-	Thread thread_draw(&draw_game, G);
-	Thread thread_logic(&update_game, G);
+	Thread thread_draw(&draw_game, (std::ref)(G));
+	Thread thread_logic(&update_game, (std::ref)(G));
 	
 	initialise(G);
 	

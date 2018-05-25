@@ -106,6 +106,7 @@ void main_menu(RenderWindow &window)
 		
 		if(start_play)
 		{
+			background_music.stop();
 			break;
 		}
 
@@ -115,5 +116,5 @@ void main_menu(RenderWindow &window)
 		window.draw(menu_quit);
 	}
 	
-	init_game(window);
+	init_game(window, start_play);
 }
