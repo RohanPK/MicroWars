@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define EPSILON 0.05
+#define EPSILON 0.5
 
 int factor(float a, float b)
 {
