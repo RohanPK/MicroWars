@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <Session Name="/home/ishan/Documents/MicroWars/MicroWars.workspace">
   <int Value="2" Name="m_selectedTab"/>
   <wxString Value="/home/ishan/Documents/MicroWars/MicroWars.workspace" Name="m_workspaceName"/>
@@ -7,10 +8,21 @@
       <wxString Value="/home/ishan/Documents/MicroWars/MicroWars/play.h" Name="FileName"/>
       <int Value="0" Name="FirstVisibleLine"/>
       <int Value="0" Name="CurrentLine"/>
+=======
+<Session Name="/home/rohan/Documents/MicroWars/MicroWars.workspace">
+  <int Value="2" Name="m_selectedTab"/>
+  <wxString Value="/home/rohan/Documents/MicroWars/MicroWars.workspace" Name="m_workspaceName"/>
+  <TabInfoArray Name="TabInfoArray">
+    <TabInfo>
+      <wxString Value="/home/rohan/Documents/MicroWars/MicroWars/update_game.cpp" Name="FileName"/>
+      <int Value="0" Name="FirstVisibleLine"/>
+      <int Value="14" Name="CurrentLine"/>
+>>>>>>> 3a6e465e5fa57815aa44ab81612ed139dbcff7fd
       <wxArrayString Name="Bookmarks"/>
       <IntVector Name="CollapsedFolds"/>
     </TabInfo>
     <TabInfo>
+<<<<<<< HEAD
       <wxString Value="/home/ishan/Documents/MicroWars/MicroWars/Orb.cpp" Name="FileName"/>
       <int Value="30" Name="FirstVisibleLine"/>
       <int Value="58" Name="CurrentLine"/>
@@ -28,20 +40,37 @@
       <wxString Value="/home/ishan/Documents/MicroWars/MicroWars/Orb.h" Name="FileName"/>
       <int Value="24" Name="FirstVisibleLine"/>
       <int Value="31" Name="CurrentLine"/>
+=======
+      <wxString Value="/home/rohan/Documents/MicroWars/MicroWars/Orb.cpp" Name="FileName"/>
+      <int Value="0" Name="FirstVisibleLine"/>
+      <int Value="0" Name="CurrentLine"/>
+>>>>>>> 3a6e465e5fa57815aa44ab81612ed139dbcff7fd
       <wxArrayString Name="Bookmarks"/>
       <IntVector Name="CollapsedFolds"/>
     </TabInfo>
     <TabInfo>
+<<<<<<< HEAD
       <wxString Value="/home/ishan/Documents/MicroWars/MicroWars/Unit.h" Name="FileName"/>
       <int Value="0" Name="FirstVisibleLine"/>
       <int Value="0" Name="CurrentLine"/>
+=======
+      <wxString Value="/home/rohan/Documents/MicroWars/MicroWars/main_menu.cpp" Name="FileName"/>
+      <int Value="87" Name="FirstVisibleLine"/>
+      <int Value="104" Name="CurrentLine"/>
+>>>>>>> 3a6e465e5fa57815aa44ab81612ed139dbcff7fd
       <wxArrayString Name="Bookmarks"/>
       <IntVector Name="CollapsedFolds"/>
     </TabInfo>
     <TabInfo>
+<<<<<<< HEAD
       <wxString Value="/home/ishan/Documents/MicroWars/MicroWars/update_game.cpp" Name="FileName"/>
       <int Value="3" Name="FirstVisibleLine"/>
       <int Value="11" Name="CurrentLine"/>
+=======
+      <wxString Value="/home/rohan/Documents/MicroWars/MicroWars/draw_game.cpp" Name="FileName"/>
+      <int Value="286" Name="FirstVisibleLine"/>
+      <int Value="292" Name="CurrentLine"/>
+>>>>>>> 3a6e465e5fa57815aa44ab81612ed139dbcff7fd
       <wxArrayString Name="Bookmarks"/>
       <IntVector Name="CollapsedFolds"/>
     </TabInfo>

@@ -106,6 +106,7 @@ void main_menu(RenderWindow &window)
 		
 		if(start_play)
 		{
+			background_music.stop();
 			break;
 		}
 
