@@ -8,7 +8,10 @@ void initialise(GameEssentials &G)
 		G.ORB_VECTOR.push_back(Orb(G.ORB_COORDINATES[i][0],G.ORB_COORDINATES[i][1],G.ORB_RADIUS,G.ORB_COLOUR[i],i,G.ORB_INITIAL_POWER[i],G.ORB_MAX_POWER[i],100));
 		for(int j = 0; j<G.ORB_INITIAL_UNITS[i]; j++)
 		{
-			G.ORB_VECTOR[i].produce_unit();
+			if(G.ORB_VECTOR[i].return_orb_colour()!='X')
+			{
+				G.ORB_VECTOR[i].produce_unit();
+			}
 		}
 	}
 }

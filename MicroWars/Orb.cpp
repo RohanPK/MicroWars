@@ -75,7 +75,6 @@ void microwars::Orb::change_health(char colour)
 		if(orb_health < 100*orb_max_power)
 		{
 			orb_health++;
-			std::cout<<"Orb:"<<orb_health<<'\n';
 			if(orb_health>=200)
 			{
 				orb_power=2;
