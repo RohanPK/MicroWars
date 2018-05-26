@@ -46,7 +46,10 @@ void draw_game(GameEssentials &G)
 	health_bar.setSize(Vector2f(100, 10));
 	health_bar.setOutlineColor(Color(255, 255, 255));
 	health_bar.setOutlineThickness(1);
-	
+
+	Font font_power;
+	font_power.loadFromFile("../assets/fonts/power.ttf");
+
 	for(int i=0; i<5; i++)
 	{
 		vector <CircleShape> Orb_Shape_temp;
@@ -102,7 +105,6 @@ void draw_game(GameEssentials &G)
 				break;
 			}
 		}
-
 		Orb_Shape_temp.push_back(Orb_Shape);
 		Orb_Shape_temp.push_back(Power_Circle_One);
 		Orb_Shape_temp.push_back(Power_Circle_Two);
@@ -114,7 +116,7 @@ void draw_game(GameEssentials &G)
 	Vector2f span;
 	
 	RectangleShape *selection_box = new RectangleShape;
-	
+	G.window->setFramerateLimit(60);
 	G.window->display();
 	while(G.window->isOpen())
 	{
@@ -277,24 +279,29 @@ void draw_game(GameEssentials &G)
 					G.window->draw(Orb_Shape_Vector[colour_index][1]);
 				G.window->draw(Orb_Shape_Vector[colour_index][0]);
 
-				Health_Bar_Vector[colour_index].setPosition(G.ORB_COORDINATES[i][0]-50,G.ORB_COORDINATES[i][1]+30);
-				Health_Bar_Vector[colour_index].setSize(Vector2f(G.ORB_VECTOR[i].return_health(),10));
+				int health_length = (G.ORB_VECTOR[i].return_health()%101);
+				Health_Bar_Vector[colour_index].setPosition(G.ORB_COORDINATES[i][0]-50,G.ORB_COORDINATES[i][1]+40);
+				Health_Bar_Vector[colour_index].setSize(Vector2f(health_length,10));
 				G.window->draw(Health_Bar_Vector[colour_index]);
-				if( G.ORB_VECTOR[i].return_health()>=25 )
+
+				Text power_number(to_string(G.ORB_VECTOR[i].return_power()),font_power,20);
+				power_number.setPosition(Vector2f(G.ORB_COORDINATES[i][0]-5,G.ORB_COORDINATES[i][1]+60));
+				G.window->draw(power_number);
+				/*if( health_length>=25 )
 				{
-					line.setPosition(G.ORB_COORDINATES[i][0]-50+25,G.ORB_COORDINATES[i][1]+30);
+					line.setPosition(G.ORB_COORDINATES[i][0]-50+25,G.ORB_COORDINATES[i][1]+40);
 					G.window->draw(line);
-					if( G.ORB_VECTOR[i].return_health()>=50 )
+					if( health_length>=50 )
 					{
-						line.setPosition(G.ORB_COORDINATES[i][0]-50+50,G.ORB_COORDINATES[i][1]+30);
+						line.setPosition(G.ORB_COORDINATES[i][0]-50+50,G.ORB_COORDINATES[i][1]+40);
 						G.window->draw(line);
-						if( G.ORB_VECTOR[i].return_health()>=75 )
+						if( health_length>=75 )
 						{
-							line.setPosition(G.ORB_COORDINATES[i][0]-50+75,G.ORB_COORDINATES[i][1]+30);
+							line.setPosition(G.ORB_COORDINATES[i][0]-50+75,G.ORB_COORDINATES[i][1]+40);
 							G.window->draw(line);
 						}
 					}
-				}
+				}*/
 			}
 
 		for (int i = 0; i<G.ORB_COUNT; i++)
