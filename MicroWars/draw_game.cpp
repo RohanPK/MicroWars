@@ -227,6 +227,8 @@ void draw_game(GameEssentials &G)
 				if(G.ORB_VECTOR[i].return_orb_colour() == 'R')
 				{
 					colour_index=2;
+					Orb_Shape_Vector[colour_index][1].setOutlineColor(Color::White);
+					Orb_Shape_Vector[colour_index][2].setOutlineColor(Color::White);
 					if(G.ORB_VECTOR[i].return_power()>=2)
 						Orb_Shape_Vector[colour_index][1].setOutlineColor(Color::Red);
 					if(G.ORB_VECTOR[i].return_power()==3)
@@ -236,6 +238,8 @@ void draw_game(GameEssentials &G)
 				if(G.ORB_VECTOR[i].return_orb_colour() == 'B')
 				{
 					colour_index=0;
+					Orb_Shape_Vector[colour_index][1].setOutlineColor(Color::White);
+					Orb_Shape_Vector[colour_index][2].setOutlineColor(Color::White);
 					if(G.ORB_VECTOR[i].return_power()>=2)
 						Orb_Shape_Vector[colour_index][1].setOutlineColor(Color::Blue);
 					if(G.ORB_VECTOR[i].return_power()==3)
@@ -245,6 +249,8 @@ void draw_game(GameEssentials &G)
 				if(G.ORB_VECTOR[i].return_orb_colour() == 'G')
 				{
 					colour_index=1;
+					Orb_Shape_Vector[colour_index][1].setOutlineColor(Color::White);
+					Orb_Shape_Vector[colour_index][2].setOutlineColor(Color::White);
 					if(G.ORB_VECTOR[i].return_power()>=2)
 						Orb_Shape_Vector[colour_index][1].setOutlineColor(Color::Green);
 					if(G.ORB_VECTOR[i].return_power()==3)
@@ -254,6 +260,8 @@ void draw_game(GameEssentials &G)
 				if(G.ORB_VECTOR[i].return_orb_colour() == 'Y')
 				{
 					colour_index=3;
+					Orb_Shape_Vector[colour_index][1].setOutlineColor(Color::White);
+					Orb_Shape_Vector[colour_index][2].setOutlineColor(Color::White);
 					if(G.ORB_VECTOR[i].return_power()>=2)
 						Orb_Shape_Vector[colour_index][1].setOutlineColor(Color::Yellow);
 					if(G.ORB_VECTOR[i].return_power()==3)
@@ -263,6 +271,8 @@ void draw_game(GameEssentials &G)
 				if(G.ORB_VECTOR[i].return_orb_colour() == 'X')
 				{
 					colour_index=4;
+					Orb_Shape_Vector[colour_index][1].setOutlineColor(Color::White);
+					Orb_Shape_Vector[colour_index][2].setOutlineColor(Color::White);
 					if(G.ORB_VECTOR[i].return_power()>=2)
 						Orb_Shape_Vector[colour_index][2].setOutlineColor(Color::White);
 					if(G.ORB_VECTOR[i].return_power()==3)
@@ -283,8 +293,13 @@ void draw_game(GameEssentials &G)
 				Health_Bar_Vector[colour_index].setPosition(G.ORB_COORDINATES[i][0]-50,G.ORB_COORDINATES[i][1]+40);
 				Health_Bar_Vector[colour_index].setSize(Vector2f(health_length,10));
 				G.window->draw(Health_Bar_Vector[colour_index]);
-
-				Text power_number(to_string(G.ORB_VECTOR[i].return_power()),font_power,20);
+				
+				string power_text;
+				if(G.ORB_VECTOR[i].return_orb_colour() != 'X')
+					power_text=to_string(G.ORB_VECTOR[i].return_power());
+				else
+					power_text='0';
+				Text power_number(power_text,font_power,20);
 				power_number.setPosition(Vector2f(G.ORB_COORDINATES[i][0]-5,G.ORB_COORDINATES[i][1]+60));
 				G.window->draw(power_number);
 				/*if( health_length>=25 )

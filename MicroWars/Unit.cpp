@@ -114,7 +114,6 @@ int microwars::Unit::return_ID()
 		return 3;
 	if(return_unit_colour()=='X')
 		return 4;
-
 }
 
 microwars::Unit::~Unit()

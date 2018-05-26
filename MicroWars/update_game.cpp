@@ -39,9 +39,9 @@ void update_game(GameEssentials &G)
 			{
 				for(int k = 0; k<G.ORB_COUNT; k++)
 				{
-					if(G.ORB_VECTOR[i].return_orb_colour() != G.ORB_VECTOR[k].return_orb_colour())
+					for(int l = 0; l<G.ORB_VECTOR[k].orb_units.size(); l++)
 					{
-						for(int l = 0; l<G.ORB_VECTOR[k].orb_units.size(); l++)
+						if(G.ORB_VECTOR[i].orb_units[j].return_unit_colour() != G.ORB_VECTOR[k].orb_units[l].return_unit_colour())
 						{
 							if(G.ORB_VECTOR[k].check_unit_vicinity(G.ORB_VECTOR[i].orb_units[j].return_unit_pos('x'), G.ORB_VECTOR[i].orb_units[j].return_unit_pos('y')))
 							{
