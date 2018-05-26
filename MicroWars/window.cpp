@@ -12,5 +12,6 @@ void init_window()
 	Image game_icon;
 	game_icon.loadFromFile("../assets/images/game_icon.png");
 	window.setIcon(game_icon.getSize().x,game_icon.getSize().y,game_icon.getPixelsPtr());
+	window.SetVerticalSyncEnabled(true);
 	main_menu(window);
 }
