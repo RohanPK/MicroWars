@@ -104,16 +104,6 @@ char microwars::Unit::return_unit_colour()
 
 int microwars::Unit::return_ID()
 {
-	if(return_unit_colour()=='B')
-		return 0;
-	if(return_unit_colour()=='G')
-		return 1;
-	if(return_unit_colour()=='R')
-		return 2;
-	if(return_unit_colour()=='Y')
-		return 3;
-	if(return_unit_colour()=='X')
-		return 4;
 }
 
 microwars::Unit::~Unit()

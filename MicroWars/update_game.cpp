@@ -45,13 +45,76 @@ void update_game(GameEssentials &G)
 						{
 							if(G.ORB_VECTOR[k].check_unit_vicinity(G.ORB_VECTOR[i].orb_units[j].return_unit_pos('x'), G.ORB_VECTOR[i].orb_units[j].return_unit_pos('y')))
 							{
+								int temp;
+								switch(G.ORB_VECTOR[i].return_orb_colour())
+								{
+									case 'B':
+									{
+										temp = 0;
+										break;
+									}
+									
+									case 'G':
+									{
+										temp = 1;
+										break;
+									}
+									
+									case 'R':
+									{
+										temp = 2;
+										break;
+									}
+										
+									case 'Y':
+									{
+										temp = 3;
+										break;
+									}
+									
+									default:
+									{
+										break;
+									}
+								}
 								G.ORB_VECTOR[i].orb_units[j].~Unit();
-								G.ORB_STATS[i].Orb_Losses++;
-								G.ORB_STATS[i].Orb_Present_Units--;
+								G.ORB_STATS[temp].Orb_Losses++;
+								G.ORB_STATS[temp].Orb_Present_Units--;
 								G.ORB_VECTOR[i].orb_units.erase(G.ORB_VECTOR[i].orb_units.begin()+j);
+								switch(G.ORB_VECTOR[k].return_orb_colour())
+								{
+									case 'B':
+									{
+										temp = 0;
+										break;
+									}
+									
+									case 'G':
+									{
+										temp = 1;
+										break;
+									}
+									
+									case 'R':
+									{
+										temp = 2;
+										break;
+									}
+										
+									case 'Y':
+									{
+										temp = 3;
+										break;
+									}
+									
+									default:
+									{
+										break;
+									}
+								}
 								G.ORB_VECTOR[k].orb_units[l].~Unit();
-								G.ORB_STATS[k].Orb_Losses++;
-								G.ORB_STATS[k].Orb_Present_Units--;
+								G.ORB_STATS[temp].Orb_Losses++;
+								G.ORB_STATS[temp].Orb_Present_Units--;
 								G.ORB_VECTOR[k].orb_units.erase(G.ORB_VECTOR[k].orb_units.begin()+l);
 							}
 						}
@@ -67,8 +130,40 @@ void update_game(GameEssentials &G)
 			{
 				if(G.ORB_VECTOR[i].return_orb_colour()!='X')
 				{
+					int temp;
 					G.ORB_VECTOR[i].produce_unit();
-					G.ORB_STATS[i].Orb_Present_Units+=G.ORB_VECTOR[i].return_power();
+					switch(G.ORB_VECTOR[i].return_orb_colour())
+					{
+						case 'B':
+						{
+							temp = 0;
+							break;
+						}
+						
+						case 'G':
+						{
+							temp = 1;
+							break;
+						}
+						
+						case 'R':
+						{
+							temp = 2;
+							break;
+						}
+							
+						case 'Y':
+						{
+							temp = 3;
+							break;
+						}
+						
+						default:
+						{
+							break;
+						}
+					}
+					G.ORB_STATS[temp].Orb_Present_Units+=G.ORB_VECTOR[i].return_power();
 				}
 			}
 		}
