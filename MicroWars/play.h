@@ -39,7 +39,7 @@ struct GameEssentials
 	Statistics ORB_STATS[G_COLOUR_COUNT];
 	
 	vector <Orb> ORB_VECTOR;
-	vector <Unit> UNIT_VECTOR[4];
+	vector <Unit> UNIT_VECTOR[5];
 	RenderWindow *window;
 	
 	bool start_play;

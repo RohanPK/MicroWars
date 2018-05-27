@@ -25,7 +25,6 @@ namespace microwars
 		int check_unit_vicinity(float x, float y);
 		bool return_selection_status();
 		char return_unit_colour();
-		int return_ID();
 		~Unit();
 	};
 }

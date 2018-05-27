@@ -10,7 +10,7 @@ void initialise(GameEssentials &G)
 		{
 			if(G.ORB_VECTOR[i].return_orb_colour()!='X')
 			{
-				G.ORB_VECTOR[i].produce_unit();
+				G.UNIT_VECTOR[G.ORB_VECTOR[i].return_colour_index()].push_back(G.ORB_VECTOR[i].produce_unit());
 			}
 		}
 	}
