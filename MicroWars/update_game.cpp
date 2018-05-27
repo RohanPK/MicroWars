@@ -7,53 +7,48 @@ void update_game(GameEssentials &G)
 	
 	while (true)
 	{
-		for(int i = 0; i<G.ORB_COUNT; i++)
+		for(int i = 0; i<G.PLAYER_COLOUR; i++)
 		{
-			for(int j = 0; j<G.ORB_VECTOR[i].orb_units.size(); j++)
+			for(int j = 0; j<G.UNIT_VECTOR[i].size(); j++)
 			{
-				if(G.ORB_VECTOR[i].orb_units[j].return_selection_status())
+				if(G.UNIT_VECTOR[i][j].move())
 				{
-					if(G.ORB_VECTOR[i].orb_units[j].move())
+					for(int k = 0; k<G.ORB_COUNT; k++)
 					{
-						for(int k = 0; k<G.ORB_COUNT; k++)
+						if(G.ORB_VECTOR[k].check_unit_vicinity(G.UNIT_VECTOR[i][j].return_unit_pos('x'), G.UNIT_VECTOR[i][j].return_unit_pos('y')))
 						{
-							if(G.ORB_VECTOR[k].check_unit_vicinity(G.ORB_VECTOR[i].orb_units[j].return_unit_pos('x'), G.ORB_VECTOR[i].orb_units[j].return_unit_pos('y')))
+							G.ORB_VECTOR[k].change_health(G.UNIT_VECTOR[i][j].return_unit_colour());
+							if(G.ORB_VECTOR[k].return_orb_colour() != G.UNIT_VECTOR[i][j].return_unit_colour() || (G.ORB_VECTOR[k].return_orb_colour() == G.UNIT_VECTOR[i][j].return_unit_colour() && G.ORB_VECTOR[k].return_health()<(100*G.ORB_VECTOR[k].return_max_power())))
 							{
-								G.ORB_VECTOR[k].change_health(G.ORB_VECTOR[i].orb_units[j].return_unit_colour());
-								if(G.ORB_VECTOR[k].return_orb_colour() != G.ORB_VECTOR[i].orb_units[j].return_unit_colour() || (G.ORB_VECTOR[k].return_orb_colour() == G.ORB_VECTOR[i].orb_units[j].return_unit_colour() && G.ORB_VECTOR[k].return_health()<(100*G.ORB_VECTOR[k].return_max_power())))
-								{
-									G.ORB_VECTOR[i].orb_units[j].~Unit();
-									G.ORB_STATS[i].Orb_Losses++;
-									G.ORB_STATS[i].Orb_Present_Units--;
-									G.ORB_VECTOR[i].orb_units.erase(G.ORB_VECTOR[i].orb_units.begin()+j);
-								}
+								G.UNIT_VECTOR[i][j].~Unit();
+								G.ORB_STATS[i].Orb_Losses++;
+								G.ORB_STATS[i].Orb_Present_Units--;
+								G.UNIT_VECTOR[i].erase(G.UNIT_VECTOR[i].begin()+j);
 							}
 						}
 					}
 				}
 			}
 		}
-		for(int i = 0; i<G.ORB_COUNT; i++)
+
+		for(int j = 0; j<4; j++)
 		{
-			for(int j = 0; j<G.ORB_VECTOR[i].orb_units.size(); j++)
+			for(int k = j+1; k<4; k++)
 			{
-				for(int k = 0; k<G.ORB_COUNT; k++)
+				for(int l = 0; l<G.UNIT_VECTOR[j].size(); l++)
 				{
-					for(int l = 0; l<G.ORB_VECTOR[k].orb_units.size(); l++)
+					for(int m = 0; m<G.UNIT_VECTOR[k].size(); m++)
 					{
-						if(G.ORB_VECTOR[i].orb_units[j].return_unit_colour() != G.ORB_VECTOR[k].orb_units[l].return_unit_colour())
+						if(G.UNIT_VECTOR[j][l].check_unit_vicinity(G.UNIT_VECTOR[k][m].return_unit_pos('x'), G.UNIT_VECTOR[k][m].return_unit_pos('y')))
 						{
-							if(G.ORB_VECTOR[k].check_unit_vicinity(G.ORB_VECTOR[i].orb_units[j].return_unit_pos('x'), G.ORB_VECTOR[i].orb_units[j].return_unit_pos('y')))
-							{
-								G.ORB_VECTOR[i].orb_units[j].~Unit();
-								G.ORB_STATS[i].Orb_Losses++;
-								G.ORB_STATS[i].Orb_Present_Units--;
-								G.ORB_VECTOR[i].orb_units.erase(G.ORB_VECTOR[i].orb_units.begin()+j);
-								G.ORB_VECTOR[k].orb_units[l].~Unit();
-								G.ORB_STATS[k].Orb_Losses++;
-								G.ORB_STATS[k].Orb_Present_Units--;
-								G.ORB_VECTOR[k].orb_units.erase(G.ORB_VECTOR[k].orb_units.begin()+l);
-							}
+							G.UNIT_VECTOR[j][l].~Unit();
+							G.ORB_STATS[j].Orb_Losses++;
+							G.ORB_STATS[j].Orb_Present_Units--;
+							G.UNIT_VECTOR[j].erase(G.UNIT_VECTOR[j].begin()+l);
+							G.UNIT_VECTOR[k][m].~Unit();
+							G.ORB_STATS[k].Orb_Losses++;
+							G.ORB_STATS[k].Orb_Present_Units--;
+							G.UNIT_VECTOR[k].erase(G.UNIT_VECTOR[k].begin()+m);
 						}
 					}
 				}
@@ -67,7 +62,7 @@ void update_game(GameEssentials &G)
 			{
 				if(G.ORB_VECTOR[i].return_orb_colour()!='X')
 				{
-					G.ORB_VECTOR[i].produce_unit();
+					G.UNIT_VECTOR[G.ORB_VECTOR[i].return_colour_index()].push_back(G.ORB_VECTOR[i].produce_unit());
 					G.ORB_STATS[i].Orb_Present_Units+=G.ORB_VECTOR[i].return_power();
 				}
 			}

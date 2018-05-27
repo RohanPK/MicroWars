@@ -181,7 +181,7 @@ void draw_game(GameEssentials &G)
 			G.window->draw(*selection_box);
 		}
 
-		for(int i = 0; i<G.ORB_COUNT; i++)
+		for(int i = 0; i<G.PLAYER_COUNT; i++)
 		{
 			if( G.ORB_VECTOR[i].return_orb_colour() == G.PLAYER_COLOUR)
 			{
@@ -192,21 +192,21 @@ void draw_game(GameEssentials &G)
 					destination_point.x	= event.mouseButton.x;
 					destination_point.y = event.mouseButton.y;
 					
-					for(int j = 0; j<G.ORB_VECTOR[i].orb_units.size(); j++)
+					for(int j = 0; j<G.UNIT_VECTOR[i].size(); j++)
 					{
-						if(G.ORB_VECTOR[i].orb_units[j].return_unit_colour() == 'Y')
+						if(G.UNIT_VECTOR[i][j].return_unit_colour() == G.PLAYER_COLOUR )
 						{
-							if(G.ORB_VECTOR[i].orb_units[j].return_unit_pos('x') >=  min(final_position.x,starting_position.x))
+							if(G.UNIT_VECTOR[i][j].return_unit_pos('x') >=  min(final_position.x,starting_position.x))
 							{
-								if(G.ORB_VECTOR[i].orb_units[j].return_unit_pos('x') <= max(final_position.x,starting_position.x)) 
+								if(G.UNIT_VECTOR[i][j].return_unit_pos('x') <= max(final_position.x,starting_position.x)) 
 								{
-									if(G.ORB_VECTOR[i].orb_units[j].return_unit_pos('y') >= min(final_position.y,starting_position.y))
+									if(G.UNIT_VECTOR[i][j].return_unit_pos('y') >= min(final_position.y,starting_position.y))
 									{
-										if(G.ORB_VECTOR[i].orb_units[j].return_unit_pos('y') <= max(final_position.y,starting_position.y))
+										if(G.UNIT_VECTOR[i][j].return_unit_pos('y') <= max(final_position.y,starting_position.y))
 										{
 											if( destination_point.x!=0 && destination_point.y!=0 )
 											{
-												G.ORB_VECTOR[i].orb_units[j].set_unit_destination(destination_point.x, destination_point.y);
+												G.UNIT_VECTOR[i][j].set_unit_destination(destination_point.x, destination_point.y);
 											}
 										}
 									}
@@ -302,51 +302,36 @@ void draw_game(GameEssentials &G)
 				Text power_number(power_text,font_power,20);
 				power_number.setPosition(Vector2f(G.ORB_COORDINATES[i][0]-5,G.ORB_COORDINATES[i][1]+60));
 				G.window->draw(power_number);
-				/*if( health_length>=25 )
-				{
-					line.setPosition(G.ORB_COORDINATES[i][0]-50+25,G.ORB_COORDINATES[i][1]+40);
-					G.window->draw(line);
-					if( health_length>=50 )
-					{
-						line.setPosition(G.ORB_COORDINATES[i][0]-50+50,G.ORB_COORDINATES[i][1]+40);
-						G.window->draw(line);
-						if( health_length>=75 )
-						{
-							line.setPosition(G.ORB_COORDINATES[i][0]-50+75,G.ORB_COORDINATES[i][1]+40);
-							G.window->draw(line);
-						}
-					}
-				}*/
 			}
 
-		for (int i = 0; i<G.ORB_COUNT; i++)
+		for (int i = 0; i<G.PLAYER_COUNT; i++)
 		{
 			CircleShape Unit_Shape(G.UNIT_RADIUS);
 
-			for(int j = 0; j<G.ORB_VECTOR[i].orb_units.size(); j++)
+			for(int j = 0; j<G.UNIT_VECTOR[i].size(); j++)
 			{
-				Unit_Shape.setPosition(G.ORB_VECTOR[i].orb_units[j].return_unit_pos('x'),G.ORB_VECTOR[i].orb_units[j].return_unit_pos('y'));
+				Unit_Shape.setPosition(G.UNIT_VECTOR[i][j].return_unit_pos('x'),G.UNIT_VECTOR[i][j].return_unit_pos('y'));
 				Unit_Shape.setOutlineThickness(0);
 				
-				if(G.ORB_VECTOR[i].orb_units[j].return_unit_colour() == 'R')
+				if(G.UNIT_VECTOR[i][j].return_unit_colour() == 'R')
 				{
 					Unit_Shape.setFillColor(Color::Red);
 				}
 				
-				if(G.ORB_VECTOR[i].orb_units[j].return_unit_colour() == 'B')
+				if(G.UNIT_VECTOR[i][j].return_unit_colour() == 'B')
 				{
 					Unit_Shape.setFillColor(Color::Blue);
 				}
 				
-				if(G.ORB_VECTOR[i].orb_units[j].return_unit_colour() == 'G')
+				if(G.UNIT_VECTOR[i][j].return_unit_colour() == 'G')
 				{
 					Unit_Shape.setFillColor(Color::Green);
 				}
 				
-				if(G.ORB_VECTOR[i].orb_units[j].return_unit_colour() == 'Y')
+				if(G.UNIT_VECTOR[i][j].return_unit_colour() == 'Y')
 				{
 					Unit_Shape.setFillColor(Color::Yellow);
-					if(G.ORB_VECTOR[i].orb_units[j].return_selection_status())
+					if(G.UNIT_VECTOR[i][j].return_selection_status())
 					{
 						Unit_Shape.setOutlineColor(Color::White);
 						Unit_Shape.setOutlineThickness(1);

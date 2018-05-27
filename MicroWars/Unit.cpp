@@ -22,7 +22,7 @@ int factor(float a, float b)
 	}
 }
 
-microwars::Unit::Unit(float x, float y, float radius, char colour, int ID, float speed)
+microwars::Unit::Unit(float x, float y, float radius, char colour, float speed)
 {
 	unit_pos_x = x;
 	unit_pos_y = y;
@@ -30,7 +30,6 @@ microwars::Unit::Unit(float x, float y, float radius, char colour, int ID, float
 	unit_speed_x = 0;
 	unit_speed_y = 0;
 	unit_colour = colour;
-	unit_ID = ID;
 	unit_speed = speed;
 	unit_selected = false;
 	unit_destination_x = x;

@@ -28,6 +28,7 @@ struct GameEssentials
 	int ORB_RADIUS;
 	int UNIT_RADIUS;
 	char PLAYER_COLOUR;
+	int PLAYER_COUNT;
 	
 	char ORB_COLOUR[G_ORB_COUNT];
 	float ORB_COORDINATES[G_ORB_COUNT][2];
@@ -38,7 +39,7 @@ struct GameEssentials
 	Statistics ORB_STATS[G_COLOUR_COUNT];
 	
 	vector <Orb> ORB_VECTOR;
-	
+	vector <Unit> UNIT_VECTOR[4];
 	RenderWindow *window;
 	
 	bool start_play;

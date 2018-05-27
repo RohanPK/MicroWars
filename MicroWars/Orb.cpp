@@ -22,15 +22,14 @@ microwars::Orb::Orb(float x, float y, float radius, char colour, int ID, int pow
 	orb_health = initial_health;
 }
 
-void microwars::Orb::produce_unit()
+microwars::Unit microwars::Orb::produce_unit()
 {
-	for(int count = 0; count< orb_power; count++)
-	{
-		float randomising_x = ((rand()%5000) - 2500.0)/(100.0);
-		float randomising_y = ((rand()%5000) - 2500.0)/(100.0);
-		microwars::Unit new_unit(orb_pos_x + randomising_x, orb_pos_y + randomising_y, UNIT_RADIUS, orb_colour, count, UNIT_SPEED);
-		orb_units.push_back(new_unit);
-	}
+
+	float randomising_x = ((rand()%5000) - 2500.0)/(100.0);
+	float randomising_y = ((rand()%5000) - 2500.0)/(100.0);
+	microwars::Unit new_unit(orb_pos_x + randomising_x, orb_pos_y + randomising_y, UNIT_RADIUS, orb_colour, UNIT_SPEED);
+	return new_unit;
+
 }
 
 float microwars::Orb::return_orb_pos(char option)
@@ -131,7 +130,30 @@ int microwars::Orb::return_max_power()
 {
 	return orb_max_power;
 }
+int microwars::Orb::return_colour_index()
+{
+	if( orb_colour == 'B')
+	{
+		return 0;
+	}
+	if( orb_colour == 'G')
+	{
+		return 1;
+	}
+	if( orb_colour == 'R')
+	{
+		return 2;
+	}
+	if( orb_colour == 'Y')
+	{
+		return 3;
+	}
+	if( orb_colour == 'X')
+	{
+		return 4;
+	}
 
+}
 microwars::Orb::~Orb()
 {
 }

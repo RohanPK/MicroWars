@@ -8,10 +8,6 @@ namespace microwars
 {
 	class Orb
 	{
-		public:
-		
-		std::vector<microwars::Unit> orb_units;
-		
 		private:
 		
 		float orb_pos_x, orb_pos_y;
@@ -26,7 +22,7 @@ namespace microwars
 		public:
 		
 		Orb(float x, float y, float radius, char colour, int ID, int power, int no_of_units, int initial_health);
-		void produce_unit();
+		Unit produce_unit();
 		float return_orb_pos(char option);
 		char return_orb_colour();
 		int check_unit_vicinity(float x, float y);
@@ -35,6 +31,7 @@ namespace microwars
 		int return_ID();
 		int return_power();
 		int return_max_power();
+		int return_colour_index();
 
 		~Orb();
 	};
