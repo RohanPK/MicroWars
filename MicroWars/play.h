@@ -5,6 +5,7 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 #include "Orb.h"
+#include "Tesla.h"
 #include "Unit.h"
 
 using namespace sf;
@@ -13,21 +14,28 @@ using namespace microwars;
 
 #define G_ORB_COUNT 7
 #define G_PLAYER_COUNT 4
+#define G_TESLA_COUNT 5
 
 struct Statistics
 {
-	int Orb_Present_Units;
-	int Orb_Losses;
-	int Orb_Produce_Rate;
+	int Present_Units;
+	int Losses;
+	int Produce_Rate;
 };
 
 struct GameEssentials
 {
 	int ORB_COUNT;
 	int ORB_RADIUS;
+	
+	int TESLA_COUNT;
+	int TESLA_RADIUS;
+	
 	int UNIT_RADIUS;
-	char PLAYER_COLOUR;
+	
 	int PLAYER_COUNT;
+	
+	char PLAYER_COLOUR;
 	
 	char ORB_COLOUR[G_ORB_COUNT];
 	float ORB_COORDINATES[G_ORB_COUNT][2];
@@ -35,10 +43,14 @@ struct GameEssentials
 	int ORB_INITIAL_POWER[G_ORB_COUNT];
 	int ORB_MAX_POWER[G_ORB_COUNT];
 	
-	Statistics ORB_STATS[G_PLAYER_COUNT];
+	float TESLA_COORDINATES[G_TESLA_COUNT][2];
+	
+	Statistics PLAYER_STATS[G_PLAYER_COUNT];
 	
 	vector <Orb> ORB_VECTOR;
 	vector <Unit> UNIT_VECTOR[G_PLAYER_COUNT];
+	vector <Tesla> TESLA_VECTOR;
+	
 	RenderWindow *window;
 	
 	bool start_play;

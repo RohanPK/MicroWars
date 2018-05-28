@@ -41,7 +41,6 @@ float microwars::Orb::return_orb_pos(char option)
 	{
 		return orb_pos_y;
 	}
-	return orb_pos_x;
 }
 
 char microwars::Orb::return_orb_colour()

@@ -8,6 +8,8 @@
   <Description/>
   <Dependencies/>
   <VirtualDirectory Name="src">
+    <File Name="Tesla.cpp"/>
+    <File Name="Tesla.h"/>
     <File Name="update_game.cpp"/>
     <File Name="draw_game.cpp"/>
     <File Name="init_game.cpp"/>
