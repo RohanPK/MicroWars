@@ -18,7 +18,7 @@ void initialise(GameEssentials &G)
 
 void init_game(RenderWindow &window, bool &start_play)
 
-{		
+{
 	GameEssentials G =  {
 						G_ORB_COUNT,
 						G_COLOUR_COUNT,

@@ -8,7 +8,7 @@ using namespace microwars;
 
 void init_window()
 {
-	RenderWindow window(VideoMode(1080, 720), "Micro Wars");
+	RenderWindow window(VideoMode(1080, 720), "Micro Wars", Style::Titlebar|Style::Close);
 	Image game_icon;
 	game_icon.loadFromFile("../assets/images/game_icon.png");
 	window.setIcon(game_icon.getSize().x,game_icon.getSize().y,game_icon.getPixelsPtr());
