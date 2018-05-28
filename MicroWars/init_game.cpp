@@ -14,6 +14,10 @@ void initialise(GameEssentials &G)
 			}
 		}
 	}
+	for(int i = 0; i<G.TESLA_COUNT; i++)
+	{
+		G.TESLA_VECTOR.push_back(Tesla(G.TESLA_COORDINATES[i][0], G.TESLA_COORDINATES[i][1], G.TESLA_RADIUS, G.TESLA_X_FACTOR[i]));
+	}
 }
 
 void init_game(RenderWindow &window, bool &start_play)
@@ -33,6 +37,7 @@ void init_game(RenderWindow &window, bool &start_play)
 						{1, 0, 2, 1, 1, 0, 1},
 						{3, 2, 3, 3, 2, 2, 2},
 						{{500, 300}},
+						{1},
 						{{100, 0, 1}, {20, 0, 0}, {10, 0, 1}, {310, 0, 3}}
 						};
 
