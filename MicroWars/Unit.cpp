@@ -100,7 +100,6 @@ char microwars::Unit::return_unit_colour()
 {
 	return unit_colour;
 }
-
 microwars::Unit::~Unit()
 {
 }

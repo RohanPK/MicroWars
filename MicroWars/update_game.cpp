@@ -68,7 +68,7 @@ void update_game(GameEssentials &G)
 					for(int j=0;j<G.ORB_VECTOR[i].return_power();j++)
 					{
 						G.UNIT_VECTOR[G.ORB_VECTOR[i].return_colour_index()].push_back(G.ORB_VECTOR[i].produce_unit());
-						G.ORB_STATS[i].Orb_Present_Units+=G.ORB_VECTOR[i].return_power();
+						G.ORB_STATS[G.ORB_VECTOR[i].return_colour_index()].Orb_Present_Units+=G.ORB_VECTOR[i].return_power();
 					}
 				}
 			}
