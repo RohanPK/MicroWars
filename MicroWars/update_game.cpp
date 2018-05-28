@@ -65,12 +65,15 @@ void update_game(GameEssentials &G)
 									}
 									for(int l = 0; l<G.TESLA_VECTOR[k].return_x_factor()*100; l++)
 									{
-										int rand_unit;
-										rand_unit = rand()%G.PLAYER_STATS[temp].Present_Units;
-										G.UNIT_VECTOR[temp][rand_unit].~Unit();
-										G.PLAYER_STATS[temp].Losses++;
-										G.PLAYER_STATS[temp].Present_Units--;
-										G.UNIT_VECTOR[temp].erase(G.UNIT_VECTOR[temp].begin()+rand_unit);
+										if(G.PLAYER_STATS[temp].Present_Units != 0)
+										{
+											int rand_unit;
+											rand_unit = rand()%G.PLAYER_STATS[temp].Present_Units;
+											G.UNIT_VECTOR[temp][rand_unit].~Unit();
+											G.PLAYER_STATS[temp].Losses++;
+											G.PLAYER_STATS[temp].Present_Units--;
+											G.UNIT_VECTOR[temp].erase(G.UNIT_VECTOR[temp].begin()+rand_unit);
+										}
 									}
 								}
 							}
@@ -102,6 +105,19 @@ void update_game(GameEssentials &G)
 						}
 					}
 				}
+			}
+		}
+		
+		//PRODUCTION-RATE SUM
+		for(int i = 0; i<G.PLAYER_COUNT; i++)
+		{
+			G.PLAYER_STATS[i].Produce_Rate = 0;
+		}
+		for (int i=0;i<G.ORB_COUNT;i++)
+		{
+			if(G.ORB_VECTOR[i].return_orb_colour()!='X')
+			{
+				G.PLAYER_STATS[G.ORB_VECTOR[i].return_colour_index()].Produce_Rate+=G.ORB_VECTOR[i].return_power();
 			}
 		}
 		
