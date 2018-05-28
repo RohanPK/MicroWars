@@ -95,6 +95,7 @@ void main_menu(RenderWindow &window)
 				
 				if( event.mouseButton.button == Mouse::Left )
 				{
+					background_music.stop();
 					window.close();
 				}
 			}
