@@ -11,7 +11,7 @@ using namespace sf;
 using namespace std;
 using namespace microwars;
 
-#define G_ORB_COUNT 5
+#define G_ORB_COUNT 7
 #define G_COLOUR_COUNT 4
 
 struct Statistics
