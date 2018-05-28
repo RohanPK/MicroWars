@@ -6,27 +6,29 @@ void main_menu(RenderWindow &window)
 	
 	window.display();
 
+	Vector2f Scale_Window=Vector2f(1.78,1.5);
+	
 	Font font_title,font_buttons;
 	font_title.loadFromFile("../assets/fonts/title.ttf");
 	
-	Text menu_title("MicroWars",font_title,100);
+	Text menu_title("MicroWars",font_title,150);
 	menu_title.setColor(sf::Color::Red);
-	Vector2f position_menu(300,50);
+	Vector2f position_menu(300*Scale_Window.x+50,50*Scale_Window.y);
 	menu_title.setPosition(position_menu);
 	
-	Text menu_play("Play",font_title,50);
+	Text menu_play("Play",font_title,75);
 	menu_play.setColor(sf::Color::Red);
-	Vector2f position_play(450,200);
+	Vector2f position_play(450*Scale_Window.x,200*Scale_Window.y);
 	menu_play.setPosition(position_play);
 	
-	Text menu_options("Options",font_title,50);
+	Text menu_options("Options",font_title,75);
 	menu_options.setColor(sf::Color::Red);
-	Vector2f position_options(450,250);
+	Vector2f position_options(450*Scale_Window.x,250*Scale_Window.y);
 	menu_options.setPosition(position_options);
 	
-	Text menu_quit("Quit",font_title,50);
+	Text menu_quit("Quit",font_title,75);
 	menu_quit.setColor(sf::Color::Red);
-	Vector2f position_quit(450,300);
+	Vector2f position_quit(450*Scale_Window.x,300*Scale_Window.y);
 	menu_quit.setPosition(position_quit);
 	
 	RectangleShape menu_box;
@@ -36,7 +38,7 @@ void main_menu(RenderWindow &window)
 	
 	Sprite background;
 	background.setTexture(background_image);
-	background.setScale(0.5625,0.6667);
+	background.setScale(1,1);
 
 	Music background_music;
 	background_music.openFromFile("../assets/sounds/temporary.ogg");
@@ -61,7 +63,7 @@ void main_menu(RenderWindow &window)
 					break;
 			}
 
-			if( Mouse::getPosition(window).x >= position_play.x && Mouse::getPosition(window).x <= (position_play.x+100) && Mouse::getPosition(window).y >=position_play.y && Mouse::getPosition(window).y <= (position_play.y+50) )
+			if( Mouse::getPosition(window).x >= position_play.x && Mouse::getPosition(window).x <= (position_play.x+150) && Mouse::getPosition(window).y >=position_play.y && Mouse::getPosition(window).y <= (position_play.y+75) )
 			{
 				menu_play.setColor(Color::White);
 				
@@ -75,7 +77,7 @@ void main_menu(RenderWindow &window)
 				menu_play.setColor(Color::Red);
 			}
 
-			if( Mouse::getPosition(window).x >= position_options.x && Mouse::getPosition(window).x <= (position_options.x+100) && Mouse::getPosition(window).y >=position_options.y && Mouse::getPosition(window).y <= (position_options.y+50) )
+			if( Mouse::getPosition(window).x >= position_options.x && Mouse::getPosition(window).x <= (position_options.x+150) && Mouse::getPosition(window).y >=position_options.y && Mouse::getPosition(window).y <= (position_options.y+75) )
 			{
 				menu_options.setColor(Color::White);
 				
@@ -89,7 +91,7 @@ void main_menu(RenderWindow &window)
 				menu_options.setColor(Color::Red);
 			}
 
-			if( Mouse::getPosition(window).x >= position_quit.x && Mouse::getPosition(window).x <= (position_quit.x+100) && Mouse::getPosition(window).y >=position_quit.y && Mouse::getPosition(window).y <= (position_quit.y+50) )
+			if( Mouse::getPosition(window).x >= position_quit.x && Mouse::getPosition(window).x <= (position_quit.x+150) && Mouse::getPosition(window).y >=position_quit.y && Mouse::getPosition(window).y <= (position_quit.y+75) )
 			{
 				menu_quit.setColor(Color::White);
 				

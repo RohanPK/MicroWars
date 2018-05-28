@@ -9,13 +9,12 @@
 #define ORB_RADIUS 30
 #define EPSILON 40
 
-microwars::Orb::Orb(float x, float y, float radius, char colour, int ID, int power, int max_power, int initial_health)
+microwars::Orb::Orb(float x, float y, float radius, char colour, int power, int max_power, int initial_health)
 {
 	orb_pos_x = x;
 	orb_pos_y = y;
 	orb_radius = radius;
 	orb_colour = colour;
-	orb_ID = ID;
 	orb_power = power;
 	orb_residual_health_colour = 'X';
 	orb_max_power = max_power;
@@ -48,11 +47,6 @@ float microwars::Orb::return_orb_pos(char option)
 char microwars::Orb::return_orb_colour()
 {
 	return orb_colour;
-}
-
-int microwars::Orb::return_ID()
-{
-	return orb_ID;
 }
 
 int microwars::Orb::check_unit_vicinity(float x, float y)

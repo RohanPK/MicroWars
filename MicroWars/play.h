@@ -12,7 +12,7 @@ using namespace std;
 using namespace microwars;
 
 #define G_ORB_COUNT 7
-#define G_COLOUR_COUNT 4
+#define G_PLAYER_COUNT 4
 
 struct Statistics
 {
@@ -24,7 +24,6 @@ struct Statistics
 struct GameEssentials
 {
 	int ORB_COUNT;
-	int COLOUR_COUNT;
 	int ORB_RADIUS;
 	int UNIT_RADIUS;
 	char PLAYER_COLOUR;
@@ -36,10 +35,10 @@ struct GameEssentials
 	int ORB_INITIAL_POWER[G_ORB_COUNT];
 	int ORB_MAX_POWER[G_ORB_COUNT];
 	
-	Statistics ORB_STATS[G_COLOUR_COUNT];
+	Statistics ORB_STATS[G_PLAYER_COUNT];
 	
 	vector <Orb> ORB_VECTOR;
-	vector <Unit> UNIT_VECTOR[5];
+	vector <Unit> UNIT_VECTOR[G_PLAYER_COUNT];
 	RenderWindow *window;
 	
 	bool start_play;

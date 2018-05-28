@@ -29,7 +29,7 @@ void draw_game(GameEssentials &G)
 	Texture background_image;
 	background_image.loadFromFile("../assets/images/play_background.png");
 	background.setTexture(background_image);
-	background.setScale(0.84375,0.9);
+	background.setScale(1.5,1.35);
 
 	vector < vector < CircleShape> > Orb_Shape_Vector;
 	CircleShape Orb_Shape(G.ORB_RADIUS);
@@ -46,6 +46,12 @@ void draw_game(GameEssentials &G)
 	health_bar.setSize(Vector2f(100, 10));
 	health_bar.setOutlineColor(Color(255, 255, 255));
 	health_bar.setOutlineThickness(1);
+
+	RectangleShape Stats_Container;
+	Stats_Container.setSize(Vector2f(310, 1080));
+	Stats_Container.setFillColor(Color(255, 255, 255,99));
+	Stats_Container.setPosition(1610,0);
+	Text stats_text(font_stats,100);
 
 	Font font_power;
 	font_power.loadFromFile("../assets/fonts/power.ttf");
@@ -124,7 +130,7 @@ void draw_game(GameEssentials &G)
 		G.window->display();
 		G.window->clear();
 		G.window->draw(background);
-		
+		G.window->draw(Stats_Container);
 		Event event;
 
 		while (G.window->pollEvent(event))
@@ -157,7 +163,6 @@ void draw_game(GameEssentials &G)
 							final_position.y = event.mouseButton.y;
 							span.x = event.mouseButton.x - starting_position.x;
 							span.y = event.mouseButton.y - starting_position.y;
-							
 							if(selection_box != nullptr)
 							{
 								delete selection_box;
@@ -219,6 +224,8 @@ void draw_game(GameEssentials &G)
 				}
 			}
 		}
+		
+		for(int i=0;i<PL)
 		for(int i = 0; i<G.ORB_COUNT; i++)
 			{
 				int colour_index;
