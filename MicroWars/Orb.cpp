@@ -67,19 +67,12 @@ void microwars::Orb::change_health(char colour)
 		if(orb_health < 100*orb_max_power)
 		{
 			orb_health++;
-			if(orb_health>=200)
-			{
-				orb_power=2;
-			}
-			if(orb_health>=300)
-				orb_power=3;
 		}
 	}
 	else if(colour == orb_residual_health_colour)
 	{
 		if(orb_health < 100)
 		{
-			orb_power=1;
 			orb_health++;
 		}
 		else
@@ -106,6 +99,11 @@ void microwars::Orb::change_health(char colour)
 			orb_colour = 'X';
 			orb_residual_health_colour = 'X';
 		}
+	}
+	orb_power = (orb_health/100) ;
+	if(orb_health<100 && orb_colour!= 'X')
+	{
+		orb_power = 1;
 	}
 }
 

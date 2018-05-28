@@ -33,7 +33,7 @@ void draw_game(GameEssentials &G)
 	Texture background_image;
 	background_image.loadFromFile("../assets/images/play_background.png");
 	background.setTexture(background_image);
-	background.setScale(1.5,1.35);
+	background.setScale(1.26,1.08);
 
 	vector < vector < CircleShape> > Orb_Shape_Vector;
 	CircleShape Orb_Shape(G.ORB_RADIUS);
