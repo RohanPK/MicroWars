@@ -2,7 +2,7 @@
 
 void draw_game(GameEssentials &G)
 {
-	Texture texture_yellow,texture_red,texture_green,texture_blue,texture_grey;
+	Texture texture_yellow,texture_red,texture_green,texture_blue,texture_grey,texture_tesla;
 	
 	texture_yellow.loadFromFile("../assets/images/yellow_orb.png");
 	texture_yellow.setSmooth(true);
@@ -23,6 +23,10 @@ void draw_game(GameEssentials &G)
 	texture_grey.loadFromFile("../assets/images/grey_orb.png");
 	texture_grey.setSmooth(true);
 	const sf::Texture *p_grey_Texture = &texture_grey;
+
+	texture_tesla.loadFromFile("../assets/images/tesla.png");
+	texture_tesla.setSmooth(true);
+	const sf::Texture *p_tesla_Texture = &texture_tesla;
 
 	Sprite background;
 	
@@ -49,9 +53,11 @@ void draw_game(GameEssentials &G)
 
 	RectangleShape Stats_Container;
 	Stats_Container.setSize(Vector2f(310, 1080));
-	Stats_Container.setFillColor(Color(255, 255, 255,99));
+	Stats_Container.setFillColor(Color(0,0,0,90));
 	Stats_Container.setPosition(1610,0);
-	Text stats_text(font_stats,100);
+	Font font_stats;
+	font_stats.loadFromFile("../assets/fonts/power.ttf");
+	Text stats_text("",font_stats,20);
 
 	Font font_power;
 	font_power.loadFromFile("../assets/fonts/power.ttf");
@@ -224,8 +230,15 @@ void draw_game(GameEssentials &G)
 				}
 			}
 		}
-		
-		for(int i=0;i<PL)
+
+		for(int i=0;i<G.TESLA_COUNT;i++)
+		{
+			CircleShape Tesla_Shape(80);
+			Tesla_Shape.setPosition(G.TESLA_COORDINATES[i][0]-Tesla_Shape.getRadius(),G.TESLA_COORDINATES[i][1]-Tesla_Shape.getRadius());
+			Tesla_Shape.setTexture(p_tesla_Texture);
+			G.window->draw(Tesla_Shape);
+		}
+
 		for(int i = 0; i<G.ORB_COUNT; i++)
 			{
 				int colour_index;
@@ -347,6 +360,40 @@ void draw_game(GameEssentials &G)
 				
 				G.window->draw(Unit_Shape);
 			}
+		}
+
+		Vector2i base_text_location =Vector2i(1620,50);
+		for(int i=0;i<4;i++)
+		{
+			if(G.PLAYER_STATS[i].Produce_Rate!=0 || G.PLAYER_STATS[i].Produce_Rate==0)
+			{
+				if ( i== 0 )
+				{
+					stats_text.setColor(Color::Blue);
+				}
+				else if (i == 1 )
+				{
+					stats_text.setColor(Color::Green);
+				}
+				else if (i == 2 )
+				{
+					stats_text.setColor(Color::Red);
+				}
+				else if (i == 3 )
+				{
+					stats_text.setColor(Color::Yellow);
+				}
+				stats_text.setPosition(base_text_location.x,base_text_location.y);
+				stats_text.setString("Units:  "+to_string(G.PLAYER_STATS[i].Present_Units));
+				G.window->draw(stats_text);
+				stats_text.setPosition(base_text_location.x,base_text_location.y+20);
+				stats_text.setString("Production:  "+to_string(G.PLAYER_STATS[i].Produce_Rate)+"s");
+				G.window->draw(stats_text);
+				stats_text.setPosition(base_text_location.x,base_text_location.y+40);
+				stats_text.setString("Losses:  "+to_string(G.PLAYER_STATS[i].Losses));
+				G.window->draw(stats_text);
+			}
+			base_text_location.y=base_text_location.y+80;
 		}
 	}
 }
