@@ -151,6 +151,10 @@ void update_game(GameEssentials &G)
 				}
 			}
 		}
+	if(G.start_play)
+	{
+		break;
+	}
 	sleep(sf::milliseconds(10));
 	}
 }

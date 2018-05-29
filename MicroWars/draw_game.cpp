@@ -62,7 +62,12 @@ void draw_game(GameEssentials &G)
 	Text stats_text("",font_stats,20);
 
 	Font font_health;
-	font_health.loadFromFile("../assets/fonts/KGHAPPY.ttf");
+	font_health.loadFromFile("../assets/fonts/power.ttf");
+
+	Text game_exit("Exit",font_health,25);
+	game_exit.setColor(sf::Color::Red);
+	Vector2f position_exit(1620,720);
+	game_exit.setPosition(position_exit);
 
 	for(int i=0; i<6; i++)
 	{
@@ -157,6 +162,7 @@ void draw_game(GameEssentials &G)
 
 		while (G.window->pollEvent(event))
 		{
+
 			//SELECTION-BOX
 			switch(event.type)
 			{
@@ -513,7 +519,24 @@ void draw_game(GameEssentials &G)
 	stats_text.setPosition(base_text_location.x,base_text_location.y);
 	G.window->draw(stats_text);
 
+	//EXIT BUTTON
+	if( Mouse::getPosition(*G.window).x >= position_exit.x && Mouse::getPosition(*G.window).x <= (position_exit.x+150) && Mouse::getPosition(*G.window).y >=position_exit.y && Mouse::getPosition(*G.window).y <= (position_exit.y+75) )
+	{
+		game_exit.setColor(Color::White);
+		
+		if( event.mouseButton.button == Mouse::Left && G.start_play==false)
+		{
+			G.start_play = true;
+			break;
+		}
+		G.window->draw(game_exit);
+	}
+	else
+	{
+		game_exit.setColor(Color::Red);
+	}
 	//PREVENT RUNNING AT CPU SPEED
 	sleep(sf::milliseconds(10));
 	}
+	main_menu(*G.window);
 }
