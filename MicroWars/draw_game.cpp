@@ -484,7 +484,7 @@ void draw_game(GameEssentials &G)
 				stats_text.setString("Units:  "+to_string(G.PLAYER_STATS[i].Present_Units));
 				G.window->draw(stats_text);
 				stats_text.setPosition(base_text_location.x,base_text_location.y+offset);
-				stats_text.setString("Production:  "+to_string(G.PLAYER_STATS[i].Produce_Rate)+"s");
+				stats_text.setString("Production:  "+to_string(G.PLAYER_STATS[i].Produce_Rate)+" units/s");
 				G.window->draw(stats_text);
 				stats_text.setPosition(base_text_location.x,base_text_location.y+2*offset);
 				stats_text.setString("Losses:  "+to_string(G.PLAYER_STATS[i].Losses));

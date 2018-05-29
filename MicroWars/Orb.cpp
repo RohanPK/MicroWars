@@ -94,7 +94,7 @@ void microwars::Orb::change_health(char colour)
 		{
 			orb_health--;
 		}
-		else
+		if(orb_health == 0)
 		{
 			orb_colour = 'X';
 			orb_residual_health_colour = 'X';

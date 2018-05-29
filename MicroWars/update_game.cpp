@@ -20,6 +20,12 @@ void update_game(GameEssentials &G)
 						{
 							if(G.ORB_VECTOR[k].check_unit_vicinity(G.UNIT_VECTOR[i][j].return_unit_pos('x'), G.UNIT_VECTOR[i][j].return_unit_pos('y')))
 							{
+								if(G.ORB_VECTOR[k].return_orb_colour() == G.UNIT_VECTOR[i][j].return_unit_colour() && G.ORB_VECTOR[k].return_health() == (100*G.ORB_VECTOR[k].return_max_power() - 1))
+								{
+									G.UNIT_VECTOR[i][j].~Unit();
+									G.PLAYER_STATS[i].Losses++;
+									G.UNIT_VECTOR[i].erase(G.UNIT_VECTOR[i].begin()+j);
+								}
 								G.ORB_VECTOR[k].change_health(G.UNIT_VECTOR[i][j].return_unit_colour());
 								if(G.ORB_VECTOR[k].return_orb_colour() != G.UNIT_VECTOR[i][j].return_unit_colour() || (G.ORB_VECTOR[k].return_orb_colour() == G.UNIT_VECTOR[i][j].return_unit_colour() && G.ORB_VECTOR[k].return_health()<(100*G.ORB_VECTOR[k].return_max_power())))
 								{
