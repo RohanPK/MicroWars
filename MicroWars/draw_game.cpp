@@ -278,16 +278,6 @@ void draw_game(GameEssentials &G)
 			Health_Bar_Vector[5].setPosition(G.TESLA_COORDINATES[i][0]-70,G.TESLA_COORDINATES[i][1]+40);
 			Health_Bar_Vector[5].setSize(Vector2f(health_length,10));
 			
-			for(int j=0; j<G.TESLA_VECTOR[i].deleted_units.size(); j++)
-			{
-				vector <sfLine> line_temp;
-				int rand_x=(rand()%int(abs(G.TESLA_COORDINATES[i][0]-G.TESLA_VECTOR[i].deleted_units[j][0])))+min(int(G.TESLA_COORDINATES[i][0]),G.TESLA_VECTOR[i].deleted_units[j][0]);
-				int rand_y=(rand()%int(abs(G.TESLA_COORDINATES[i][1]-G.TESLA_VECTOR[i].deleted_units[j][1])))+min(int(G.TESLA_COORDINATES[i][1]),G.TESLA_VECTOR[i].deleted_units[j][1]);
-				line_temp.push_back(sfLine(Vector2f(G.TESLA_COORDINATES[i][0],G.TESLA_COORDINATES[i][1]),Vector2f(rand_x,rand_y)));
-				line_temp.push_back(sfLine(Vector2f(rand_x,rand_y),Vector2f(G.TESLA_VECTOR[i].deleted_units[j][0] ,G.TESLA_VECTOR[i].deleted_units[j][1])));
-				G.LINE_VECTOR.push_back(line_temp);
-			}
-			G.TESLA_VECTOR[i].deleted_units.clear();
 			G.window->draw(Health_Bar_Vector[5]);
 			G.window->draw(Orb_Shape_Vector[5][0]);
 		}

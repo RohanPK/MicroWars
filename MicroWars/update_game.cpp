@@ -77,7 +77,12 @@ void update_game(GameEssentials &G)
 											int temp_array[2];
 											temp_array[0]=G.UNIT_VECTOR[temp][rand_unit].return_unit_pos('x');
 											temp_array[1]=G.UNIT_VECTOR[temp][rand_unit].return_unit_pos('y');
-											G.TESLA_VECTOR[k].deleted_units.push_back(temp_array);
+											vector <sfLine> line_temp;
+											int rand_x=(rand()%int(abs(G.TESLA_COORDINATES[i][0]-temp_array[0])))+min(int(G.TESLA_COORDINATES[i][0]),temp_array[0]);
+											int rand_y=(rand()%int(abs(G.TESLA_COORDINATES[i][1]-temp_array[1])))+min(int(G.TESLA_COORDINATES[i][1]),temp_array[1]);
+											line_temp.push_back(sfLine(Vector2f(G.TESLA_COORDINATES[k][0],G.TESLA_COORDINATES[k][1]),Vector2f(rand_x,rand_y)));
+											line_temp.push_back(sfLine(Vector2f(rand_x,rand_y),Vector2f(temp_array[0],temp_array[1])));
+											G.LINE_VECTOR.push_back(line_temp);
 											G.UNIT_VECTOR[temp][rand_unit].~Unit();
 											G.PLAYER_STATS[temp].Losses++;
 											G.UNIT_VECTOR[temp].erase(G.UNIT_VECTOR[temp].begin()+rand_unit);
