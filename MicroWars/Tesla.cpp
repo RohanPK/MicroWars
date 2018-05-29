@@ -5,7 +5,7 @@
 #include <iostream>
 
 #define TESLA_RADIUS 50
-#define EPSILON 40
+#define EPSILON 60
 
 microwars::Tesla::Tesla(float x, float y, float radius, float x_factor)
 {

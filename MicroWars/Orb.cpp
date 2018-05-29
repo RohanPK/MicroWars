@@ -121,6 +121,7 @@ int microwars::Orb::return_max_power()
 {
 	return orb_max_power;
 }
+
 int microwars::Orb::return_colour_index()
 {
 	if( orb_colour == 'B')
@@ -143,8 +144,8 @@ int microwars::Orb::return_colour_index()
 	{
 		return 4;
 	}
-
 }
+
 microwars::Orb::~Orb()
 {
 }

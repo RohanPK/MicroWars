@@ -61,8 +61,8 @@ void draw_game(GameEssentials &G)
 	font_stats.loadFromFile("../assets/fonts/KGHAPPY.ttf");
 	Text stats_text("",font_stats,20);
 
-	Font font_power;
-	font_power.loadFromFile("../assets/fonts/power.ttf");
+	Font font_health;
+	font_health.loadFromFile("../assets/fonts/KGHAPPY.ttf");
 
 	for(int i=0; i<6; i++)
 	{
@@ -209,49 +209,70 @@ void draw_game(GameEssentials &G)
 		}
 
 		//MOVE UNITS
-		for(int i = 0; i<G.PLAYER_COUNT; i++)
+		int i;
+		switch(G.PLAYER_COLOUR)
 		{
-			if( G.ORB_VECTOR[i].return_orb_colour() == G.PLAYER_COLOUR)
+			case 'B':
 			{
-				if (event.mouseButton.button == Mouse::Right && Mouse::isButtonPressed(Mouse::Button::Right))
+				i = 0;
+				break;
+			}
+			case 'G':
+			{
+				i = 1;
+				break;
+			}
+			case 'R':
+			{
+				i = 2;
+				break;
+			}
+			case 'Y':
+			{
+				i = 3;
+				break;
+			}
+			default:
+			{
+				break;
+			}
+		}
+		if (event.mouseButton.button == Mouse::Right && Mouse::isButtonPressed(Mouse::Button::Right))
+		{
+			Vector2f destination_point;
+			
+			destination_point.x	= event.mouseButton.x;
+			destination_point.y = event.mouseButton.y;
+			for(int j = 0; j<G.UNIT_VECTOR[i].size(); j++)
+			{
+				if(G.UNIT_VECTOR[i][j].return_unit_colour() == G.PLAYER_COLOUR )
 				{
-					Vector2f destination_point;
-					
-					destination_point.x	= event.mouseButton.x;
-					destination_point.y = event.mouseButton.y;
-					for(int j = 0; j<G.UNIT_VECTOR[i].size(); j++)
+					if(G.UNIT_VECTOR[i][j].return_unit_pos('x') >=  min(final_position.x,starting_position.x))
 					{
-						if(G.UNIT_VECTOR[i][j].return_unit_colour() == G.PLAYER_COLOUR )
+						if(G.UNIT_VECTOR[i][j].return_unit_pos('x') <= max(final_position.x,starting_position.x)) 
 						{
-							if(G.UNIT_VECTOR[i][j].return_unit_pos('x') >=  min(final_position.x,starting_position.x))
+							if(G.UNIT_VECTOR[i][j].return_unit_pos('y') >= min(final_position.y,starting_position.y))
 							{
-								if(G.UNIT_VECTOR[i][j].return_unit_pos('x') <= max(final_position.x,starting_position.x)) 
+								if(G.UNIT_VECTOR[i][j].return_unit_pos('y') <= max(final_position.y,starting_position.y))
 								{
-									if(G.UNIT_VECTOR[i][j].return_unit_pos('y') >= min(final_position.y,starting_position.y))
+									if( destination_point.x!=0 && destination_point.y!=0 )
 									{
-										if(G.UNIT_VECTOR[i][j].return_unit_pos('y') <= max(final_position.y,starting_position.y))
-										{
-											if( destination_point.x!=0 && destination_point.y!=0 )
-											{
-												G.UNIT_VECTOR[i][j].set_unit_destination(destination_point.x, destination_point.y);
-											}
-										}
+										G.UNIT_VECTOR[i][j].set_unit_destination(destination_point.x, destination_point.y);
 									}
 								}
 							}
 						}
 					}
-					delete selection_box;
-					selection_box = nullptr;
 				}
 			}
+			delete selection_box;
+			selection_box = nullptr;
 		}
-
 
 		//DRAW TESLA
 		for(int i=0;i<G.TESLA_COUNT;i++)
 		{
-			Orb_Shape_Vector[5][0].setPosition(G.TESLA_COORDINATES[i][0]-G.TESLA_RADIUS,G.TESLA_COORDINATES[i][1]-G.TESLA_RADIUS);
+			Orb_Shape_Vector[5][0].setPosition(G.TESLA_COORDINATES[i][0]-(G.TESLA_RADIUS/2) -10,G.TESLA_COORDINATES[i][1]-(G.TESLA_RADIUS/2) -10);
 			
 			int health_length = (G.TESLA_VECTOR[i].return_health()%101);
 			Health_Bar_Vector[5].setPosition(G.TESLA_COORDINATES[i][0]-70,G.TESLA_COORDINATES[i][1]+40);
@@ -383,18 +404,18 @@ void draw_game(GameEssentials &G)
 				Health_Bar_Vector[colour_index].setSize(Vector2f(health_length,10));
 				G.window->draw(Health_Bar_Vector[colour_index]);
 				
-				string power_text;
+				string health_text;
 				if(G.ORB_VECTOR[i].return_orb_colour() != 'X')
 				{
-					power_text=to_string(G.ORB_VECTOR[i].return_power());
+					health_text=to_string(G.ORB_VECTOR[i].return_health());
 				}
 				else
 				{
-					power_text='0';
+					health_text='0';
 				}
-				Text power_number(power_text,font_power,20);
-				power_number.setPosition(Vector2f(G.ORB_COORDINATES[i][0]-5,G.ORB_COORDINATES[i][1]+60));
-				G.window->draw(power_number);
+				Text health_number(health_text,font_health,20);
+				health_number.setPosition(Vector2f(G.ORB_COORDINATES[i][0]-15,G.ORB_COORDINATES[i][1]+60));
+				G.window->draw(health_number);
 			}
 
 		//DRAW UNITS
@@ -494,6 +515,6 @@ void draw_game(GameEssentials &G)
 	G.window->draw(stats_text);
 
 	//PREVENT RUNNING AT CPU SPEED
-	sleep(sf::milliseconds(1));
+	sleep(sf::milliseconds(10));
 	}
 }

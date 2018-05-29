@@ -100,6 +100,33 @@ char microwars::Unit::return_unit_colour()
 {
 	return unit_colour;
 }
+
+int microwars::Unit::return_colour_index()
+{
+	switch(unit_colour)
+	{
+		case 'B':
+		{
+			return 0;
+		}
+		case 'G':
+		{
+			return 1;
+		}
+		case 'R':
+		{
+			return 2;
+		}
+		case 'Y':
+		{
+			return 3;
+		}
+		default:
+		{
+			break;
+		}
+	}
+}
 microwars::Unit::~Unit()
 {
 }
