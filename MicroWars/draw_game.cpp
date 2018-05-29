@@ -2,6 +2,7 @@
 
 void draw_game(GameEssentials &G)
 {
+	//LOAD TEXTURES
 	Texture texture_yellow,texture_red,texture_green,texture_blue,texture_grey,texture_tesla;
 	
 	texture_yellow.loadFromFile("../assets/images/yellow_orb.png");
@@ -35,6 +36,7 @@ void draw_game(GameEssentials &G)
 	background.setTexture(background_image);
 	background.setScale(1.26,1.08);
 
+	//ORB SHAPE ARRAY
 	vector < vector < CircleShape> > Orb_Shape_Vector;
 	CircleShape Orb_Shape(G.ORB_RADIUS);
 	CircleShape Power_Circle_One(2*G.ORB_RADIUS);
@@ -62,7 +64,7 @@ void draw_game(GameEssentials &G)
 	Font font_power;
 	font_power.loadFromFile("../assets/fonts/power.ttf");
 
-	for(int i=0; i<5; i++)
+	for(int i=0; i<6; i++)
 	{
 		vector <CircleShape> Orb_Shape_temp;
 		Orb_Shape.setTexture(NULL);
@@ -116,6 +118,13 @@ void draw_game(GameEssentials &G)
 				health_bar.setFillColor(Color(128,128,128));
 				break;
 			}
+			
+			case 5:
+			{
+				Orb_Shape.setTexture(p_tesla_Texture,true);
+				Orb_Shape.setRadius(G.TESLA_RADIUS);
+				health_bar.setFillColor(Color::Magenta);
+			}
 		}
 		Orb_Shape_temp.push_back(Orb_Shape);
 		Orb_Shape_temp.push_back(Power_Circle_One);
@@ -130,6 +139,13 @@ void draw_game(GameEssentials &G)
 	RectangleShape *selection_box = new RectangleShape;
 	G.window->setFramerateLimit(60);
 	G.window->display();
+	
+	Clock run_time;
+	int elapsed_minutes;
+
+	Clock line_animation;
+	Time animation_delay=seconds(0.005);
+
 	while(G.window->isOpen())
 	{
 
@@ -141,7 +157,7 @@ void draw_game(GameEssentials &G)
 
 		while (G.window->pollEvent(event))
 		{
-
+			//SELECTION-BOX
 			switch(event.type)
 			{
 				case Event::Closed:
@@ -192,6 +208,7 @@ void draw_game(GameEssentials &G)
 			G.window->draw(*selection_box);
 		}
 
+		//MOVE UNITS
 		for(int i = 0; i<G.PLAYER_COUNT; i++)
 		{
 			if( G.ORB_VECTOR[i].return_orb_colour() == G.PLAYER_COLOUR)
@@ -202,7 +219,6 @@ void draw_game(GameEssentials &G)
 					
 					destination_point.x	= event.mouseButton.x;
 					destination_point.y = event.mouseButton.y;
-					
 					for(int j = 0; j<G.UNIT_VECTOR[i].size(); j++)
 					{
 						if(G.UNIT_VECTOR[i][j].return_unit_colour() == G.PLAYER_COLOUR )
@@ -231,19 +247,48 @@ void draw_game(GameEssentials &G)
 			}
 		}
 
+
+		//DRAW TESLA
 		for(int i=0;i<G.TESLA_COUNT;i++)
 		{
-			CircleShape Tesla_Shape(80);
-			Tesla_Shape.setPosition(G.TESLA_COORDINATES[i][0]-Tesla_Shape.getRadius(),G.TESLA_COORDINATES[i][1]-Tesla_Shape.getRadius());
-			Tesla_Shape.setTexture(p_tesla_Texture);
-			G.window->draw(Tesla_Shape);
+			Orb_Shape_Vector[5][0].setPosition(G.TESLA_COORDINATES[i][0]-G.TESLA_RADIUS,G.TESLA_COORDINATES[i][1]-G.TESLA_RADIUS);
+			
+			int health_length = (G.TESLA_VECTOR[i].return_health()%101);
+			Health_Bar_Vector[5].setPosition(G.TESLA_COORDINATES[i][0]-70,G.TESLA_COORDINATES[i][1]+40);
+			Health_Bar_Vector[5].setSize(Vector2f(health_length,10));
+			
+			for(int j=0; j<G.TESLA_VECTOR[i].deleted_units.size(); j++)
+			{
+				vector <sfLine> line_temp;
+				int rand_x=(rand()%int(abs(G.TESLA_COORDINATES[i][0]-G.TESLA_VECTOR[i].deleted_units[j][0])))+min(int(G.TESLA_COORDINATES[i][0]),G.TESLA_VECTOR[i].deleted_units[j][0]);
+				int rand_y=(rand()%int(abs(G.TESLA_COORDINATES[i][1]-G.TESLA_VECTOR[i].deleted_units[j][1])))+min(int(G.TESLA_COORDINATES[i][1]),G.TESLA_VECTOR[i].deleted_units[j][1]);
+				line_temp.push_back(sfLine(Vector2f(G.TESLA_COORDINATES[i][0],G.TESLA_COORDINATES[i][1]),Vector2f(rand_x,rand_y)));
+				line_temp.push_back(sfLine(Vector2f(rand_x,rand_y),Vector2f(G.TESLA_VECTOR[i].deleted_units[j][0] ,G.TESLA_VECTOR[i].deleted_units[j][1])));
+				G.LINE_VECTOR.push_back(line_temp);
+			}
+			G.TESLA_VECTOR[i].deleted_units.clear();
+			G.window->draw(Health_Bar_Vector[5]);
+			G.window->draw(Orb_Shape_Vector[5][0]);
+		}
+		
+
+		for(int i=0; i<G.LINE_VECTOR.size();i++)
+		{
+			G.window->draw(G.LINE_VECTOR[i][0]);
+			G.window->draw(G.LINE_VECTOR[i][1]);
+			if(line_animation.getElapsedTime()>animation_delay)
+			{
+				line_animation.restart();
+				G.LINE_VECTOR.erase(G.LINE_VECTOR.begin()+i);
+			}
 		}
 
+		//DRAW ORB AND HEALTH
 		for(int i = 0; i<G.ORB_COUNT; i++)
 			{
 				int colour_index;
 				RectangleShape line(sf::Vector2f(2,10));
-
+				
 				if(G.ORB_VECTOR[i].return_orb_colour() == 'R')
 				{
 					colour_index=2;
@@ -324,6 +369,7 @@ void draw_game(GameEssentials &G)
 				G.window->draw(power_number);
 			}
 
+		//DRAW UNITS
 		for (int i = 0; i<G.PLAYER_COUNT; i++)
 		{
 			CircleShape Unit_Shape(G.UNIT_RADIUS);
@@ -351,17 +397,18 @@ void draw_game(GameEssentials &G)
 				if(G.UNIT_VECTOR[i][j].return_unit_colour() == 'Y')
 				{
 					Unit_Shape.setFillColor(Color::Yellow);
-					if(G.UNIT_VECTOR[i][j].return_selection_status())
-					{
-						Unit_Shape.setOutlineColor(Color::White);
-						Unit_Shape.setOutlineThickness(1);
-					}
 				}
-				
+
+				if(G.UNIT_VECTOR[i][j].return_selection_status())
+				{
+					Unit_Shape.setOutlineColor(Color::White);
+					Unit_Shape.setOutlineThickness(1);
+				}
 				G.window->draw(Unit_Shape);
 			}
 		}
 
+		//DRAW STATS
 		Vector2i base_text_location =Vector2i(1620,50);
 		for(int i=0;i<4;i++)
 		{
@@ -383,17 +430,35 @@ void draw_game(GameEssentials &G)
 				{
 					stats_text.setColor(Color::Yellow);
 				}
+				int offset=40;
 				stats_text.setPosition(base_text_location.x,base_text_location.y);
 				stats_text.setString("Units:  "+to_string(G.PLAYER_STATS[i].Present_Units));
 				G.window->draw(stats_text);
-				stats_text.setPosition(base_text_location.x,base_text_location.y+20);
+				stats_text.setPosition(base_text_location.x,base_text_location.y+offset);
 				stats_text.setString("Production:  "+to_string(G.PLAYER_STATS[i].Produce_Rate)+"s");
 				G.window->draw(stats_text);
-				stats_text.setPosition(base_text_location.x,base_text_location.y+40);
+				stats_text.setPosition(base_text_location.x,base_text_location.y+2*offset);
 				stats_text.setString("Losses:  "+to_string(G.PLAYER_STATS[i].Losses));
 				G.window->draw(stats_text);
 			}
-			base_text_location.y=base_text_location.y+80;
+			base_text_location.y=base_text_location.y+250;
 		}
+
+	//DISPLAY TIMER
+	Time elapsed_seconds = run_time.getElapsedTime();
+	if( elapsed_seconds.asSeconds()/60>=1)
+	{
+		run_time.restart();
+		elapsed_minutes++;
+	}
+	if(elapsed_seconds.asSeconds()<10)                                                                      //Append extra 0
+		stats_text.setString(to_string(elapsed_minutes)+":0"+to_string(int(elapsed_seconds.asSeconds())));
+	else
+		stats_text.setString(to_string(elapsed_minutes)+":"+to_string(int(elapsed_seconds.asSeconds())));
+	stats_text.setPosition(base_text_location.x,base_text_location.y);
+	G.window->draw(stats_text);
+
+	//PREVENT RUNNING AT CPU SPEED
+	sleep(sf::milliseconds(10));
 	}
 }

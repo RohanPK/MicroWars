@@ -24,24 +24,24 @@ void init_game(RenderWindow &window, bool &start_play)
 
 {
 	GameEssentials G =  {
-						G_ORB_COUNT,
-						30,
-						G_TESLA_COUNT,
-						50,
-						4,
-						G_PLAYER_COUNT,
-						'Y',
-						{'B', 'X', 'Y', 'Y', 'X', 'R', 'R'}, 
-						{{100, 200}, {178, 340}, {900, 250}, {660, 580}, {800, 820}, {260,400},{750,950}}, 
-						{100, 20, 160, 1500, 10, 0, 10},
-						{1, 0, 2, 1, 1, 0, 1},
-						{3, 2, 3, 3, 2, 2, 2},
-						{{800, 240}},
-						{1.5},
-						{{100, 0, 1}, {0, 0, 0}, {10, 0, 1}, {310, 0, 3}}
+						G_ORB_COUNT,                          //Total Orbs
+						30,                                   //Orb Radius
+						G_TESLA_COUNT,                        //Tesla Count
+						50,                                   //Tesla Radius
+						4,                                    //Unit Radius
+						G_PLAYER_COUNT,                       //Number of unique colours
+						'Y',                                  //Player Colour
+						{'B', 'G', 'Y', 'Y', 'X', 'R', 'R'},  //Player Colour Array
+						{{100, 200}, {178, 340}, {900, 250}, {660, 580}, {800, 820}, {260,400},{750,950}},    //Orb Co-ordinates
+						{100, 20, 160, 100, 10, 0, 10},       //Initial Units
+						{1, 1, 2, 1, 1, 0, 1},                //Initial Power
+						{3, 2, 3, 3, 2, 2, 2},                //Max Power
+						{{800, 240}},                         //Array of Tesla Co-ordinates
+						{1.5},                                //Tesla X factor
+						{{100, 0, 1}, {0, 0, 0}, {10, 0, 1}, {260, 0, 3}}                                      //Initial Stats
 						};
 
-	G.start_play = start_play;
+	G.start_play = start_play;                                //Start_Play is used to ignore the first click when play is clicked
 	G.window = &window;
 	
 	Thread thread_draw(&draw_game, (std::ref)(G));

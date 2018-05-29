@@ -1,3 +1,5 @@
+#include <vector>
+using namespace std;
 #ifndef TESLA_H
 #define TESLA_H
 
@@ -15,6 +17,7 @@ namespace microwars
 		public:
 		
 		Tesla(float x, float y, float radius, float x_factor);
+		vector < int* > deleted_units;
 		float return_tesla_pos(char option);
 		int check_unit_vicinity(float x, float y);
 		void change_health();
