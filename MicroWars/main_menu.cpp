@@ -1,6 +1,6 @@
 #include "play.h"
 
-void main_menu(RenderWindow &window)
+int main_menu(RenderWindow &window)
 {
 	bool start_play = false;
 	
@@ -58,6 +58,7 @@ void main_menu(RenderWindow &window)
 				case Event::Closed:
 					background_music.stop();
 					window.close();
+					return 0;
 					break;
 					
 				default:
@@ -100,6 +101,7 @@ void main_menu(RenderWindow &window)
 				{
 					background_music.stop();
 					window.close();
+					return 0;
 				}
 			}
 			else

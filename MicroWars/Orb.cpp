@@ -48,6 +48,11 @@ char microwars::Orb::return_orb_colour()
 	return orb_colour;
 }
 
+char microwars::Orb::return_orb_residual_health_colour()
+{
+	return orb_residual_health_colour;
+}
+
 int microwars::Orb::check_unit_vicinity(float x, float y)
 {
 	if(fabs(orb_pos_x - x)<=EPSILON && fabs(orb_pos_y - y)<=EPSILON)
@@ -141,6 +146,30 @@ int microwars::Orb::return_colour_index()
 		return 3;
 	}
 	if( orb_colour == 'X')
+	{
+		return 4;
+	}
+}
+
+int microwars::Orb::return_residual_health_colour_index()
+{
+	if( orb_residual_health_colour == 'B')
+	{
+		return 0;
+	}
+	if( orb_residual_health_colour == 'G')
+	{
+		return 1;
+	}
+	if( orb_residual_health_colour == 'R')
+	{
+		return 2;
+	}
+	if( orb_residual_health_colour == 'Y')
+	{
+		return 3;
+	}
+	if( orb_residual_health_colour == 'X')
 	{
 		return 4;
 	}

@@ -93,10 +93,10 @@ struct GameEssentials
 
 void init_window();
 
-void main_menu(RenderWindow &window);
+int main_menu(RenderWindow &window);
 
 void init_game(RenderWindow &window, bool &start_play);
 
-void draw_game(GameEssentials &G);
+int draw_game(GameEssentials &G);
 
 void update_game(GameEssentials &G);

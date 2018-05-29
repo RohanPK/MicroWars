@@ -23,12 +23,14 @@ namespace microwars
 		Unit produce_unit();
 		float return_orb_pos(char option);
 		char return_orb_colour();
+		char return_orb_residual_health_colour();
 		int check_unit_vicinity(float x, float y);
 		void change_health(char colour);
 		int return_health();
 		int return_power();
 		int return_max_power();
 		int return_colour_index();
+		int return_residual_health_colour_index();
 
 		~Orb();
 	};
