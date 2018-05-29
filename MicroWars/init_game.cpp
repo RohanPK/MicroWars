@@ -36,15 +36,15 @@ void init_game(RenderWindow &window, bool &start_play)
 		50,																						//TESLA RADIUS
 		4,																						//UNIT RADIUS
 		G_PLAYER_COUNT,																			//NUMBER OF PLAYERS
-		'G',																					//PLAYER COLOUR
+		'Y',																					//PLAYER COLOUR
 		{'B', 'G', 'R', 'R', 'Y', 'Y', 'X'},													//ORB COLOURS
 		{{100, 800}, {200, 300}, {1300, 200}, {400, 500}, {1500, 400}, {600,700}, {900,600}},	//ORB CO-ORDINATES:- IDEAL RANGE:((100-1500),(100-980))
-		{100, 200, 100, 100, 200, 0, 0},														//INITIAL UNITS
+		{100, 200, 100, 100, 200, 100, 0},														//INITIAL UNITS
 		{3, 1, 1, 2, 1, 1, 0},																	//INITIAL ORB POWER
 		{3, 3, 3, 3, 3, 2, 2},																	//MAXIMUM ORB POWER
 		{{800, 500}},																			//TESLA CO-ORDINATES
 		{2},																					//TESLA X-FACTOR
-		{{100, 0, 3}, {200, 0, 1}, {200, 0, 3}, {200, 0, 2}}									//INITIAL STATS
+		{{100, 0, 3}, {200, 0, 1}, {200, 0, 3}, {300, 0, 2}}									//INITIAL STATS
 	};
 
 	G.start_play = start_play;

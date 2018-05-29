@@ -303,12 +303,11 @@ void draw_game(GameEssentials &G)
 		//DRAW ORB AND HEALTH
 		for(int i = 0; i<G.ORB_COUNT; i++)
 			{
-				int colour_index;
+				int colour_index = G.ORB_VECTOR[i].return_colour_index();
 				RectangleShape line(sf::Vector2f(2,10));
 				
 				if(G.ORB_VECTOR[i].return_orb_colour() == 'R')
 				{
-					colour_index=2;
 					Orb_Shape_Vector[colour_index][1].setOutlineColor(Color::White);
 					Orb_Shape_Vector[colour_index][2].setOutlineColor(Color::White);
 					if(G.ORB_VECTOR[i].return_power()>=2)
@@ -323,7 +322,6 @@ void draw_game(GameEssentials &G)
 				
 				if(G.ORB_VECTOR[i].return_orb_colour() == 'B')
 				{
-					colour_index=0;
 					Orb_Shape_Vector[colour_index][1].setOutlineColor(Color::White);
 					Orb_Shape_Vector[colour_index][2].setOutlineColor(Color::White);
 					if(G.ORB_VECTOR[i].return_power()>=2)
@@ -338,7 +336,6 @@ void draw_game(GameEssentials &G)
 				
 				if(G.ORB_VECTOR[i].return_orb_colour() == 'G')
 				{
-					colour_index=1;
 					Orb_Shape_Vector[colour_index][1].setOutlineColor(Color::White);
 					Orb_Shape_Vector[colour_index][2].setOutlineColor(Color::White);
 					if(G.ORB_VECTOR[i].return_power()>=2)
@@ -353,7 +350,6 @@ void draw_game(GameEssentials &G)
 				
 				if(G.ORB_VECTOR[i].return_orb_colour() == 'Y')
 				{
-					colour_index=3;
 					Orb_Shape_Vector[colour_index][1].setOutlineColor(Color::White);
 					Orb_Shape_Vector[colour_index][2].setOutlineColor(Color::White);
 					if(G.ORB_VECTOR[i].return_power()>=2)
@@ -368,7 +364,6 @@ void draw_game(GameEssentials &G)
 				
 				if(G.ORB_VECTOR[i].return_orb_colour() == 'X')
 				{
-					colour_index=4;
 					Orb_Shape_Vector[colour_index][1].setOutlineColor(Color::White);
 					Orb_Shape_Vector[colour_index][2].setOutlineColor(Color::White);
 					if(G.ORB_VECTOR[i].return_power()>=2)
@@ -400,17 +395,26 @@ void draw_game(GameEssentials &G)
 				Health_Bar_Vector[colour_index].setSize(Vector2f(health_length,10));
 				if( G.ORB_VECTOR[i].return_health()>0)
 				{
-					G.window->draw(Health_Bar_Vector[colour_index]);
+					if(G.ORB_VECTOR[i].return_orb_colour() == 'X' && G.ORB_VECTOR[i].return_orb_residual_health_colour() != 'X')
+					{
+						Health_Bar_Vector[G.ORB_VECTOR[i].return_residual_health_colour_index()].setPosition(G.ORB_COORDINATES[i][0]-50,G.ORB_COORDINATES[i][1]+40);
+						Health_Bar_Vector[G.ORB_VECTOR[i].return_residual_health_colour_index()].setSize(Vector2f(health_length,10));
+						G.window->draw(Health_Bar_Vector[G.ORB_VECTOR[i].return_residual_health_colour_index()]);
+					}
+					else
+					{
+						G.window->draw(Health_Bar_Vector[colour_index]);
+					}
 				}
 				
 				string health_text;
-				if(G.ORB_VECTOR[i].return_orb_colour() != 'X')
+				if(G.ORB_VECTOR[i].return_orb_colour() == 'X' && G.ORB_VECTOR[i].return_orb_residual_health_colour() == 'X')
 				{
-					health_text=to_string(G.ORB_VECTOR[i].return_health());
+					health_text='0';
 				}
 				else
 				{
-					health_text='0';
+					health_text=to_string(G.ORB_VECTOR[i].return_health());
 				}
 				Text health_number(health_text,font_health,20);
 				health_number.setPosition(Vector2f(G.ORB_COORDINATES[i][0]-15,G.ORB_COORDINATES[i][1]+60));

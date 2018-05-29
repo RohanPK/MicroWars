@@ -72,14 +72,15 @@ void update_game(GameEssentials &G)
 										if(G.UNIT_VECTOR[temp].size() != 0)
 										{
 											int rand_unit;
-											srand(time(NULL));
 											rand_unit = rand()%G.UNIT_VECTOR[temp].size();
 											int temp_array[2];
 											temp_array[0]=G.UNIT_VECTOR[temp][rand_unit].return_unit_pos('x');
 											temp_array[1]=G.UNIT_VECTOR[temp][rand_unit].return_unit_pos('y');
 											vector <sfLine> line_temp;
-											int rand_x=(rand()%int(abs(G.TESLA_COORDINATES[i][0]-temp_array[0])))+min(int(G.TESLA_COORDINATES[i][0]),temp_array[0]);
-											int rand_y=(rand()%int(abs(G.TESLA_COORDINATES[i][1]-temp_array[1])))+min(int(G.TESLA_COORDINATES[i][1]),temp_array[1]);
+											int randomising_x = ((rand()%5000) - 2500)/(20);
+											int randomising_y = ((rand()%5000) - 2500)/(20);
+											int rand_x=(G.TESLA_COORDINATES[k][0]+temp_array[0])/2 + randomising_x;
+											int rand_y=(G.TESLA_COORDINATES[k][1]+temp_array[1])/2 + randomising_y;
 											line_temp.push_back(sfLine(Vector2f(G.TESLA_COORDINATES[k][0],G.TESLA_COORDINATES[k][1]),Vector2f(rand_x,rand_y)));
 											line_temp.push_back(sfLine(Vector2f(rand_x,rand_y),Vector2f(temp_array[0],temp_array[1])));
 											G.LINE_VECTOR.push_back(line_temp);
