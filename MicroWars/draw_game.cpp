@@ -34,7 +34,7 @@ void draw_game(GameEssentials &G)
 	Texture background_image;
 	background_image.loadFromFile("../assets/images/play_background.png");
 	background.setTexture(background_image);
-	background.setScale(1.26,1.08);
+	background.setScale(1.3,1.5);
 
 	//ORB SHAPE ARRAY
 	vector < vector < CircleShape> > Orb_Shape_Vector;
@@ -257,7 +257,10 @@ void draw_game(GameEssentials &G)
 								{
 									if( destination_point.x!=0 && destination_point.y!=0 )
 									{
-										G.UNIT_VECTOR[i][j].set_unit_destination(destination_point.x, destination_point.y);
+										if( destination_point.x<=Stats_Container.getPosition().x)
+										{
+											G.UNIT_VECTOR[i][j].set_unit_destination(destination_point.x, destination_point.y);
+										}
 									}
 								}
 							}
@@ -275,10 +278,13 @@ void draw_game(GameEssentials &G)
 			Orb_Shape_Vector[5][0].setPosition(G.TESLA_COORDINATES[i][0]-(G.TESLA_RADIUS/2) -10,G.TESLA_COORDINATES[i][1]-(G.TESLA_RADIUS/2) -10);
 			
 			int health_length = (G.TESLA_VECTOR[i].return_health()%101);
-			Health_Bar_Vector[5].setPosition(G.TESLA_COORDINATES[i][0]-70,G.TESLA_COORDINATES[i][1]+40);
+			Health_Bar_Vector[5].setPosition(G.TESLA_COORDINATES[i][0]-50,G.TESLA_COORDINATES[i][1]+40);
 			Health_Bar_Vector[5].setSize(Vector2f(health_length,10));
 			
-			G.window->draw(Health_Bar_Vector[5]);
+			if( G.TESLA_VECTOR[i].return_health()>0)
+			{
+				G.window->draw(Health_Bar_Vector[5]);
+			}
 			G.window->draw(Orb_Shape_Vector[5][0]);
 		}
 		
@@ -392,7 +398,10 @@ void draw_game(GameEssentials &G)
 				int health_length = (G.ORB_VECTOR[i].return_health()%101);
 				Health_Bar_Vector[colour_index].setPosition(G.ORB_COORDINATES[i][0]-50,G.ORB_COORDINATES[i][1]+40);
 				Health_Bar_Vector[colour_index].setSize(Vector2f(health_length,10));
-				G.window->draw(Health_Bar_Vector[colour_index]);
+				if( G.ORB_VECTOR[i].return_health()>0)
+				{
+					G.window->draw(Health_Bar_Vector[colour_index]);
+				}
 				
 				string health_text;
 				if(G.ORB_VECTOR[i].return_orb_colour() != 'X')
