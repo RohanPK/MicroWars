@@ -9,8 +9,8 @@ using namespace microwars;
 void init_window()
 {
 
-	VideoMode Full_Screen = VideoMode::getFullscreenModes()[0];                                             //getFullScreen returns array of best fits
-	RenderWindow window(Full_Screen, "Micro Wars", Style::Titlebar|Style::Close|Style::Fullscreen);         //1920*1080 screen size
+	VideoMode Full_Screen = VideoMode::getFullscreenModes()[0];											//getFullScreen RETURNS ARRAY OF BEST FIT
+	RenderWindow window(Full_Screen, "Micro Wars", Style::Titlebar|Style::Close|Style::Fullscreen);		//1920*1080 SCREEN SIZE
 	Image game_icon;
 	game_icon.loadFromFile("../assets/images/game_icon.png");
 	window.setIcon(game_icon.getSize().x,game_icon.getSize().y,game_icon.getPixelsPtr());

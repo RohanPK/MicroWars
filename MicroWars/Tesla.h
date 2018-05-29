@@ -16,8 +16,9 @@ namespace microwars
 
 		public:
 		
-		Tesla(float x, float y, float radius, float x_factor);
 		vector < int* > deleted_units;
+		
+		Tesla(float x, float y, float radius, float x_factor);
 		float return_tesla_pos(char option);
 		int check_unit_vicinity(float x, float y);
 		void change_health();

@@ -58,7 +58,7 @@ void draw_game(GameEssentials &G)
 	Stats_Container.setFillColor(Color(0,0,0,90));
 	Stats_Container.setPosition(1610,0);
 	Font font_stats;
-	font_stats.loadFromFile("../assets/fonts/power.ttf");
+	font_stats.loadFromFile("../assets/fonts/KGHAPPY.ttf");
 	Text stats_text("",font_stats,20);
 
 	Font font_power;
@@ -295,9 +295,13 @@ void draw_game(GameEssentials &G)
 					Orb_Shape_Vector[colour_index][1].setOutlineColor(Color::White);
 					Orb_Shape_Vector[colour_index][2].setOutlineColor(Color::White);
 					if(G.ORB_VECTOR[i].return_power()>=2)
+					{
 						Orb_Shape_Vector[colour_index][1].setOutlineColor(Color::Red);
+					}
 					if(G.ORB_VECTOR[i].return_power()==3)
+					{
 						Orb_Shape_Vector[colour_index][2].setOutlineColor(Color::Red);
+					}
 				}
 				
 				if(G.ORB_VECTOR[i].return_orb_colour() == 'B')
@@ -306,9 +310,13 @@ void draw_game(GameEssentials &G)
 					Orb_Shape_Vector[colour_index][1].setOutlineColor(Color::White);
 					Orb_Shape_Vector[colour_index][2].setOutlineColor(Color::White);
 					if(G.ORB_VECTOR[i].return_power()>=2)
+					{
 						Orb_Shape_Vector[colour_index][1].setOutlineColor(Color::Blue);
+					}
 					if(G.ORB_VECTOR[i].return_power()==3)
+					{
 						Orb_Shape_Vector[colour_index][2].setOutlineColor(Color::Blue);
+					}
 				}
 				
 				if(G.ORB_VECTOR[i].return_orb_colour() == 'G')
@@ -317,9 +325,13 @@ void draw_game(GameEssentials &G)
 					Orb_Shape_Vector[colour_index][1].setOutlineColor(Color::White);
 					Orb_Shape_Vector[colour_index][2].setOutlineColor(Color::White);
 					if(G.ORB_VECTOR[i].return_power()>=2)
+					{
 						Orb_Shape_Vector[colour_index][1].setOutlineColor(Color::Green);
+					}
 					if(G.ORB_VECTOR[i].return_power()==3)
+					{
 						Orb_Shape_Vector[colour_index][2].setOutlineColor(Color::Green);
+					}
 				}
 				
 				if(G.ORB_VECTOR[i].return_orb_colour() == 'Y')
@@ -328,9 +340,13 @@ void draw_game(GameEssentials &G)
 					Orb_Shape_Vector[colour_index][1].setOutlineColor(Color::White);
 					Orb_Shape_Vector[colour_index][2].setOutlineColor(Color::White);
 					if(G.ORB_VECTOR[i].return_power()>=2)
+					{
 						Orb_Shape_Vector[colour_index][1].setOutlineColor(Color::Yellow);
+					}
 					if(G.ORB_VECTOR[i].return_power()==3)
+					{
 						Orb_Shape_Vector[colour_index][2].setOutlineColor(Color::Yellow);
+					}
 				}
 				
 				if(G.ORB_VECTOR[i].return_orb_colour() == 'X')
@@ -339,9 +355,13 @@ void draw_game(GameEssentials &G)
 					Orb_Shape_Vector[colour_index][1].setOutlineColor(Color::White);
 					Orb_Shape_Vector[colour_index][2].setOutlineColor(Color::White);
 					if(G.ORB_VECTOR[i].return_power()>=2)
+					{
 						Orb_Shape_Vector[colour_index][2].setOutlineColor(Color::White);
+					}
 					if(G.ORB_VECTOR[i].return_power()==3)
+					{
 						Orb_Shape_Vector[colour_index][1].setOutlineColor(Color::White);
+					}
 				}
 				
 				Orb_Shape_Vector[colour_index][0].setPosition(G.ORB_COORDINATES[i][0]-G.ORB_RADIUS/2,G.ORB_COORDINATES[i][1]-G.ORB_RADIUS/2);
@@ -349,9 +369,13 @@ void draw_game(GameEssentials &G)
 				Orb_Shape_Vector[colour_index][2].setPosition(G.ORB_COORDINATES[i][0]-3*G.ORB_RADIUS/2,G.ORB_COORDINATES[i][1]-3*G.ORB_RADIUS/2);
 				
 				if( G.ORB_VECTOR[i].return_max_power()>2)
+				{
 					G.window->draw(Orb_Shape_Vector[colour_index][2]);
+				}
 				if( G.ORB_VECTOR[i].return_max_power()>1)
+				{
 					G.window->draw(Orb_Shape_Vector[colour_index][1]);
+				}
 				G.window->draw(Orb_Shape_Vector[colour_index][0]);
 
 				int health_length = (G.ORB_VECTOR[i].return_health()%101);
@@ -361,9 +385,13 @@ void draw_game(GameEssentials &G)
 				
 				string power_text;
 				if(G.ORB_VECTOR[i].return_orb_colour() != 'X')
+				{
 					power_text=to_string(G.ORB_VECTOR[i].return_power());
+				}
 				else
+				{
 					power_text='0';
+				}
 				Text power_number(power_text,font_power,20);
 				power_number.setPosition(Vector2f(G.ORB_COORDINATES[i][0]-5,G.ORB_COORDINATES[i][1]+60));
 				G.window->draw(power_number);
@@ -451,14 +479,21 @@ void draw_game(GameEssentials &G)
 		run_time.restart();
 		elapsed_minutes++;
 	}
-	if(elapsed_seconds.asSeconds()<10)                                                                      //Append extra 0
-		stats_text.setString(to_string(elapsed_minutes)+":0"+to_string(int(elapsed_seconds.asSeconds())));
+	
+	stats_text.setColor(Color::Cyan);
+	
+	if(elapsed_seconds.asSeconds()<10)
+	{
+		stats_text.setString("\tTIME ELAPSED: "+to_string(elapsed_minutes)+":0"+to_string(int(elapsed_seconds.asSeconds())));
+	}
 	else
-		stats_text.setString(to_string(elapsed_minutes)+":"+to_string(int(elapsed_seconds.asSeconds())));
+	{
+		stats_text.setString("\tTIME ELAPSED: "+to_string(elapsed_minutes)+":"+to_string(int(elapsed_seconds.asSeconds())));
+	}
 	stats_text.setPosition(base_text_location.x,base_text_location.y);
 	G.window->draw(stats_text);
 
 	//PREVENT RUNNING AT CPU SPEED
-	sleep(sf::milliseconds(10));
+	sleep(sf::milliseconds(1));
 	}
 }

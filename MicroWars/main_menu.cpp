@@ -56,6 +56,7 @@ void main_menu(RenderWindow &window)
 			switch(event.type)
 			{
 				case Event::Closed:
+					background_music.stop();
 					window.close();
 					break;
 					

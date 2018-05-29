@@ -2,6 +2,6 @@
 using namespace sf;
 int main()
 {
-	init_window();           //It's lonely out here.
+	init_window();           //IT'S LONELY OUT HERE!
 	return 0;
 }

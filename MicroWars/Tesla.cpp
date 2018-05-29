@@ -15,6 +15,7 @@ microwars::Tesla::Tesla(float x, float y, float radius, float x_factor)
 	tesla_health = 0;
 	tesla_x_factor = x_factor;
 }
+
 float microwars::Tesla::return_tesla_pos(char option)
 {
 	if(option == 'x')
@@ -64,4 +65,3 @@ float microwars::Tesla::return_x_factor()
 microwars::Tesla::~Tesla()
 {
 }
-
