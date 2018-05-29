@@ -2,6 +2,7 @@
 
 int draw_game(GameEssentials &G)
 {
+	G.exit_play=false;
 	//LOAD TEXTURES
 	Texture texture_yellow,texture_red,texture_green,texture_blue,texture_grey,texture_tesla;
 	
@@ -531,7 +532,7 @@ int draw_game(GameEssentials &G)
 		
 		if( event.mouseButton.button == Mouse::Left && G.start_play==false)
 		{
-			G.start_play = true;
+			G.exit_play = true;
 			break;
 		}
 		G.window->draw(game_exit);

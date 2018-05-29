@@ -89,6 +89,7 @@ struct GameEssentials
 	RenderWindow *window;
 	
 	bool start_play;
+	bool exit_play;
 };
 
 void init_window();

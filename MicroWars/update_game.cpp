@@ -152,7 +152,7 @@ void update_game(GameEssentials &G)
 				}
 			}
 		}
-	if(G.start_play)
+	if(G.exit_play)
 	{
 		break;
 	}
