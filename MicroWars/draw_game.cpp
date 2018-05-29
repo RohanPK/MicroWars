@@ -69,6 +69,10 @@ int draw_game(GameEssentials &G)
 	game_exit.setColor(sf::Color::Red);
 	Vector2f position_exit(1620,720);
 	game_exit.setPosition(position_exit);
+	RectangleShape exit_button;
+	exit_button.setSize(Vector2f(400, 100));
+	exit_button.setFillColor(Color::Red);
+	game_exit.setColor(Color::Red);
 
 	for(int i=0; i<6; i++)
 	{
@@ -501,9 +505,9 @@ int draw_game(GameEssentials &G)
 				stats_text.setString("Losses:  "+to_string(G.PLAYER_STATS[i].Losses));
 				G.window->draw(stats_text);
 			}
-			base_text_location.y=base_text_location.y+250;
+			base_text_location.y=base_text_location.y+220;
 		}
-
+	base_text_location.y=base_text_location.y-50;
 	//DISPLAY TIMER
 	Time elapsed_seconds = run_time.getElapsedTime();
 	if( elapsed_seconds.asSeconds()/60>=1)
@@ -522,25 +526,27 @@ int draw_game(GameEssentials &G)
 	{
 		stats_text.setString("\tTIME ELAPSED: "+to_string(elapsed_minutes)+":"+to_string(int(elapsed_seconds.asSeconds())));
 	}
-	stats_text.setPosition(base_text_location.x,base_text_location.y);
+	stats_text.setPosition(base_text_location.x,base_text_location.y-100);
 	G.window->draw(stats_text);
 
 	//EXIT BUTTON
+	//game_exit.setPosition();
+	exit_button.setPosition(base_text_location.x,1080-exit_button.getSize().y);
+	position_exit=exit_button.getPosition();
 	if( Mouse::getPosition(*G.window).x >= position_exit.x && Mouse::getPosition(*G.window).x <= (position_exit.x+150) && Mouse::getPosition(*G.window).y >=position_exit.y && Mouse::getPosition(*G.window).y <= (position_exit.y+75) )
-	{
-		game_exit.setColor(Color::White);
-		
+		{
 		if( event.mouseButton.button == Mouse::Left && G.start_play==false)
 		{
 			G.exit_play = true;
 			break;
 		}
-		G.window->draw(game_exit);
 	}
 	else
 	{
 		game_exit.setColor(Color::Red);
 	}
+	G.window->draw(exit_button);
+	G.window->draw(game_exit);
 	//PREVENT RUNNING AT CPU SPEED
 	sleep(sf::milliseconds(10));
 	}
