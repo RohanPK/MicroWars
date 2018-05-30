@@ -14,9 +14,9 @@ using namespace sf;
 using namespace std;
 using namespace microwars;
 
-#define G_ORB_COUNT 7
+#define G_ORB_COUNT 100
 #define G_PLAYER_COUNT 4
-#define G_TESLA_COUNT 1
+#define G_TESLA_COUNT 100
 
 class sfLine : public sf::Drawable
 {
@@ -100,7 +100,7 @@ int main_menu(RenderWindow &window);
 
 void init_game(RenderWindow &window, bool &start_play);
 
-void save_to_disk(vector <Orb> Orb_Vector,vector <Tesla> Tesla_Vector);
+void save_to_disk(vector <Orb> Orb_Vector,vector <Tesla> Tesla_Vector,vector<int> Initial_Units_Vector);
 
 int edit_level(RenderWindow &window, bool &start_edit);
 

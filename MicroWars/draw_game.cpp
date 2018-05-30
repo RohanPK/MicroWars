@@ -291,7 +291,6 @@ int draw_game(GameEssentials &G)
 			}
 			G.window->draw(Orb_Shape_Vector[5][0]);
 		}
-		
 
 		for(int i=0; i<G.LINE_VECTOR.size();i++)
 		{

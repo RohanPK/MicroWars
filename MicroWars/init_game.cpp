@@ -26,6 +26,11 @@ GameEssentials read_level()
 	
 	for(int i=0; i<G.ORB_COUNT;i++)
 	{
+		level_file>>G.ORB_INITIAL_UNITS[i];
+	}
+
+	for(int i=0; i<G.ORB_COUNT;i++)
+	{
 		level_file>>G.ORB_INITIAL_POWER[i];
 	}
 	
@@ -36,7 +41,7 @@ GameEssentials read_level()
 	
 	for(int i=0; i<G.TESLA_COUNT;i++)
 	{
-		level_file>>G.TESLA_COORDINATES[i][0]>>comma>>G.TESLA_COORDINATES[i][0];
+		level_file>>G.TESLA_COORDINATES[i][0]>>comma>>G.TESLA_COORDINATES[i][1];
 	}
 	
 	for(int i=0; i<G.TESLA_COUNT;i++)
