@@ -137,10 +137,11 @@ Texture texture_yellow,texture_red,texture_green,texture_blue,texture_grey,textu
 		}
 	}
 	
-	int colour_index=0;
-	int current_power=0;
-	int max_power=0;
-	char colour_letter='B';
+	int colour_index = 0;
+	int current_power = 0;
+	int max_power = 0;
+	float x_factor = 0;
+	char colour_letter = 'B';
 
 	Text mouse_text("(0,0)",font_mouse,15);
 	Text orb_text("0,0",font_mouse,15);
@@ -203,17 +204,35 @@ Texture texture_yellow,texture_red,texture_green,texture_blue,texture_grey,textu
 					}
 					else if (event.key.code == sf::Keyboard::Left)
 					{
-						max_power--;
+						if(colour_index == 5)
+						{
+							x_factor-=0.1;
+						}
+						else
+						{
+							max_power--;
+						}
 						break;
 					}
 					else if (event.key.code == sf::Keyboard::Right)
 					{
-						max_power++;
+						if(colour_index == 5)
+						{
+							x_factor+=0.1;
+						}
+						else
+						{
+							max_power++;
+						}
 						break;
 					}
 					else if (event.key.code == sf::Keyboard::Down )
 					{
-						if( current_power>0)
+						if(colour_index == 5)
+						{
+							x_factor--;
+						}
+						else
 						{
 							current_power--;
 						}
@@ -221,7 +240,14 @@ Texture texture_yellow,texture_red,texture_green,texture_blue,texture_grey,textu
 					}
 					else if (event.key.code == sf::Keyboard::Up )
 					{
-						current_power++;
+						if(colour_index == 5)
+						{
+							x_factor++;
+						}
+						else
+						{
+							current_power++;
+						}
 						break;
 					}
 				}
@@ -244,7 +270,15 @@ Texture texture_yellow,texture_red,texture_green,texture_blue,texture_grey,textu
 		}
 
 		Orb_Shape_Vector[colour_index][0].setPosition(mouse_position.x-30,mouse_position.y-30);
-		string information="("+ to_string(mouse_position.x) +','+ to_string(mouse_position.y)+")"+"\nCurrent Power:"+to_string(current_power)+"\nMax Power:"+to_string(max_power);
+		string information;
+		if(colour_index == 5)
+		{
+			information="("+ to_string(mouse_position.x) +','+ to_string(mouse_position.y)+")"+"\nX Factor:"+to_string(x_factor);
+		}
+		else
+		{
+			information="("+ to_string(mouse_position.x) +','+ to_string(mouse_position.y)+")"+"\nCurrent Power:"+to_string(current_power)+"\nMax Power:"+to_string(max_power);
+		}
 		mouse_text.setString(information);
 		mouse_text.setPosition(mouse_position.x+20,mouse_position.y+20);
 		window.draw(mouse_text);

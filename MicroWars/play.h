@@ -14,9 +14,9 @@ using namespace sf;
 using namespace std;
 using namespace microwars;
 
-#define G_ORB_COUNT 100
+#define G_ORB_COUNT 7
 #define G_PLAYER_COUNT 4
-#define G_TESLA_COUNT 100
+#define G_TESLA_COUNT 1
 
 class sfLine : public sf::Drawable
 {

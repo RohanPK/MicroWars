@@ -62,7 +62,7 @@ int draw_game(GameEssentials &G)
 	Font font_exit;
 	font_exit.loadFromFile("../assets/fonts/power.ttf");
 
-	Text game_exit("Exit",font_exit,45);
+	Text game_exit("EXIT",font_exit,45);
 	game_exit.setColor(sf::Color::Red);
 	Vector2f position_exit(1640,820);
 	game_exit.setPosition(position_exit);
