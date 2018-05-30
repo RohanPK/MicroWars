@@ -282,7 +282,7 @@ int draw_game(GameEssentials &G)
 			Orb_Shape_Vector[5][0].setPosition(G.TESLA_COORDINATES[i][0]-(G.TESLA_RADIUS/2) -10,G.TESLA_COORDINATES[i][1]-(G.TESLA_RADIUS/2) -10);
 	
 			int health_length = (G.TESLA_VECTOR[i].return_health()%101);
-			Health_Bar_Vector[5].setPosition(G.TESLA_COORDINATES[i][0]-50,G.TESLA_COORDINATES[i][1]+40);
+			Health_Bar_Vector[5].setPosition(G.TESLA_COORDINATES[i][0]-35,G.TESLA_COORDINATES[i][1]+50);
 			Health_Bar_Vector[5].setSize(Vector2f(health_length,10));
 			
 			if( G.TESLA_VECTOR[i].return_health()>0)
@@ -492,7 +492,7 @@ int draw_game(GameEssentials &G)
 	{
 		stats_text.setString("\tTIME ELAPSED: "+to_string(elapsed_minutes)+":"+to_string(int(elapsed_seconds.asSeconds())));
 	}
-	stats_text.setPosition(base_text_location.x,base_text_location.y-150);
+	stats_text.setPosition(base_text_location.x,base_text_location.y);
 	G.window->draw(stats_text);
 
 	//EXIT BUTTON

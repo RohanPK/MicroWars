@@ -244,7 +244,7 @@ Texture texture_yellow,texture_red,texture_green,texture_blue,texture_grey,textu
 		}
 
 		Orb_Shape_Vector[colour_index][0].setPosition(mouse_position.x-30,mouse_position.y-30);
-		string information="("+ to_string(mouse_position.x) +','+ to_string(mouse_position.y)+ "\nCurrent Power:"+to_string(current_power)+"\nMax Power:"+to_string(max_power);
+		string information="("+ to_string(mouse_position.x) +','+ to_string(mouse_position.y)+")"+"\nCurrent Power:"+to_string(current_power)+"\nMax Power:"+to_string(max_power);
 		mouse_text.setString(information);
 		mouse_text.setPosition(mouse_position.x+20,mouse_position.y+20);
 		window.draw(mouse_text);

@@ -45,6 +45,7 @@ GameEssentials read_level()
 	}
 	return G;
 }
+
 void initialise(GameEssentials &G)
 {
 	//INITIALISING ORBS
@@ -89,7 +90,7 @@ void init_game(RenderWindow &window, bool &start_play)
 		{{800, 500}},																			//TESLA CO-ORDINATES
 		{2},																					//TESLA X-FACTOR
 	};
-	read_level();
+	//G = read_level();
 	G.start_play = start_play;
 	G.window = &window;
 	

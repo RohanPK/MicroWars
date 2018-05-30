@@ -89,6 +89,7 @@ void update_game(GameEssentials &G)
 											G.UNIT_VECTOR[temp].erase(G.UNIT_VECTOR[temp].begin()+rand_unit);
 										}
 									}
+									G.TESLA_VECTOR[k].change_health();
 								}
 							}
 						}
@@ -132,11 +133,13 @@ void update_game(GameEssentials &G)
 				G.PLAYER_STATS[G.ORB_VECTOR[i].return_colour_index()].Produce_Rate+=G.ORB_VECTOR[i].return_power();
 			}
 		}
+		
 		//PRESENT-UNITS ASSIGNMENT
 		for(int i = 0; i<G.PLAYER_COUNT; i++)
 		{
 			G.PLAYER_STATS[i].Present_Units = G.UNIT_VECTOR[i].size();
 		}
+		
 		//UNIT PRODUCTION
 		if(timer_produce_units.getElapsedTime().asSeconds()>= wait_time.asSeconds())
 		{
@@ -152,10 +155,12 @@ void update_game(GameEssentials &G)
 				}
 			}
 		}
+		
 	if(G.exit_play)
 	{
 		break;
 	}
+	
 	sleep(sf::milliseconds(10));
 	}
 }
