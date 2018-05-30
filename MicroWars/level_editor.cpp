@@ -83,7 +83,7 @@ Texture texture_yellow,texture_red,texture_green,texture_blue,texture_grey,textu
 	
 	RectangleShape Stats_Container;
 	Stats_Container.setSize(Vector2f(310, 1080));
-	Stats_Container.setFillColor(Color::White);
+	Stats_Container.setFillColor(Color::Black);
 	Stats_Container.setPosition(1610,0);
 
 	Font font_mouse;
@@ -91,10 +91,10 @@ Texture texture_yellow,texture_red,texture_green,texture_blue,texture_grey,textu
 	Font font_save;
 	font_save.loadFromFile("../assets/fonts/exit.ttf");
 
-	Text save_level("Save",font_mouse,25);
+	Text save_level("SAVE",font_mouse,45);
 	save_level.setColor(sf::Color::White);
 	Vector2f position_save(1610,980);
-	save_level.setPosition(position_save.x+100,position_save.y);
+	save_level.setPosition(position_save.x +60,position_save.y + 20);
 	RectangleShape save_button;
 	save_button.setSize(Vector2f(400,100));
 	save_button.setFillColor(Color::Red);
@@ -146,7 +146,7 @@ Texture texture_yellow,texture_red,texture_green,texture_blue,texture_grey,textu
 	int colour_index = 0;
 	int current_power = 0;
 	int max_power = 0;
-	float x_factor = 0;
+	int x_factor = 0;
 	char colour_letter = 'B';
 	int initial_units = 0;
 
@@ -220,7 +220,7 @@ Texture texture_yellow,texture_red,texture_green,texture_blue,texture_grey,textu
 					{
 						if(colour_index == 5)
 						{
-							x_factor-=0.1;
+							x_factor-=10;
 						}
 						else
 						{
@@ -233,7 +233,7 @@ Texture texture_yellow,texture_red,texture_green,texture_blue,texture_grey,textu
 					{
 						if(colour_index == 5)
 						{
-							x_factor+=0.1;
+							x_factor+=10;
 						}
 						else
 						{
@@ -246,7 +246,7 @@ Texture texture_yellow,texture_red,texture_green,texture_blue,texture_grey,textu
 					{
 						if(colour_index == 5)
 						{
-							x_factor--;
+							x_factor-=100;;
 						}
 						else
 						{
@@ -259,7 +259,7 @@ Texture texture_yellow,texture_red,texture_green,texture_blue,texture_grey,textu
 					{
 						if(colour_index == 5)
 						{
-							x_factor++;
+							x_factor+=100;
 						}
 						else
 						{
@@ -323,14 +323,11 @@ Texture texture_yellow,texture_red,texture_green,texture_blue,texture_grey,textu
 		}
 
 		Orb_Shape_Vector[colour_index][0].setPosition(mouse_position.x-30,mouse_position.y-30);
+		
 		string information;
 		if(colour_index == 5)
 		{
-			int x_factor_int;
-			int x_factor_decimal;
-			x_factor_int = x_factor;
-			x_factor_decimal = 10*float(x_factor - float(x_factor_int));
-			information="("+ to_string(mouse_position.x) +','+ to_string(mouse_position.y)+")"+"\nX Factor:"+to_string(x_factor_int)+"."+to_string(x_factor_decimal);
+			information="("+ to_string(mouse_position.x) +','+ to_string(mouse_position.y)+")"+"\nX Factor:"+to_string(x_factor);
 		}
 		else if(colour_index == 4)
 		{
@@ -338,7 +335,7 @@ Texture texture_yellow,texture_red,texture_green,texture_blue,texture_grey,textu
 		}
 		else
 		{
-			information="("+ to_string(mouse_position.x) +','+ to_string(mouse_position.y)+")"+"\nCurrent Power:"+to_string(current_power)+"\nMax Power:"+to_string(max_power)+"\nInitial Units"+to_string(initial_units);
+			information="("+ to_string(mouse_position.x) +','+ to_string(mouse_position.y)+")"+"\nCurrent Power:"+to_string(current_power)+"\nMax Power:"+to_string(max_power)+"\nInitial Units:"+to_string(initial_units);
 		}
 		mouse_text.setString(information);
 		mouse_text.setPosition(mouse_position.x+20,mouse_position.y+20);
@@ -377,16 +374,16 @@ Texture texture_yellow,texture_red,texture_green,texture_blue,texture_grey,textu
 		}
 		for(int i=0;i<Tesla_Vector.size();i++)
 		{
-			Orb_Shape_Vector[5][0].setPosition(Tesla_Vector[i].return_tesla_pos('x')-35,Tesla_Vector[i].return_tesla_pos('y')+50);
-			orb_text.setPosition(Tesla_Vector[i].return_tesla_pos('x'),Tesla_Vector[i].return_tesla_pos('y')+20);
+			Orb_Shape_Vector[5][0].setPosition(Tesla_Vector[i].return_tesla_pos('x')-30,Tesla_Vector[i].return_tesla_pos('y')-30);
+			orb_text.setPosition(Tesla_Vector[i].return_tesla_pos('x'),Tesla_Vector[i].return_tesla_pos('y')+30);
 			orb_text.setString("X:"+to_string(Tesla_Vector[i].return_x_factor()));
 			window.draw(Orb_Shape_Vector[5][0]);
 			window.draw(orb_text);
 		}
 
 		window.draw(Stats_Container);
-		window.draw(save_level);
 		window.draw(save_button);
+		window.draw(save_level);
 
 		sleep(sf::milliseconds(10));
 	}

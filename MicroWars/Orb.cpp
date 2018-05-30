@@ -7,7 +7,7 @@
 #define UNIT_SPEED 0.2
 #define UNIT_RADIUS 4
 #define ORB_RADIUS 30
-#define EPSILON 40
+#define EPSILON 30
 
 microwars::Orb::Orb(float x, float y, float radius, char colour, int power, int max_power, int initial_health)
 {

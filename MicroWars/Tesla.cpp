@@ -5,9 +5,9 @@
 #include <iostream>
 
 #define TESLA_RADIUS 50
-#define EPSILON 60
+#define EPSILON 50
 
-microwars::Tesla::Tesla(float x, float y, float radius, float x_factor)
+microwars::Tesla::Tesla(float x, float y, float radius, int x_factor)
 {
 	tesla_pos_x = x;
 	tesla_pos_y = y;
@@ -57,7 +57,7 @@ int microwars::Tesla::return_health()
 	return tesla_health;
 }
 		
-float microwars::Tesla::return_x_factor()
+int microwars::Tesla::return_x_factor()
 {
 	return tesla_x_factor;
 }

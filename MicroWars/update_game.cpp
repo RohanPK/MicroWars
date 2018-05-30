@@ -67,7 +67,7 @@ void update_game(GameEssentials &G)
 											temp = l;
 										}
 									}
-									for(int l = 0; l<G.TESLA_VECTOR[k].return_x_factor()*100; l++)
+									for(int l = 0; l<G.TESLA_VECTOR[k].return_x_factor(); l++)
 									{
 										if(G.UNIT_VECTOR[temp].size() != 0)
 										{

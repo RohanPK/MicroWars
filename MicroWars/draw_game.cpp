@@ -63,7 +63,6 @@ int draw_game(GameEssentials &G)
 	font_exit.loadFromFile("../assets/fonts/power.ttf");
 
 	Text game_exit("EXIT",font_exit,45);
-	game_exit.setColor(sf::Color::Red);
 	Vector2f position_exit(1640,820);
 	game_exit.setPosition(position_exit);
 	RectangleShape exit_button;
@@ -394,7 +393,7 @@ int draw_game(GameEssentials &G)
 				health_text=to_string(G.ORB_VECTOR[i].return_health());
 			}
 			Text health_number(health_text,font_health,20);
-			health_number.setPosition(Vector2f(G.ORB_COORDINATES[i][0]-15,G.ORB_COORDINATES[i][1]+60));
+			health_number.setPosition(Vector2f(G.ORB_COORDINATES[i][0]-10,G.ORB_COORDINATES[i][1]+70));
 			G.window->draw(health_number);
 		}
 
@@ -473,6 +472,7 @@ int draw_game(GameEssentials &G)
 			base_text_location.y=base_text_location.y+220;
 		}
 	base_text_location.y=base_text_location.y-50;
+	
 	//DISPLAY TIMER
 	Time elapsed_seconds = run_time.getElapsedTime();
 	if( elapsed_seconds.asSeconds()/60>=1)
@@ -513,6 +513,7 @@ int draw_game(GameEssentials &G)
 	}
 	G.window->draw(exit_button);
 	G.window->draw(game_exit);
+	
 	//PREVENT RUNNING AT CPU SPEED
 	sleep(sf::milliseconds(10));
 	}

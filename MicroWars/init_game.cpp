@@ -84,7 +84,7 @@ void initialise(GameEssentials &G)
 void init_game(RenderWindow &window, bool &start_play)
 
 {
-	GameEssentials G;/* =
+	GameEssentials G;/*
 	{
 		G_ORB_COUNT,																			//TOTAL ORBS
 		30,																						//ORB RADIUS
