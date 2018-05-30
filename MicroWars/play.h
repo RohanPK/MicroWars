@@ -5,6 +5,7 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 #include <cmath>
+#include <fstream>
 #include "Orb.h"
 #include "Tesla.h"
 #include "Unit.h"
@@ -13,9 +14,9 @@ using namespace sf;
 using namespace std;
 using namespace microwars;
 
-#define G_ORB_COUNT 7
+#define G_ORB_COUNT 100
 #define G_PLAYER_COUNT 4
-#define G_TESLA_COUNT 1
+#define G_TESLA_COUNT 100
 
 class sfLine : public sf::Drawable
 {
@@ -90,6 +91,7 @@ struct GameEssentials
 	
 	bool start_play;
 	bool exit_play;
+	bool level_edit;
 };
 
 void init_window();
@@ -97,6 +99,12 @@ void init_window();
 int main_menu(RenderWindow &window);
 
 void init_game(RenderWindow &window, bool &start_play);
+
+void save_to_disk(vector <Orb> Orb_Vector,vector <Tesla> Tesla_Vector);
+
+int edit_level(RenderWindow &window, bool &start_edit);
+
+GameEssentials read_level();
 
 int draw_game(GameEssentials &G);
 

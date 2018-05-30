@@ -3,6 +3,7 @@
 int main_menu(RenderWindow &window)
 {
 	bool start_play = false;
+	bool start_edit = false;
 	
 	window.display();
 
@@ -21,7 +22,7 @@ int main_menu(RenderWindow &window)
 	Vector2f position_play(450*Scale_Window.x,200*Scale_Window.y);
 	menu_play.setPosition(position_play);
 	
-	Text menu_options("Options",font_title,75);
+	Text menu_options("Editor",font_title,75);
 	menu_options.setColor(sf::Color::Red);
 	Vector2f position_options(450*Scale_Window.x,250*Scale_Window.y);
 	menu_options.setPosition(position_options);
@@ -56,11 +57,12 @@ int main_menu(RenderWindow &window)
 			switch(event.type)
 			{
 				case Event::Closed:
+				{
 					background_music.stop();
 					window.close();
 					return 0;
 					break;
-					
+				}
 				default:
 					break;
 			}
@@ -85,7 +87,7 @@ int main_menu(RenderWindow &window)
 				
 				if( event.mouseButton.button == Mouse::Left )
 				{
-					start_play = true;
+					start_edit = true;
 				}
 			}
 			else
@@ -110,7 +112,7 @@ int main_menu(RenderWindow &window)
 			}
 		}
 		
-		if(start_play)
+		if( start_play==true || start_edit==true )
 		{
 			background_music.stop();
 			break;
@@ -121,6 +123,13 @@ int main_menu(RenderWindow &window)
 		window.draw(menu_options);
 		window.draw(menu_quit);
 	}
+	if ( start_play )
+	{
+		init_game(window, start_play);
+	}
+	else
+	{
+		edit_level(window, start_edit);
+	}
 	
-	init_game(window, start_play);
 }

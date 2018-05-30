@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Rohan
-Date                   :=29/05/18
+Date                   :=30/05/18
 CodeLitePath           :=/home/rohan/.codelite
 LinkerName             :=/usr/bin/g++
 SharedObjectLinkerName :=/usr/bin/g++ -shared -fPIC
@@ -60,7 +60,8 @@ AS       := /usr/bin/as
 ## User defined environment variables
 ##
 CodeLiteDir:=/usr/share/codelite
-Objects0=$(IntermediateDirectory)/Unit.cpp$(ObjectSuffix) $(IntermediateDirectory)/window.cpp$(ObjectSuffix) $(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IntermediateDirectory)/Orb.cpp$(ObjectSuffix) $(IntermediateDirectory)/Tesla.cpp$(ObjectSuffix) $(IntermediateDirectory)/update_game.cpp$(ObjectSuffix) $(IntermediateDirectory)/init_game.cpp$(ObjectSuffix) $(IntermediateDirectory)/draw_game.cpp$(ObjectSuffix) $(IntermediateDirectory)/main_menu.cpp$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/Unit.cpp$(ObjectSuffix) $(IntermediateDirectory)/window.cpp$(ObjectSuffix) $(IntermediateDirectory)/Orb.cpp$(ObjectSuffix) $(IntermediateDirectory)/Tesla.cpp$(ObjectSuffix) $(IntermediateDirectory)/level_editor.cpp$(ObjectSuffix) $(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IntermediateDirectory)/update_game.cpp$(ObjectSuffix) $(IntermediateDirectory)/main_menu.cpp$(ObjectSuffix) $(IntermediateDirectory)/draw_game.cpp$(ObjectSuffix) $(IntermediateDirectory)/init_game.cpp$(ObjectSuffix) \
+	
 
 
 
@@ -107,14 +108,6 @@ $(IntermediateDirectory)/window.cpp$(DependSuffix): window.cpp
 $(IntermediateDirectory)/window.cpp$(PreprocessSuffix): window.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/window.cpp$(PreprocessSuffix) window.cpp
 
-$(IntermediateDirectory)/main.cpp$(ObjectSuffix): main.cpp $(IntermediateDirectory)/main.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/rohan/Documents/MicroWars/MicroWars/main.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/main.cpp$(DependSuffix): main.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/main.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/main.cpp$(DependSuffix) -MM main.cpp
-
-$(IntermediateDirectory)/main.cpp$(PreprocessSuffix): main.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/main.cpp$(PreprocessSuffix) main.cpp
-
 $(IntermediateDirectory)/Orb.cpp$(ObjectSuffix): Orb.cpp $(IntermediateDirectory)/Orb.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/rohan/Documents/MicroWars/MicroWars/Orb.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Orb.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/Orb.cpp$(DependSuffix): Orb.cpp
@@ -131,6 +124,22 @@ $(IntermediateDirectory)/Tesla.cpp$(DependSuffix): Tesla.cpp
 $(IntermediateDirectory)/Tesla.cpp$(PreprocessSuffix): Tesla.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Tesla.cpp$(PreprocessSuffix) Tesla.cpp
 
+$(IntermediateDirectory)/level_editor.cpp$(ObjectSuffix): level_editor.cpp $(IntermediateDirectory)/level_editor.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/rohan/Documents/MicroWars/MicroWars/level_editor.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/level_editor.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/level_editor.cpp$(DependSuffix): level_editor.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/level_editor.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/level_editor.cpp$(DependSuffix) -MM level_editor.cpp
+
+$(IntermediateDirectory)/level_editor.cpp$(PreprocessSuffix): level_editor.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/level_editor.cpp$(PreprocessSuffix) level_editor.cpp
+
+$(IntermediateDirectory)/main.cpp$(ObjectSuffix): main.cpp $(IntermediateDirectory)/main.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/rohan/Documents/MicroWars/MicroWars/main.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/main.cpp$(DependSuffix): main.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/main.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/main.cpp$(DependSuffix) -MM main.cpp
+
+$(IntermediateDirectory)/main.cpp$(PreprocessSuffix): main.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/main.cpp$(PreprocessSuffix) main.cpp
+
 $(IntermediateDirectory)/update_game.cpp$(ObjectSuffix): update_game.cpp $(IntermediateDirectory)/update_game.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/rohan/Documents/MicroWars/MicroWars/update_game.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/update_game.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/update_game.cpp$(DependSuffix): update_game.cpp
@@ -139,13 +148,13 @@ $(IntermediateDirectory)/update_game.cpp$(DependSuffix): update_game.cpp
 $(IntermediateDirectory)/update_game.cpp$(PreprocessSuffix): update_game.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/update_game.cpp$(PreprocessSuffix) update_game.cpp
 
-$(IntermediateDirectory)/init_game.cpp$(ObjectSuffix): init_game.cpp $(IntermediateDirectory)/init_game.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/rohan/Documents/MicroWars/MicroWars/init_game.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/init_game.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/init_game.cpp$(DependSuffix): init_game.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/init_game.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/init_game.cpp$(DependSuffix) -MM init_game.cpp
+$(IntermediateDirectory)/main_menu.cpp$(ObjectSuffix): main_menu.cpp $(IntermediateDirectory)/main_menu.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/rohan/Documents/MicroWars/MicroWars/main_menu.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main_menu.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/main_menu.cpp$(DependSuffix): main_menu.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/main_menu.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/main_menu.cpp$(DependSuffix) -MM main_menu.cpp
 
-$(IntermediateDirectory)/init_game.cpp$(PreprocessSuffix): init_game.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/init_game.cpp$(PreprocessSuffix) init_game.cpp
+$(IntermediateDirectory)/main_menu.cpp$(PreprocessSuffix): main_menu.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/main_menu.cpp$(PreprocessSuffix) main_menu.cpp
 
 $(IntermediateDirectory)/draw_game.cpp$(ObjectSuffix): draw_game.cpp $(IntermediateDirectory)/draw_game.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/rohan/Documents/MicroWars/MicroWars/draw_game.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/draw_game.cpp$(ObjectSuffix) $(IncludePath)
@@ -155,13 +164,13 @@ $(IntermediateDirectory)/draw_game.cpp$(DependSuffix): draw_game.cpp
 $(IntermediateDirectory)/draw_game.cpp$(PreprocessSuffix): draw_game.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/draw_game.cpp$(PreprocessSuffix) draw_game.cpp
 
-$(IntermediateDirectory)/main_menu.cpp$(ObjectSuffix): main_menu.cpp $(IntermediateDirectory)/main_menu.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/rohan/Documents/MicroWars/MicroWars/main_menu.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main_menu.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/main_menu.cpp$(DependSuffix): main_menu.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/main_menu.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/main_menu.cpp$(DependSuffix) -MM main_menu.cpp
+$(IntermediateDirectory)/init_game.cpp$(ObjectSuffix): init_game.cpp $(IntermediateDirectory)/init_game.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/rohan/Documents/MicroWars/MicroWars/init_game.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/init_game.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/init_game.cpp$(DependSuffix): init_game.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/init_game.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/init_game.cpp$(DependSuffix) -MM init_game.cpp
 
-$(IntermediateDirectory)/main_menu.cpp$(PreprocessSuffix): main_menu.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/main_menu.cpp$(PreprocessSuffix) main_menu.cpp
+$(IntermediateDirectory)/init_game.cpp$(PreprocessSuffix): init_game.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/init_game.cpp$(PreprocessSuffix) init_game.cpp
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)

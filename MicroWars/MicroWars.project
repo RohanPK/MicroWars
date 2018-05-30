@@ -8,6 +8,7 @@
   <Description/>
   <Dependencies/>
   <VirtualDirectory Name="src">
+    <File Name="level_editor.cpp"/>
     <File Name="Tesla.cpp"/>
     <File Name="Tesla.h"/>
     <File Name="update_game.cpp"/>
