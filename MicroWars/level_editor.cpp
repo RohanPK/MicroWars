@@ -80,7 +80,7 @@ Texture texture_yellow,texture_red,texture_green,texture_blue,texture_grey,textu
 	vector < Orb > Orb_Vector;
 	vector < Tesla > Tesla_Vector;
 	vector < int > Initial_Units_Vector;
-	
+
 	RectangleShape Stats_Container;
 	Stats_Container.setSize(Vector2f(310, 1080));
 	Stats_Container.setFillColor(Color::Black);
@@ -339,7 +339,6 @@ Texture texture_yellow,texture_red,texture_green,texture_blue,texture_grey,textu
 		}
 		mouse_text.setString(information);
 		mouse_text.setPosition(mouse_position.x+20,mouse_position.y+20);
-		window.draw(mouse_text);
 		window.draw(Orb_Shape_Vector[colour_index][0]);
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 		{
@@ -349,17 +348,26 @@ Texture texture_yellow,texture_red,texture_green,texture_blue,texture_grey,textu
 			}
 			else
 			{
-				if ( colour_index !=5 )
+				if (mouse_position.x<=Stats_Container.getPosition().x )
 				{
-					if( max_power>=current_power )
+					if ( colour_index !=5 )
+					{
+						if ( max_power>=current_power )
+							{
+								if ( initial_units>=0 && current_power>=0 )
+								{
+									Orb_Vector.push_back(Orb(mouse_position.x,mouse_position.y,30,colour_letter,current_power,max_power,current_power*100));
+									Initial_Units_Vector.push_back(initial_units);
+								}
+							}
+					}
+					else
+					{
+						if ( x_factor >=0 )
 						{
-							Orb_Vector.push_back(Orb(mouse_position.x,mouse_position.y,30,colour_letter,current_power,max_power,current_power*100));							
-							Initial_Units_Vector.push_back(initial_units);
+							Tesla_Vector.push_back(Tesla(mouse_position.x,mouse_position.y,50,x_factor));
 						}
-				}
-				else
-				{
-					Tesla_Vector.push_back(Tesla(mouse_position.x,mouse_position.y,50,x_factor));
+					}
 				}
 			}
 			sleep(sf::seconds(0.5));
@@ -384,6 +392,7 @@ Texture texture_yellow,texture_red,texture_green,texture_blue,texture_grey,textu
 		window.draw(Stats_Container);
 		window.draw(save_button);
 		window.draw(save_level);
+		window.draw(mouse_text);
 
 		sleep(sf::milliseconds(10));
 	}

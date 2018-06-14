@@ -298,7 +298,7 @@ int draw_game(GameEssentials &G)
 			if(line_animation.getElapsedTime()>animation_delay)
 			{
 				line_animation.restart();
-				G.LINE_VECTOR.erase(G.LINE_VECTOR.begin()+i);
+				G.LINE_VECTOR.erase(G.LINE_VECTOR.begin());
 			}
 		}
 

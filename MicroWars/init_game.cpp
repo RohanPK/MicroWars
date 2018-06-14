@@ -102,7 +102,7 @@ void init_game(RenderWindow &window, bool &start_play)
 		{2},																					//TESLA X-FACTOR
 	};*/
 	G = read_level();
-	G.PLAYER_COLOUR = 'Y';
+	G.PLAYER_COLOUR = 'B';
 	G.start_play = start_play;
 	G.window = &window;
 	
